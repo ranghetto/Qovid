@@ -1,0 +1,8 @@
+# VS Code
+.vscode/
+
+# Build
+build/
+
+# Qt Creator
+*.pro.user

@@ -18,5 +18,9 @@ QT += core gui widgets charts
 
 # Input
 SOURCES += src/main.cpp \
+  src/PersonModel.cpp \
+  src/ActionAbstractModel.cpp \
 
 HEADERS += \
+  src/PersonModel.h \
+  src/ActionAbstractModel.h \

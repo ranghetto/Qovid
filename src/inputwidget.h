@@ -16,7 +16,7 @@ class InputWidget: public QWidget
         QRadioButton *sim_duration_30s, *sim_duration_1m, *sim_duration_3m, *sim_duration_complete;
         QPushButton *start_sim;
     public:
-        InputWidget(QWidget* parents=nullptr);
+        InputWidget(QWidget* parent=nullptr);
 };
 
 #endif // INPUTWIDGET_H

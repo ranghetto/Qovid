@@ -1,6 +1,6 @@
 #include "containerwidget.h"
 
-ContainerWidget::ContainerWidget(QWidget *parents)
+ContainerWidget::ContainerWidget(QWidget *parent)
 {
     input_widget=new InputWidget(this);
     QHBoxLayout *layout=new QHBoxLayout(this);

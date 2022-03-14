@@ -11,7 +11,7 @@ class ContainerWidget: public QWidget
     private:
         InputWidget *input_widget;
     public:
-        ContainerWidget(QWidget *parents=nullptr);
+        ContainerWidget(QWidget *parent=nullptr);
         ~ContainerWidget()=default;
 };
 

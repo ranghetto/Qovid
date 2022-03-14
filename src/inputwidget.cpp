@@ -1,6 +1,6 @@
 #include "inputwidget.h"
 
-InputWidget::InputWidget(QWidget* parents): QWidget(parents) {
+InputWidget::InputWidget(QWidget* parent): QWidget(parent) {
       //variables declaration and inizialization
         //layout
         QVBoxLayout *layout= new QVBoxLayout(this);

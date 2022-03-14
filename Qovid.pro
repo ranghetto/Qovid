@@ -18,5 +18,14 @@ QT += core gui widgets charts
 
 # Input
 SOURCES += src/main.cpp \
+    src/MainWindow.cpp \
+    src/containerwidget.cpp \
+    src/inputwidget.cpp
+
 
 HEADERS += \
+    src/MainWindow.h \
+    src/containerwidget.h \
+    src/inputwidget.h
+
+

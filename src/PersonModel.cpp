@@ -1,11 +1,10 @@
 #include "PersonModel.h"
 #include "ActionAbstractModel.h"
 
-#include <QtMath>
-
-PersonModel::PersonModel(QPoint position, QVector2D speed = QVector2D(0, 0),
-                         QVector2D acceleration = QVector2D(0, 0),
-                         QPoint bounds = QPoint(500, 500)) {}
+PersonModel::PersonModel(QPoint position, QVector2D speed,
+                         QVector2D acceleration, QPoint bounds)
+    : position(position), speed(speed), acceleration(acceleration),
+      bounds(bounds) {}
 
 void PersonModel::doAction() {
   if (!currentAction)

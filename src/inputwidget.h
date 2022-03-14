@@ -2,20 +2,19 @@
 #define INPUTWIDGET_H
 #include <QWidget>
 #include <QLabel>
-#include <QLineEdit>
 #include <QVBoxLayout>
 #include <QRadioButton>
 #include <QSpinBox>
-
+#include <QPushButton>
 
 class InputWidget: public QWidget
 {
     Q_OBJECT
     protected:
-        QLabel *l_population, *l_infection, *l_infection_rt, *l_death, *ltime;
-        QLineEdit *input_pop, *input_inf;
-        QSpinBox *input_inf_rt, *input_dth;
-        QRadioButton *radio_1, *radio_2, *radio_3, *radio_4;
+        QLabel *label_population, *label_infection, *label_infection_rate, *label_death_rate, *label_time;
+        QSpinBox *input_population, *input_infection, *input_infection_rate, *input_death_rate;
+        QRadioButton *sim_duration_30s, *sim_duration_1m, *sim_duration_3m, *sim_duration_complete;
+        QPushButton *start_sim;
     public:
         InputWidget(QWidget* parents=nullptr);
 };

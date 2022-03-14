@@ -2,8 +2,8 @@
 
 ContainerWidget::ContainerWidget(QWidget *parents)
 {
-    widget1=new InputWidget(this);
+    input_widget=new InputWidget(this);
     QHBoxLayout *layout=new QHBoxLayout(this);
-    layout->addWidget(widget1);
+    layout->addWidget(input_widget);
     this->setLayout(layout);
 }

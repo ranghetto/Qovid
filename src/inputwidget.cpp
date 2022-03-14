@@ -5,46 +5,53 @@ InputWidget::InputWidget(QWidget* parents): QWidget(parents) {
         //layout
         QVBoxLayout *layout= new QVBoxLayout(this);
         //label
-        l_population=new QLabel(this);
-        l_infection=new QLabel(this);
-        ltime=new QLabel(this);
-        l_infection_rt=new QLabel(this);
-        l_death=new QLabel(this);
+        label_population=new QLabel(this);
+        label_infection=new QLabel(this);
+        label_infection_rate=new QLabel(this);
+        label_death_rate=new QLabel(this);
+        label_time=new QLabel(this);
         //input field
-        input_pop=new QLineEdit(this);
-        input_inf=new QLineEdit(this);
-        input_inf_rt=new QSpinBox(this);
-        input_dth=new QSpinBox(this);
+        input_population=new QSpinBox(this);
+        input_infection=new QSpinBox(this);
+        input_infection_rate=new QSpinBox(this);
+        input_death_rate=new QSpinBox(this);
         //radio menu
-        radio_1=new QRadioButton("30s",this);
-        radio_2=new QRadioButton("1m",this);
-        radio_3=new QRadioButton("3m",this);
-        radio_4=new QRadioButton("fino a compleatamento",this);
+        sim_duration_30s=new QRadioButton("30 secondi",this);
+        sim_duration_1m=new QRadioButton("1 minuto",this);
+        sim_duration_3m=new QRadioButton("3 minuto",this);
+        sim_duration_complete=new QRadioButton("fino al completamento",this);
+        //button
+        start_sim=new QPushButton("Inizia Simulazione",this);
       //label text
-        l_population->setText("Grandezza della Popolazione");
-        l_infection->setText("Raggio del Contagio");
-        l_infection_rt->setText("Percentuale infezione");
-        l_death->setText("percentuale morte");
-        ltime->setText("Tempo della Simulazuione");
+        label_population->setText("Grandezza della popolazione");
+        label_infection->setText("Raggio del contagio");
+        label_infection_rate->setText("Probabilità di essere contagiati");
+        label_death_rate->setText("Probabilità di morte dell'infetto");
+        label_time->setText("Durata simulazione");
       //SpinBox max min setting
-        input_inf_rt->setMaximum(100);
-        input_inf_rt->setMinimum(0);
-        input_dth->setMaximum(100);
-        input_dth->setMinimum(0);
+        input_population->setMaximum(100);
+        input_population->setMinimum(0);
+        input_infection->setMaximum(100);
+        input_infection->setMinimum(0);
+        input_infection_rate->setMaximum(100);
+        input_infection_rate->setMinimum(0);
+        input_death_rate->setMaximum(100);
+        input_death_rate->setMinimum(0);
       //adding widget to layout
-        layout->addWidget(l_population);
-        layout->addWidget(input_pop);
-        layout->addWidget(l_infection);
-        layout->addWidget(input_inf);
-        layout->addWidget(l_infection_rt);
-        layout->addWidget(input_inf_rt);
-        layout->addWidget(l_death);
-        layout->addWidget(input_dth);
-        layout->addWidget(ltime);
-        layout->addWidget(radio_1);
-        layout->addWidget(radio_2);
-        layout->addWidget(radio_3);
-        layout->addWidget(radio_4);
+        layout->addWidget(label_population);
+        layout->addWidget(input_population);
+        layout->addWidget(label_infection);
+        layout->addWidget(input_infection);
+        layout->addWidget(label_infection_rate);
+        layout->addWidget(input_infection_rate);
+        layout->addWidget(label_death_rate);
+        layout->addWidget(input_death_rate);
+        layout->addWidget(label_time);
+        layout->addWidget(sim_duration_30s);
+        layout->addWidget(sim_duration_1m);
+        layout->addWidget(sim_duration_3m);
+        layout->addWidget(sim_duration_complete);
+        layout->addWidget(start_sim);
 
         this->setLayout(layout);
 }

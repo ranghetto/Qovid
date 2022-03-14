@@ -9,7 +9,7 @@ class ContainerWidget: public QWidget
 {
     Q_OBJECT
     private:
-        InputWidget *widget1;
+        InputWidget *input_widget;
     public:
         ContainerWidget(QWidget *parents=nullptr);
         ~ContainerWidget()=default;

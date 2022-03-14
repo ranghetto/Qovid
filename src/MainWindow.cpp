@@ -3,5 +3,4 @@
 MainWindow::MainWindow(QWidget *parent){
     container=new ContainerWidget(this);
     setCentralWidget(container);
-    resize(500, 500);
 };

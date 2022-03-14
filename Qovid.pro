@@ -20,7 +20,9 @@ QT += core gui widgets charts
 SOURCES += src/main.cpp \
   src/PersonModel.cpp \
   src/ActionAbstractModel.cpp \
+  src/SimulationView.cpp \
 
 HEADERS += \
   src/PersonModel.h \
   src/ActionAbstractModel.h \
+  src/SimulationView.h \

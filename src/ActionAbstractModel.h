@@ -1,5 +1,5 @@
-#ifndef ACTION
-#define ACTION
+#ifndef ACTION_ABSTRACT_MODEL_H
+#define ACTION_ABSTRACT_MODEL_H
 
 class PersonModel;
 
@@ -14,4 +14,4 @@ protected:
   unsigned int timeout;
 };
 
-#endif // ACTION
+#endif // ACTION_ABSTRACT_MODEL_H

@@ -22,9 +22,15 @@ SOURCES += src/main.cpp \
   src/ActionAbstractModel.cpp \
   src/ActionReachPointModel.cpp \
   src/SimulationView.cpp \
+  src/MainWindow.cpp \
+  src/containerwidget.cpp \
+  src/inputwidget.cpp
 
 HEADERS += \
   src/PersonModel.h \
   src/ActionAbstractModel.h \
   src/ActionReachPointModel.h \
   src/SimulationView.h \
+  src/MainWindow.h \
+  src/containerwidget.h \
+  src/inputwidget.h

@@ -15,9 +15,9 @@ public:
   void setIsRunning(bool isRunning);
 
 private:
-  bool isRunning;
   PersonModel &person;
   unsigned int timeout;
+  bool isRunning;
 };
 
 #endif // ACTION_ABSTRACT_MODEL_H

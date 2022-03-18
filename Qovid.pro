@@ -18,14 +18,19 @@ QT += core gui widgets charts
 
 # Input
 SOURCES += src/main.cpp \
-    src/MainWindow.cpp \
-    src/containerwidget.cpp \
-    src/inputwidget.cpp
-
+  src/PersonModel.cpp \
+  src/ActionAbstractModel.cpp \
+  src/ActionReachPointModel.cpp \
+  src/SimulationView.cpp \
+  src/MainWindow.cpp \
+  src/containerwidget.cpp \
+  src/inputwidget.cpp
 
 HEADERS += \
-    src/MainWindow.h \
-    src/containerwidget.h \
-    src/inputwidget.h
-
-
+  src/PersonModel.h \
+  src/ActionAbstractModel.h \
+  src/ActionReachPointModel.h \
+  src/SimulationView.h \
+  src/MainWindow.h \
+  src/containerwidget.h \
+  src/inputwidget.h

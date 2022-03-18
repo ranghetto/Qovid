@@ -37,8 +37,8 @@ void ActionReachPointModel::operator()() {
   // Due to round of floats, probably some information get lost, so a distance
   // of 0.01 from the target is considered acceptable
   if (directionMag <= 0.01) {
-    int x = QRandomGenerator::global()->bounded(0, 500);
-    int y = QRandomGenerator::global()->bounded(0, 500);
+    int x = qrand() % 500;
+    int y = qrand() % 500;
     destination = QPoint(x, y);
   }
 }

@@ -5,7 +5,6 @@ class ActionAbstractModel;
 
 #include <QPainter>
 #include <QPoint>
-#include <QRandomGenerator>
 #include <QVector2D>
 
 class PersonModel : public QObject {

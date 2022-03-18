@@ -1,18 +1,18 @@
 #include "PersonModel.h"
 #include "ActionAbstractModel.h"
 
-PersonModel::PersonModel(QPoint position, QVector2D speed,
+PersonModel::PersonModel(QPointF position, QVector2D speed,
                          QVector2D acceleration, QPoint bounds)
     : position(position), speed(speed), acceleration(acceleration),
       bounds(bounds) {}
 
-void PersonModel::doAction() {
+void PersonModel::doAction(QPainter &painter) {
   if (!currentAction)
     return;
   (*currentAction)();
 }
 
-void PersonModel::setPosition(QPoint position) { this->position = position; }
+void PersonModel::setPosition(QPointF position) { this->position = position; }
 
 void PersonModel::setSpeed(QVector2D speed) { this->speed = speed; }
 
@@ -26,13 +26,13 @@ void PersonModel::setAction(ActionAbstractModel &action) {
   this->currentAction = &action;
 }
 
-void PersonModel::limitSpeed(unsigned int speedLimit) {
+void PersonModel::limitSpeed(float speedLimit) {
   if (speed.length() > speedLimit)
     speed.normalize();
   speed *= speedLimit;
 }
 
-QPoint PersonModel::getPosition() const { return position; }
+QPointF PersonModel::getPosition() const { return position; }
 
 QVector2D PersonModel::getSpeed() const { return speed; }
 

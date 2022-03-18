@@ -16,7 +16,7 @@ public:
                        QPoint bounds = QPoint(500, 500));
 
   virtual void draw(QPainter &painter);
-  void doAction(QPainter &painter);
+  void doAction();
 
   // setters
   void setPosition(QPointF position);

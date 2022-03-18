@@ -6,7 +6,7 @@ PersonModel::PersonModel(QPointF position, QVector2D speed,
     : position(position), speed(speed), acceleration(acceleration),
       bounds(bounds) {}
 
-void PersonModel::doAction(QPainter &painter) {
+void PersonModel::doAction() {
   if (!currentAction)
     return;
   (*currentAction)();

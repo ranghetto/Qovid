@@ -2,13 +2,19 @@
 #define ACTION_ABSTRACT_MODEL_H
 
 class PersonModel;
+class QPainter;
 
 class ActionAbstractModel {
 public:
   ActionAbstractModel(PersonModel &person, unsigned int timeout = 0);
   virtual void operator()() = 0;
+  bool getIsRunning() const;
+  PersonModel &getPerson() const;
+  unsigned int getTimeout() const;
 
-protected:
+  void setIsRunning(bool isRunning);
+
+private:
   bool isRunning;
   PersonModel &person;
   unsigned int timeout;

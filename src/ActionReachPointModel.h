@@ -6,6 +6,8 @@
 
 class ActionReachPointModel : public ActionAbstractModel {
 public:
+  // implements a QPointF as destination for the PersonModel, it does not handle
+  // boundaries, any point is valid;
   ActionReachPointModel(QPointF destination, unsigned int timeout = 0);
   void operator()(PersonModel &person) override;
 

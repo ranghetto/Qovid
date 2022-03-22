@@ -6,9 +6,8 @@
 
 class ActionReachPointModel : public ActionAbstractModel {
 public:
-  ActionReachPointModel(PersonModel &person, QPointF destination,
-                        unsigned int timeout = 0);
-  void operator()() override;
+  ActionReachPointModel(QPointF destination, unsigned int timeout = 0);
+  void operator()(PersonModel &person) override;
 
 private:
   QPointF destination;

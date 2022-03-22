@@ -1,15 +1,15 @@
 #include "PersonModel.h"
 #include "ActionAbstractModel.h"
 
+// TODO remove bounds
 PersonModel::PersonModel(QPointF position, QVector2D speed,
-                         QVector2D acceleration, QPoint bounds)
-    : position(position), speed(speed), acceleration(acceleration),
-      bounds(bounds) {}
+                         QVector2D acceleration)
+    : position(position), speed(speed), acceleration(acceleration) {}
 
 void PersonModel::doAction() {
   if (!currentAction)
     return;
-  (*currentAction)();
+  (*currentAction)(*this);
 }
 
 void PersonModel::setPosition(QPointF position) { this->position = position; }
@@ -19,8 +19,6 @@ void PersonModel::setSpeed(QVector2D speed) { this->speed = speed; }
 void PersonModel::setAcceleration(QVector2D acceleration) {
   this->acceleration = acceleration;
 }
-
-void PersonModel::setBounds(QPoint bounds) { this->bounds = bounds; }
 
 void PersonModel::setAction(ActionAbstractModel &action) {
   this->currentAction = &action;
@@ -37,8 +35,6 @@ QPointF PersonModel::getPosition() const { return position; }
 QVector2D PersonModel::getSpeed() const { return speed; }
 
 QVector2D PersonModel::getAcceleration() const { return acceleration; }
-
-QPoint PersonModel::getBounds() const { return bounds; }
 
 ActionAbstractModel &PersonModel::getCurrentAction() const {
   return *currentAction;

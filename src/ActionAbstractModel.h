@@ -22,6 +22,8 @@ public:
   // TODO could be much usefull to return remaining time too.
   unsigned int getTimeout() const;
 
+  virtual ~ActionAbstractModel() = default;
+
   void setIsRunning(bool isRunning);
 
 private:

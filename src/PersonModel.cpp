@@ -1,10 +1,13 @@
 #include "PersonModel.h"
 #include "ActionAbstractModel.h"
 
-// TODO remove bounds
 PersonModel::PersonModel(QPointF position, QVector2D speed,
-                         QVector2D acceleration)
-    : position(position), speed(speed), acceleration(acceleration) {}
+                         QVector2D acceleration, Status status)
+    : position(position), speed(speed), acceleration(acceleration),
+      status(status) {}
+
+// TODO https://github.com/ranghetto/Qovid/issues/12
+PersonModel::~PersonModel() { delete currentAction; }
 
 void PersonModel::doAction() {
   if (!currentAction)
@@ -24,6 +27,8 @@ void PersonModel::setAction(ActionAbstractModel &action) {
   this->currentAction = &action;
 }
 
+void PersonModel::setStatus(Status status) { this->status = status; }
+
 void PersonModel::limitSpeed(float speedLimit) {
   if (speed.length() > speedLimit)
     speed.normalize();
@@ -39,6 +44,8 @@ QVector2D PersonModel::getAcceleration() const { return acceleration; }
 ActionAbstractModel &PersonModel::getCurrentAction() const {
   return *currentAction;
 }
+
+PersonModel::Status PersonModel::getStatus() const { return status; }
 
 void PersonModel::draw(QPainter &painter) {
   painter.setBrush(QBrush(QColor(52, 180, 235)));

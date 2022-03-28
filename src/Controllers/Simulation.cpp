@@ -52,3 +52,10 @@ void Simulation::setView(SimulationView *view) {
 }
 
 void Simulation::generateWorld() { world_ = new World(); }
+
+World *Simulation::world() const { return world_; }
+
+Simulation &Simulation::instance() {
+  static Simulation *simulation = new Simulation(nullptr);
+  return *simulation;
+}

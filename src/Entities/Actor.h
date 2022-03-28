@@ -12,16 +12,19 @@ using namespace BehaviourTree;
 
 class Actor : public Entity {
 public:
-  Actor(QVector<QVector2D> waypoints, QVector2D position = {0, 0},
-        float speed = 1.0f);
+  Actor(QVector2D position = {0, 0}, float speed = 1.0f,
+        ActorHealthState state = ActorHealthState::HEALTHY);
   void update(qint64 deltaTime) override;
   void render(QPainter &painter) override;
 
   QVector2D position() const;
   float speed() const;
+  ActorHealthState healthState() const;
 
   void setPosition(QVector2D position);
   void setSpeed(float speed);
+  void setAI(ActorAI *ai);
+  void setHealthState(ActorHealthState state);
 
 private:
   QVector2D position_;

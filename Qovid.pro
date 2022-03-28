@@ -18,19 +18,32 @@ QT += core gui widgets charts
 
 # Input
 SOURCES += src/main.cpp \
-  src/PersonModel.cpp \
-  src/ActionAbstractModel.cpp \
-  src/ActionReachPointModel.cpp \
-  src/SimulationView.cpp \
-  src/MainWindow.cpp \
-  src/containerwidget.cpp \
-  src/inputwidget.cpp
+  src/AI/ActorAI.cpp \
+  src/AI/Patrol.cpp \
+  src/BehaviourTree/Node.cpp \
+  src/BehaviourTree/Selector.cpp \
+  src/BehaviourTree/Sequence.cpp \
+  src/BehaviourTree/Tree.cpp \
+  src/Controllers/Simulation.cpp \
+  src/Controllers/World.cpp \
+  src/Entities/Actor.cpp \
+  src/Views/ContainerWidget.cpp \
+  src/Views/InputWidget.cpp \
+  src/Views/MainWindow.cpp \
+  src/Views/SimulationView.cpp \
 
 HEADERS += \
-  src/PersonModel.h \
-  src/ActionAbstractModel.h \
-  src/ActionReachPointModel.h \
-  src/SimulationView.h \
-  src/MainWindow.h \
-  src/containerwidget.h \
-  src/inputwidget.h
+  src/AI/ActorAI.h \
+  src/AI/Patrol.h \
+  src/BehaviourTree/Node.h \
+  src/BehaviourTree/Selector.h \
+  src/BehaviourTree/Sequence.h \
+  src/BehaviourTree/Tree.h \
+  src/Controllers/Simulation.h \
+  src/Controllers/World.h \
+  src/Entities/Actor.h \
+  src/Entities/Entity.h \
+  src/Views/ContainerWidget.h \
+  src/Views/InputWidget.h \
+  src/Views/MainWindow.h \
+  src/Views/SimulationView.h \

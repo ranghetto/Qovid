@@ -25,6 +25,7 @@ SOURCES += src/main.cpp \
   src/BehaviourTree/Sequence.cpp \
   src/BehaviourTree/Tree.cpp \
   src/Controllers/Simulation.cpp \
+  src/Controllers/ViewController.cpp \
   src/Controllers/World.cpp \
   src/Entities/Actor.cpp \
   src/Views/ContainerWidget.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
   src/BehaviourTree/Sequence.h \
   src/BehaviourTree/Tree.h \
   src/Controllers/Simulation.h \
+  src/Controllers/ViewController.h \
   src/Controllers/World.h \
   src/Entities/Actor.h \
   src/Entities/Entity.h \

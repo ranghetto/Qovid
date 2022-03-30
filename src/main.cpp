@@ -1,18 +1,20 @@
 #include "Controllers/Simulation.h"
-#include "Views/MainWindow.h"
+#include "Controllers/ViewController.h"
 #include "Views/SimulationView.h"
 #include <QApplication>
 
 int main(int argc, char **argv) {
   QApplication app(argc, argv);
 
-  Simulation *s = new Simulation();
+  ViewController *c=new ViewController();
 
-  SimulationView *sv = new SimulationView(s);
+  //Simulation *s = new Simulation();
 
-  s->setView(sv);
+  //SimulationView *sv = new SimulationView(s);
 
-  sv->show();
+  //s->setView(sv);
 
+  //sv->show();
+  c->show();
   app.exec();
 }

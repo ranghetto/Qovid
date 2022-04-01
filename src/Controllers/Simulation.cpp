@@ -17,6 +17,8 @@ Simulation::Simulation(QObject *parent)
   lastTime_ = deltaTimer_->elapsed();
 }
 
+//slot & signal
+
 void Simulation::update() {
   if (isRunning_) {
     qint64 current = deltaTimer_->elapsed();
@@ -35,6 +37,14 @@ void Simulation::update(qint64 deltaTime) {
       entity->update(deltaTime);
   }
 }
+
+void Simulation::handleStartSimulation(){
+    view_ = new SimulationView(this);
+    this->setView(view_);
+    container_widget_->showSimulation(view_);
+}
+
+//setter & getter
 
 void Simulation::render(QPainter &painter) {
   for (auto entity : world_->entities()) {

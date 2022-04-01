@@ -57,6 +57,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   this->setLayout(layout);
 }
 
+
 void InputWidget::setSimulation(Simulation *controller){
     controller_=controller;
+    connect(start_sim, SIGNAL(clicked()), controller_, SLOT(handleStartSimulation()));
 }

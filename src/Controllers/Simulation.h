@@ -34,7 +34,7 @@ public:
 
 public slots:
   void update(); // update loop
-  //void handleButton();
+  void handleStartSimulation(); //handle InputWidget QPushButton
 
 private:
   // Views

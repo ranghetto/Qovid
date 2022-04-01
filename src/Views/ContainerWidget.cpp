@@ -8,10 +8,19 @@ ContainerWidget::ContainerWidget(QWidget *parent) {
   this->setLayout(layout);
 }
 
+//setter & getter
+
 void ContainerWidget::setSimulation(Simulation* controller){
     controller_=controller;
 }
 
 InputWidget* ContainerWidget::getInputWidget(){
     return input_widget_;
+}
+
+//function
+
+void ContainerWidget::showSimulation(SimulationView *simulation){
+    simulation_=simulation;
+    layout()->addWidget(simulation_);
 }

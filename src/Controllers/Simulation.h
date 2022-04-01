@@ -1,9 +1,11 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-#include "../Entities/Entity.h"
+#include "../Views/MainWindow.h"
+#include "../Views/ContainerWidget.h"
 #include "../Views/InputWidget.h"
 #include "../Views/SimulationView.h"
+#include "../Entities/Entity.h"
 #include "World.h"
 #include <QElapsedTimer>
 #include <QObject>
@@ -12,13 +14,14 @@
 #include <QVector>
 #include <QWidget>
 
-class Simulation : QObject {
+class Simulation : public QObject {
   Q_OBJECT
 
 public:
   Simulation(QObject *parent = nullptr);
 
   // Setters
+  void setMainWindow(); //setter for mainwindow, containerwidget, inputwidget
   void setView(SimulationView *view);
   void generateWorld();
 
@@ -31,11 +34,14 @@ public:
 
 public slots:
   void update(); // update loop
+  //void handleButton();
 
 private:
   // Views
   SimulationView *view_;
-  InputWidget *input;
+  MainWindow *main_window_;
+  ContainerWidget* container_widget_;
+  InputWidget *input_widget_;
 
   // Controllers
   World *world_;
@@ -45,6 +51,7 @@ private:
   QElapsedTimer *deltaTimer_;
   bool isRunning_;
   qint64 lastTime_;
+
 
   void update(qint64 deltaTime);
 };

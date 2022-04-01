@@ -1,4 +1,5 @@
 #include "InputWidget.h"
+#include "../Controllers/Simulation.h"
 
 InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   // variables declaration and inizialization
@@ -54,4 +55,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   layout->addWidget(start_sim);
 
   this->setLayout(layout);
+}
+
+void InputWidget::setSimulation(Simulation *controller){
+    controller_=controller;
 }

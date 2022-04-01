@@ -43,6 +43,16 @@ void Simulation::render(QPainter &painter) {
   }
 }
 
+void Simulation::setMainWindow() {
+    main_window_=new MainWindow();
+    main_window_->setSimulation(this);
+    container_widget_=main_window_->getContainer();
+    container_widget_->setSimulation(this);
+    input_widget_=container_widget_->getInputWidget();
+    input_widget_->setSimulation(this);
+    main_window_->show();
+}
+
 void Simulation::setView(SimulationView *view) {
   view->setController(this);
   view_ = view;

@@ -2,19 +2,21 @@
 #define CONTAINERWIDGET_H
 
 #include "InputWidget.h"
-#include "SimulationView.h"
 #include <QHBoxLayout>
 #include <QWidget>
 
+class Simulation;
+
 class ContainerWidget : public QWidget {
   Q_OBJECT
-private:
-  InputWidget *input_widget;
-  SimulationView *sim;
 
 public:
   ContainerWidget(QWidget *parent = nullptr);
-  ~ContainerWidget() = default;
-};
+  InputWidget* getInputWidget();
+  void setSimulation(Simulation*);
 
+private:
+  InputWidget *input_widget_;
+  Simulation* controller_;
+};
 #endif // CONTAINERWIDGET_H

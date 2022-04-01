@@ -5,14 +5,17 @@
 #include <QMainWindow>
 #include <QWidget>
 
+class Simulation;
+
 class MainWindow : public QMainWindow {
   Q_OBJECT
-protected:
-  ContainerWidget *container;
-
 public:
-  MainWindow(QWidget *parent = nullptr);
-  ~MainWindow() = default;
+    MainWindow(QWidget *parent = nullptr);
+    ContainerWidget* getContainer();
+    void setSimulation(Simulation*);
+private:
+  ContainerWidget *container;
+  Simulation* controller_;
 };
 
 #endif

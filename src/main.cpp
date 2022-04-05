@@ -6,7 +6,7 @@
 int main(int argc, char **argv) {
   QApplication app(argc, argv);
 
-  Simulation *s = new Simulation();
+  Simulation *s = &Simulation::instance();
 
   SimulationView *sv = new SimulationView(s);
 

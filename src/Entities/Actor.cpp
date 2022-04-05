@@ -1,13 +1,16 @@
 #include "Actor.h"
 #include "../AI/InfectActorsInRange.h"
 #include "../AI/Patrol.h"
+#include "../AI/Recovery.h"
 #include "../BehaviourTree/Sequence.h"
 #include <QPainter>
 
 Actor::Actor(QVector2D position, float speed, ActorHealthState state,
-             QVector<QVector2D> waypoints, float waitTime, float range)
+             QVector<QVector2D> waypoints, float waitTime, float range,
+             int timeToRecover)
     : Tree(new Sequence({new Patrol(*this, waypoints, waitTime),
-                         new InfectActorsInRange(*this, range)})),
+                         new InfectActorsInRange(*this, range),
+                         new Recovery(*this, timeToRecover)})),
       position_(position), speed_(speed), healthState_(state) {}
 
 QVector2D Actor::position() const { return position_; }

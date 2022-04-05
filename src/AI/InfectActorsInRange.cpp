@@ -11,7 +11,12 @@ NodeState InfectActorsInRange::evaluate(qint64 deltaTime) {
 
   if (actor_.healthState() == ActorHealthState::INFECTED) {
     for (auto p : people) {
-      p->setHealthState(ActorHealthState::INFECTED);
+      if (p->healthState() == ActorHealthState::HEALTHY)
+        // TODO probably this needs to be: select 20% of the total people around
+        // this actor and infect them, the other 80% stay healthy
+        // TODO configurable %, not hardcoded
+        if (qrand() % 100 < 20)
+          p->setHealthState(ActorHealthState::INFECTED);
     }
   }
 

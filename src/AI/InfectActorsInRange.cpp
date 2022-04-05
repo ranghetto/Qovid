@@ -11,8 +11,7 @@ NodeState InfectActorsInRange::evaluate(qint64 deltaTime) {
 
   if (actor_.healthState() == ActorHealthState::INFECTED) {
     for (auto p : people) {
-      if (qrand() % 100 < 20)
-        p->setHealthState(ActorHealthState::INFECTED);
+      p->setHealthState(ActorHealthState::INFECTED);
     }
   }
 

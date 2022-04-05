@@ -1,5 +1,4 @@
 #include "World.h"
-#include "../AI/ActorAI.h"
 #include "../Entities/Actor.h"
 #include <QTime>
 #include <QVector2D>
@@ -7,19 +6,16 @@
 World::World() {
   qsrand(QTime::currentTime().msec());
 
-  for (int j = 0; j < 100; j++) {
+  for (int j = 0; j < 200; j++) {
     QVector<QVector2D> v;
     for (int i = 0; i < 6; i++) {
       v.append(QVector2D(qrand() % 500, qrand() % 500));
     }
-    Actor *a;
-    if (qrand() % 100 < 1) {
-      a = new Actor(v[5], 0.2f, ActorHealthState::INFECTED);
-    } else {
-      a = new Actor(v[5], 0.2f);
-    }
-    ActorAI *ai = new ActorAI(*a, {v[0], v[1], v[2], v[3], v[4]}, 2000, 5);
-    a->setAI(ai);
+    Actor *a = new Actor(v[5], 0.2f, ActorHealthState::HEALTHY,
+                         {v[0], v[1], v[2], v[3], v[4]}, 2000, 2);
+    if (qrand() % 100 < 2)
+      a->setHealthState(ActorHealthState::INFECTED);
+
     addEntity(*a);
   }
 }

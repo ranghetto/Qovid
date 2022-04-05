@@ -1,9 +1,14 @@
 #include "Actor.h"
-#include "../AI/ActorAI.h"
+#include "../AI/InfectActorsInRange.h"
+#include "../AI/Patrol.h"
+#include "../BehaviourTree/Sequence.h"
 #include <QPainter>
 
-Actor::Actor(QVector2D position, float speed, ActorHealthState state)
-    : position_(position), speed_(speed), healthState_(state) {}
+Actor::Actor(QVector2D position, float speed, ActorHealthState state,
+             QVector<QVector2D> waypoints, float waitTime, float range)
+    : Tree(new Sequence({new Patrol(*this, waypoints, waitTime),
+                         new InfectActorsInRange(*this, range)})),
+      position_(position), speed_(speed), healthState_(state) {}
 
 QVector2D Actor::position() const { return position_; }
 
@@ -15,14 +20,12 @@ void Actor::setPosition(QVector2D position) { position_ = position; }
 
 void Actor::setSpeed(float speed) { speed_ = speed; }
 
-void Actor::setAI(ActorAI *ai) { ai_ = ai; }
-
 void Actor::setHealthState(ActorHealthState state) { healthState_ = state; }
 
 void Actor::update(qint64 deltaTime) {
   if (healthState_ == ActorHealthState::DEAD)
     return;
-  ai_->update(deltaTime);
+  Tree::update(deltaTime);
 }
 
 void Actor::render(QPainter &painter) {

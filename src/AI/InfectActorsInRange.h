@@ -9,7 +9,7 @@ using namespace BehaviourTree;
 class InfectActorsInRange : public Node {
 public:
   InfectActorsInRange(Actor &actor, int range);
-  NodeState evaluate(qint64 deltaTime) override;
+  NodeState evaluate() override;
 
 private:
   Actor &actor_;

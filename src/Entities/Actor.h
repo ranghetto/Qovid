@@ -16,7 +16,7 @@ public:
         ActorHealthState state = ActorHealthState::HEALTHY,
         QVector<QVector2D> waypoints = {}, float waitTime = 1000,
         float range = 2, int timeToRecover = 20000);
-  void update(qint64 deltaTime) override;
+  void update() override;
   void render(QPainter &painter) override;
 
   QVector2D position() const;

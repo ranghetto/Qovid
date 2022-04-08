@@ -25,11 +25,7 @@ void Actor::setSpeed(float speed) { speed_ = speed; }
 
 void Actor::setHealthState(ActorHealthState state) { healthState_ = state; }
 
-void Actor::update(qint64 deltaTime) {
-  if (healthState_ == ActorHealthState::DEAD)
-    return;
-  Tree::update(deltaTime);
-}
+void Actor::update() { Tree::update(); }
 
 void Actor::render(QPainter &painter) {
   painter.setPen(Qt::PenStyle::NoPen);

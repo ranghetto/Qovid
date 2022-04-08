@@ -9,7 +9,7 @@ class Sequence : public Node {
 public:
   Sequence(Node *parent = nullptr);
   Sequence(QList<Node *> children);
-  NodeState evaluate(qint64 deltaTime) override;
+  NodeState evaluate() override;
 };
 } // namespace BehaviourTree
 

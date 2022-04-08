@@ -6,15 +6,20 @@
 #include <QHBoxLayout>
 #include <QWidget>
 
+class Simulation;
+
 class ContainerWidget : public QWidget {
   Q_OBJECT
-private:
-  InputWidget *input_widget;
-  SimulationView *sim;
 
 public:
   ContainerWidget(QWidget *parent = nullptr);
-  ~ContainerWidget() = default;
-};
+  InputWidget* getInputWidget();   //return input_wiget to the controller
+  void setSimulation(Simulation*); //set controller_
+  void addSimulationView(SimulationView*);
 
+private:
+  SimulationView *simulation_;
+  InputWidget *input_widget_;
+  Simulation* controller_;
+};
 #endif // CONTAINERWIDGET_H

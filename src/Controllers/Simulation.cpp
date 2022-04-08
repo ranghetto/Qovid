@@ -1,20 +1,36 @@
 #include "Simulation.h"
 
-// TODO set `isRunning_` false by default
 Simulation::Simulation(QObject *parent)
     : QObject(parent), world_(nullptr), loopTimer_(new QTimer(this)),
-      deltaTimer_(new QElapsedTimer()), isRunning_(true) {
+      deltaTimer_(new QElapsedTimer()), isRunning_(false) {
 
-  generateWorld();
-  connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
-  // ->start(0) is a timer configurations to enter in the event loop of Qt.
-  // Every time `timeout()` signal is sent, the connecter slots'll be executed
-  // in the main loop of Qt, without inferferring with normal operations.
-  loopTimer_->start(0);
+        connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
 
-  // Timer to calculate `deltaTime`
-  deltaTimer_->start();
-  lastTime_ = deltaTimer_->elapsed();
+        createMainWindow();
+
+      }
+
+//slot & signal
+
+//handle signal from "start simulation" button
+void Simulation::handleStartSimulation(){
+  
+    input_widget_->disableSimulationButton();
+    generateWorld();
+    isRunning_=true;
+    
+    // ->start(0) is a timer configurations to enter in the event loop of Qt.
+    // Every time `timeout()` signal is sent, the connecter slots'll be executed
+    // in the main loop of Qt, without inferferring with normal operations.
+    loopTimer_->start(0);
+
+    // Timer to calculate `deltaTime`
+    deltaTimer_->start();
+    lastTime_ = deltaTimer_->elapsed();
+
+    view_ = new SimulationView(this);
+    this->setView(view_);
+    container_widget_->addSimulationView(view_);
 }
 
 void Simulation::update() {
@@ -24,7 +40,6 @@ void Simulation::update() {
 
     // input hanlder should be placed above if exists
     update(elapsed);
-
     lastTime_ = current;
   }
 }
@@ -36,6 +51,8 @@ void Simulation::update(qint64 deltaTime) {
   }
 }
 
+//setter & getter
+
 void Simulation::render(QPainter &painter) {
   for (auto entity : world_->entities()) {
     if (entity)
@@ -43,15 +60,30 @@ void Simulation::render(QPainter &painter) {
   }
 }
 
+//create mainwindow and set/get pointers
+void Simulation::createMainWindow() {
+    main_window_=new MainWindow();
+    main_window_->setSimulation(this);
+    container_widget_=main_window_->getContainer();
+    container_widget_->setSimulation(this);
+    input_widget_=container_widget_->getInputWidget();
+    input_widget_->setSimulation(this);
+    main_window_->show();
+}
+
 void Simulation::setView(SimulationView *view) {
   view->setController(this);
-  view_ = view;
+  //CONNECT TIMER TO VIEW (QWIDGET) UPDATE METHOD
   connect(loopTimer_, SIGNAL(timeout()), view, SLOT(update()));
   // TODO implement
   // connect(viewButton, SIGNAL(clicked()), this, SLOT(takeInput()));
 }
 
-void Simulation::generateWorld() { world_ = new World(); }
+
+void Simulation::generateWorld() { 
+  int population=input_widget_->getPopulation();
+  world_ = new World(population);
+}
 
 World *Simulation::world() const { return world_; }
 

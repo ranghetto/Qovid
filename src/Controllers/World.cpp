@@ -3,11 +3,10 @@
 #include <QTime>
 #include <QVector2D>
 
-World::World() {
+World::World(int population): population_(population) {
   qsrand(QTime::currentTime().msec());
 
-  // TODO all hardcoded values must be settable through UI -> Controller
-  for (int j = 0; j < 200; j++) {
+  for (int j = 0; j < population_; j++) {
     QVector<QVector2D> v;
     for (int i = 0; i < 6; i++) {
       v.append(QVector2D(qrand() % 500, qrand() % 500));

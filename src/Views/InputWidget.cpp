@@ -1,4 +1,5 @@
 #include "InputWidget.h"
+#include "../Controllers/Simulation.h"
 
 InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   // variables declaration and inizialization
@@ -29,8 +30,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_death_rate->setText("Probabilità di morte dell'infetto");
   label_time->setText("Durata simulazione");
   // SpinBox max min setting
-  input_population->setMaximum(100);
-  input_population->setMinimum(0);
+  input_population->setMaximum(300);
+  input_population->setMinimum(2);
   input_infection->setMaximum(100);
   input_infection->setMinimum(0);
   input_infection_rate->setMaximum(100);
@@ -54,4 +55,19 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   layout->addWidget(start_sim);
 
   this->setLayout(layout);
+}
+
+void InputWidget::disableSimulationButton(){
+  start_sim->setEnabled(false);
+}
+
+//setters & getters
+
+void InputWidget::setSimulation(Simulation *controller){
+    controller_=controller;
+    connect(start_sim, SIGNAL(clicked()), controller_, SLOT(handleStartSimulation()));
+}
+
+int InputWidget::getPopulation(){
+  return input_population->value();
 }

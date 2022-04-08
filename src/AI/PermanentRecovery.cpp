@@ -3,7 +3,7 @@
 PermanentRecovery::PermanentRecovery(Actor &actor, int timeToRecover)
     : actor_(actor), timeToRecover_(timeToRecover), timerStarted_(false) {}
 
-NodeState PermanentRecovery::evaluate(qint64 deltaTime) {
+NodeState PermanentRecovery::evaluate() {
   if (actor_.healthState() == ActorHealthState::RECOVERED) {
     state_ = NodeState::SUCCESS;
     return state_;

@@ -1,7 +1,7 @@
 #include "Actor.h"
 #include "../AI/InfectActorsInRange.h"
 #include "../AI/Patrol.h"
-#include "../AI/Recovery.h"
+#include "../AI/PermanentRecovery.h"
 #include "../BehaviourTree/Sequence.h"
 #include <QPainter>
 
@@ -10,7 +10,7 @@ Actor::Actor(QVector2D position, float speed, ActorHealthState state,
              int timeToRecover)
     : Tree(new Sequence({new Patrol(*this, waypoints, waitTime),
                          new InfectActorsInRange(*this, range),
-                         new Recovery(*this, timeToRecover)})),
+                         new PermanentRecovery(*this, timeToRecover)})),
       position_(position), speed_(speed), healthState_(state) {}
 
 QVector2D Actor::position() const { return position_; }

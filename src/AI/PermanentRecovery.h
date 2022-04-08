@@ -7,15 +7,15 @@
 
 using namespace BehaviourTree;
 
-class Recovery : public Node {
+class PermanentRecovery : public Node {
 public:
-  Recovery(Actor &actor, int timeToRecover);
+  PermanentRecovery(Actor &actor, int timeToRecover);
   NodeState evaluate(qint64 deltaTime) override;
 
 private:
   Actor &actor_;
   int timeToRecover_;
-  bool wasInfected_;
+  bool timerStarted_;
   QElapsedTimer timer_;
 };
 

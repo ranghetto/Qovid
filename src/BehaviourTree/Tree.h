@@ -9,7 +9,7 @@ class Tree {
 public:
   Tree(Node *root = nullptr);
   ~Tree() = default;
-  void update(qint64 deltaTime);
+  void update();
 
 private:
   Node *root_;

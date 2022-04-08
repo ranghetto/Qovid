@@ -9,7 +9,7 @@ class Selector : public Node {
 public:
   Selector(Node *parent = nullptr);
   Selector(QList<Node *> children);
-  NodeState evaluate(qint64 deltaTime) override;
+  NodeState evaluate() override;
 };
 } // namespace BehaviourTree
 

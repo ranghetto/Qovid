@@ -12,7 +12,7 @@ public:
   Node(QList<Node *> children);
   virtual ~Node();
 
-  virtual NodeState evaluate(qint64 deltaTime) = 0;
+  virtual NodeState evaluate() = 0;
 
 protected:
   NodeState state_;

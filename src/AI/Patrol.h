@@ -11,7 +11,7 @@ using namespace BehaviourTree;
 class Patrol : public Node {
 public:
   Patrol(Actor &actor, QVector<QVector2D> waypoints, float waitTime = 0.0f);
-  NodeState evaluate(qint64 deltaTime) override;
+  NodeState evaluate() override;
 
 private:
   QVector<QVector2D> waypoints_;

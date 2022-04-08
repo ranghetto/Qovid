@@ -4,7 +4,7 @@
 InfectActorsInRange::InfectActorsInRange(Actor &actor, int range)
     : actor_(actor), range_(range) {}
 
-NodeState InfectActorsInRange::evaluate(qint64 deltaTime) {
+NodeState InfectActorsInRange::evaluate() {
 
   QVector<Actor *> people = Simulation::instance().world()->findNearbyActors(
       actor_.position(), range_);

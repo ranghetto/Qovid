@@ -9,7 +9,7 @@ public:
   Entity() = default;
   virtual ~Entity() = default;
 
-  virtual void update(qint64 deltaTime) = 0;
+  virtual void update() = 0;
   virtual void render(QPainter &painter) = 0;
 };
 

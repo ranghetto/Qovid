@@ -10,7 +10,7 @@ using namespace BehaviourTree;
 class PermanentRecovery : public Node {
 public:
   PermanentRecovery(Actor &actor, int timeToRecover);
-  NodeState evaluate(qint64 deltaTime) override;
+  NodeState evaluate() override;
 
 private:
   Actor &actor_;

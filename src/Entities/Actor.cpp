@@ -1,4 +1,6 @@
 #include "Actor.h"
+#include "../AI/CheckAlive.h"
+#include "../AI/CheckInfected.h"
 #include "../AI/InfectActorsInRange.h"
 #include "../AI/Patrol.h"
 #include "../AI/PermanentRecovery.h"
@@ -7,12 +9,15 @@
 
 Actor::Actor(QVector2D position, float speed, ActorHealthState state,
              QVector<QVector2D> waypoints, float waitTime, float range,
-             int timeToRecover)
-    : Tree(new Sequence({new Patrol(*this, waypoints, waitTime),
-                         new InfectActorsInRange(*this, range),
-                         new PermanentRecovery(*this, timeToRecover)})),
+             float timeToRecover, float survivalRateo, float infectRateo)
+    : Tree(new Sequence({
+          new CheckAlive(*this),
+          new Patrol(*this, waypoints, waitTime),
+          new CheckInfected(*this),
+          new InfectActorsInRange(*this, range, infectRateo),
+          new PermanentRecovery(*this, timeToRecover),
+      })),
       position_(position), speed_(speed), healthState_(state) {}
-
 QVector2D Actor::position() const { return position_; }
 
 float Actor::speed() const { return speed_; }

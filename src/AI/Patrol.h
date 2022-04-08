@@ -14,12 +14,12 @@ public:
   NodeState evaluate() override;
 
 private:
+  Actor &actor_;
   QVector<QVector2D> waypoints_;
   int currentWaypointIndex_;
   float waitTime_; // milliseconds
   float waitCounter_;
   bool waiting_;
-  Actor &actor_;
 };
 
 #endif // PATROL_H

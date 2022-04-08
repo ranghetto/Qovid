@@ -30,7 +30,7 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_death_rate->setText("Probabilità di morte dell'infetto");
   label_time->setText("Durata simulazione");
   // SpinBox max min setting
-  input_population->setMaximum(100);
+  input_population->setMaximum(300);
   input_population->setMinimum(0);
   input_infection->setMaximum(100);
   input_infection->setMinimum(0);
@@ -57,8 +57,13 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   this->setLayout(layout);
 }
 
+//setters & getters
 
 void InputWidget::setSimulation(Simulation *controller){
     controller_=controller;
     connect(start_sim, SIGNAL(clicked()), controller_, SLOT(handleStartSimulation()));
+}
+
+int InputWidget::getPopulation(){
+  return input_population->value();
 }

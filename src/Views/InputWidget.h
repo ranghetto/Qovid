@@ -14,7 +14,9 @@ class InputWidget : public QWidget {
   Q_OBJECT
 public:
     InputWidget(QWidget *parent = nullptr);
+    //setters & getters
     void setSimulation(Simulation*);
+    int getPopulation();
 private:
   QLabel *label_population, *label_infection, *label_infection_rate,
       *label_death_rate, *label_time;

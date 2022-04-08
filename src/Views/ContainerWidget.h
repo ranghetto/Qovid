@@ -15,7 +15,7 @@ public:
   ContainerWidget(QWidget *parent = nullptr);
   InputWidget* getInputWidget();   //return input_wiget to the controller
   void setSimulation(Simulation*); //set controller_
-  void showSimulation(SimulationView*);
+  void addSimulationView(SimulationView*);
 
 private:
   SimulationView *simulation_;

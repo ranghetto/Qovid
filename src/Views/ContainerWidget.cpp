@@ -20,7 +20,7 @@ InputWidget* ContainerWidget::getInputWidget(){
 
 //function
 
-void ContainerWidget::showSimulation(SimulationView *simulation){
+void ContainerWidget::addSimulationView(SimulationView *simulation){
     simulation_=simulation;
     layout()->addWidget(simulation_);
 }

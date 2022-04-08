@@ -1,23 +1,29 @@
 #include "Simulation.h"
 
-// TODO set `isRunning_` false by default
 Simulation::Simulation(QObject *parent)
     : QObject(parent), world_(nullptr), loopTimer_(new QTimer(this)),
-      deltaTimer_(new QElapsedTimer()), isRunning_(true) {
-
-  generateWorld();
-  connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
-  // ->start(0) is a timer configurations to enter in the event loop of Qt.
-  // Every time `timeout()` signal is sent, the connecter slots'll be executed
-  // in the main loop of Qt, without inferferring with normal operations.
-  loopTimer_->start(0);
-
-  // Timer to calculate `deltaTime`
-  deltaTimer_->start();
-  lastTime_ = deltaTimer_->elapsed();
-}
+      deltaTimer_(new QElapsedTimer()), isRunning_(false) {}
 
 //slot & signal
+
+//handle signal from "start simulation" button
+void Simulation::handleStartSimulation(){
+    generateWorld();
+    isRunning_=true;
+    connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
+    // ->start(0) is a timer configurations to enter in the event loop of Qt.
+    // Every time `timeout()` signal is sent, the connecter slots'll be executed
+    // in the main loop of Qt, without inferferring with normal operations.
+    loopTimer_->start(0);
+
+    // Timer to calculate `deltaTime`
+    deltaTimer_->start();
+    lastTime_ = deltaTimer_->elapsed();
+
+    view_ = new SimulationView(this);
+    this->setView(view_);
+    container_widget_->showSimulation(view_);
+}
 
 void Simulation::update() {
   if (isRunning_) {
@@ -38,12 +44,6 @@ void Simulation::update(qint64 deltaTime) {
   }
 }
 
-void Simulation::handleStartSimulation(){
-    view_ = new SimulationView(this);
-    this->setView(view_);
-    container_widget_->showSimulation(view_);
-}
-
 //setter & getter
 
 void Simulation::render(QPainter &painter) {
@@ -53,6 +53,7 @@ void Simulation::render(QPainter &painter) {
   }
 }
 
+//create mainwindow and set/get pointers
 void Simulation::setMainWindow() {
     main_window_=new MainWindow();
     main_window_->setSimulation(this);
@@ -71,4 +72,7 @@ void Simulation::setView(SimulationView *view) {
   // connect(viewButton, SIGNAL(clicked()), this, SLOT(takeInput()));
 }
 
-void Simulation::generateWorld() { world_ = new World(); }
+void Simulation::generateWorld() { 
+  int population=input_widget_->getPopulation();
+  world_ = new World(population); 
+}

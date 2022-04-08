@@ -2,7 +2,9 @@
 
 Simulation::Simulation(QObject *parent)
     : QObject(parent), world_(nullptr), loopTimer_(new QTimer(this)),
-      deltaTimer_(new QElapsedTimer()), isRunning_(false) {}
+      deltaTimer_(new QElapsedTimer()), isRunning_(false) {
+        connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
+      }
 
 //slot & signal
 
@@ -10,7 +12,7 @@ Simulation::Simulation(QObject *parent)
 void Simulation::handleStartSimulation(){
     generateWorld();
     isRunning_=true;
-    connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
+    
     // ->start(0) is a timer configurations to enter in the event loop of Qt.
     // Every time `timeout()` signal is sent, the connecter slots'll be executed
     // in the main loop of Qt, without inferferring with normal operations.
@@ -67,7 +69,6 @@ void Simulation::setMainWindow() {
 void Simulation::setView(SimulationView *view) {
   view->setController(this);
   view_ = view;
-  connect(loopTimer_, SIGNAL(timeout()), view, SLOT(update()));
   // TODO implement
   // connect(viewButton, SIGNAL(clicked()), this, SLOT(takeInput()));
 }

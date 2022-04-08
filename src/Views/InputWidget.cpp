@@ -31,7 +31,7 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_time->setText("Durata simulazione");
   // SpinBox max min setting
   input_population->setMaximum(300);
-  input_population->setMinimum(0);
+  input_population->setMinimum(2);
   input_infection->setMaximum(100);
   input_infection->setMinimum(0);
   input_infection_rate->setMaximum(100);

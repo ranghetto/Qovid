@@ -14,6 +14,7 @@ class InputWidget : public QWidget {
   Q_OBJECT
 public:
     InputWidget(QWidget *parent = nullptr);
+    void disableSimulationButton();
     //setters & getters
     void setSimulation(Simulation*);
     int getPopulation();

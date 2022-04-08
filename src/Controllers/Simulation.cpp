@@ -14,7 +14,8 @@ Simulation::Simulation(QObject *parent)
 
 //handle signal from "start simulation" button
 void Simulation::handleStartSimulation(){
-    if(!world_){
+  
+    input_widget_->disableSimulationButton();
     generateWorld();
     isRunning_=true;
     
@@ -30,7 +31,6 @@ void Simulation::handleStartSimulation(){
     view_ = new SimulationView(this);
     this->setView(view_);
     container_widget_->addSimulationView(view_);
-    }
 }
 
 void Simulation::update() {

@@ -57,6 +57,10 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   this->setLayout(layout);
 }
 
+void InputWidget::disableSimulationButton(){
+  start_sim->setEnabled(false);
+}
+
 //setters & getters
 
 void InputWidget::setSimulation(Simulation *controller){

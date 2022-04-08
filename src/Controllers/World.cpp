@@ -3,7 +3,7 @@
 #include <QTime>
 #include <QVector2D>
 
-World::World(int population): population_(population) {
+World::World(int population) : population_(population) {
   qsrand(QTime::currentTime().msec());
 
   for (int j = 0; j < population_; j++) {

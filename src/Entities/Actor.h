@@ -14,7 +14,11 @@ class Actor : public Entity, public Tree {
 public:
   Actor(QVector2D position, float speed, ActorHealthState state,
         QVector<QVector2D> waypoints, float waitTime, float range,
+<<<<<<< HEAD
         float timeToRecover, float surviveRateo, float infectRateo);
+=======
+        float surviveRateo, float infectRateo);
+>>>>>>> Aggiunte classi per aiutare l'implementazione di morte
   void update() override;
   void render(QPainter &painter) override;
 

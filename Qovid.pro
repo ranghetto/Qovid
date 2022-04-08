@@ -22,11 +22,7 @@ SOURCES += src/main.cpp \
   src/AI/CheckInfected.cpp \
   src/AI/InfectActorsInRange.cpp \
   src/AI/Patrol.cpp \
-<<<<<<< HEAD
   src/AI/PermanentRecovery.cpp \
-=======
-  src/AI/Survive.cpp \
->>>>>>> Aggiunte classi per aiutare l'implementazione di morte
   src/BehaviourTree/Node.cpp \
   src/BehaviourTree/Selector.cpp \
   src/BehaviourTree/Sequence.cpp \
@@ -44,11 +40,7 @@ HEADERS += \
   src/AI/CheckInfected.h \
   src/AI/InfectActorsInRange.h \
   src/AI/Patrol.h \
-<<<<<<< HEAD
   src/AI/PermanentRecovery.h \
-=======
-  src/AI/Survive.h \
->>>>>>> Aggiunte classi per aiutare l'implementazione di morte
   src/BehaviourTree/Node.h \
   src/BehaviourTree/Selector.h \
   src/BehaviourTree/Sequence.h \

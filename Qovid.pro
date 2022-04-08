@@ -20,6 +20,7 @@ QT += core gui widgets charts
 SOURCES += src/main.cpp \
   src/AI/InfectActorsInRange.cpp \
   src/AI/Patrol.cpp \
+  src/AI/PermanentRecovery.cpp \
   src/BehaviourTree/Node.cpp \
   src/BehaviourTree/Selector.cpp \
   src/BehaviourTree/Sequence.cpp \
@@ -35,6 +36,7 @@ SOURCES += src/main.cpp \
 HEADERS += \
   src/AI/InfectActorsInRange.h \
   src/AI/Patrol.h \
+  src/AI/PermanentRecovery.h \
   src/BehaviourTree/Node.h \
   src/BehaviourTree/Selector.h \
   src/BehaviourTree/Sequence.h \

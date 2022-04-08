@@ -10,23 +10,27 @@ class ActorAI;
 
 using namespace BehaviourTree;
 
-class Actor : public Entity {
+class Actor : public Entity, public Tree {
 public:
-  Actor(QVector<QVector2D> waypoints, QVector2D position = {0, 0},
-        float speed = 1.0f);
+  Actor(QVector2D position = {0, 0}, float speed = 1.0f,
+        ActorHealthState state = ActorHealthState::HEALTHY,
+        QVector<QVector2D> waypoints = {}, float waitTime = 1000,
+        float range = 2);
   void update(qint64 deltaTime) override;
   void render(QPainter &painter) override;
 
   QVector2D position() const;
   float speed() const;
+  ActorHealthState healthState() const;
 
   void setPosition(QVector2D position);
   void setSpeed(float speed);
 
+  void setHealthState(ActorHealthState state);
+
 private:
   QVector2D position_;
   float speed_;
-  ActorAI *ai_;
   ActorHealthState healthState_;
 };
 

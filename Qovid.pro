@@ -18,7 +18,7 @@ QT += core gui widgets charts
 
 # Input
 SOURCES += src/main.cpp \
-  src/AI/ActorAI.cpp \
+  src/AI/InfectActorsInRange.cpp \
   src/AI/Patrol.cpp \
   src/BehaviourTree/Node.cpp \
   src/BehaviourTree/Selector.cpp \
@@ -33,7 +33,7 @@ SOURCES += src/main.cpp \
   src/Views/SimulationView.cpp \
 
 HEADERS += \
-  src/AI/ActorAI.h \
+  src/AI/InfectActorsInRange.h \
   src/AI/Patrol.h \
   src/BehaviourTree/Node.h \
   src/BehaviourTree/Selector.h \

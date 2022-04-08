@@ -1,29 +1,47 @@
 #include "Actor.h"
-#include "../AI/ActorAI.h"
+#include "../AI/InfectActorsInRange.h"
+#include "../AI/Patrol.h"
+#include "../BehaviourTree/Sequence.h"
 #include <QPainter>
 
-Actor::Actor(QVector<QVector2D> waypoints, QVector2D position, float speed)
-    : position_(position), speed_(speed) {
-  // TODO spostare creazione cervello nel World
-  ai_ = new ActorAI(*this, waypoints, 5000);
-}
+Actor::Actor(QVector2D position, float speed, ActorHealthState state,
+             QVector<QVector2D> waypoints, float waitTime, float range)
+    : Tree(new Sequence({new Patrol(*this, waypoints, waitTime),
+                         new InfectActorsInRange(*this, range)})),
+      position_(position), speed_(speed), healthState_(state) {}
 
 QVector2D Actor::position() const { return position_; }
 
 float Actor::speed() const { return speed_; }
 
+ActorHealthState Actor::healthState() const { return healthState_; }
+
 void Actor::setPosition(QVector2D position) { position_ = position; }
 
 void Actor::setSpeed(float speed) { speed_ = speed; }
 
+void Actor::setHealthState(ActorHealthState state) { healthState_ = state; }
+
 void Actor::update(qint64 deltaTime) {
   if (healthState_ == ActorHealthState::DEAD)
     return;
-  ai_->update(deltaTime);
+  Tree::update(deltaTime);
 }
 
 void Actor::render(QPainter &painter) {
   painter.setPen(Qt::PenStyle::NoPen);
-  painter.setBrush(QBrush(Qt::green));
+  painter.setBrush(QBrush(Qt::black));
+  if (healthState_ == ActorHealthState::HEALTHY) {
+    painter.setBrush(QBrush(Qt::green));
+  }
+  if (healthState_ == ActorHealthState::INFECTED) {
+    painter.setBrush(QBrush(Qt::red));
+  }
+  if (healthState_ == ActorHealthState::DEAD) {
+    painter.setBrush(QBrush(Qt::lightGray));
+  }
+  if (healthState_ == ActorHealthState::RECOVERED) {
+    painter.setBrush(QBrush(Qt::blue));
+  }
   painter.drawEllipse(position_.toPoint(), 5, 5);
 }

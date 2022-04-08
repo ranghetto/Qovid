@@ -8,13 +8,5 @@ int main(int argc, char **argv) {
 
   Simulation *s = &Simulation::instance();
 
-  s->setMainWindow();
-
-  //SimulationView *sv = new SimulationView(s);
-
-  //s->setView(sv);
-
-  //sv->show();
-
   app.exec();
 }

@@ -3,7 +3,11 @@
 Simulation::Simulation(QObject *parent)
     : QObject(parent), world_(nullptr), loopTimer_(new QTimer(this)),
       deltaTimer_(new QElapsedTimer()), isRunning_(false) {
+
         connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
+
+        createMainWindow();
+
       }
 
 //slot & signal
@@ -56,7 +60,7 @@ void Simulation::render(QPainter &painter) {
 }
 
 //create mainwindow and set/get pointers
-void Simulation::setMainWindow() {
+void Simulation::createMainWindow() {
     main_window_=new MainWindow();
     main_window_->setSimulation(this);
     container_widget_=main_window_->getContainer();

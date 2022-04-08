@@ -21,7 +21,6 @@ public:
   static Simulation &instance();
 
   // Setters
-  void setMainWindow(); //setter for mainwindow, containerwidget, inputwidget
   void setView(SimulationView *view);
   void generateWorld();
 
@@ -55,6 +54,7 @@ private:
   bool isRunning_;
   qint64 lastTime_;
 
+  void createMainWindow(); //setter for mainwindow, containerwidget, inputwidget
 
   void update(qint64 deltaTime);
 };

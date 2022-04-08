@@ -14,6 +14,7 @@ Simulation::Simulation(QObject *parent)
 
 //handle signal from "start simulation" button
 void Simulation::handleStartSimulation(){
+    if(!world_){
     generateWorld();
     isRunning_=true;
     
@@ -28,7 +29,8 @@ void Simulation::handleStartSimulation(){
 
     view_ = new SimulationView(this);
     this->setView(view_);
-    container_widget_->showSimulation(view_);
+    container_widget_->addSimulationView(view_);
+    }
 }
 
 void Simulation::update() {
@@ -38,7 +40,6 @@ void Simulation::update() {
 
     // input hanlder should be placed above if exists
     update(elapsed);
-
     lastTime_ = current;
   }
 }
@@ -72,7 +73,8 @@ void Simulation::createMainWindow() {
 
 void Simulation::setView(SimulationView *view) {
   view->setController(this);
-  view_ = view;
+  //CONNECT TIMER TO VIEW (QWIDGET) UPDATE METHOD
+  connect(loopTimer_, SIGNAL(timeout()), view, SLOT(update()));
   // TODO implement
   // connect(viewButton, SIGNAL(clicked()), this, SLOT(takeInput()));
 }

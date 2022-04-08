@@ -5,7 +5,7 @@
 
 namespace BehaviourTree {
 // only if all child nodes succeed, it succeeds
-class Sequence : Node {
+class Sequence : public Node {
 public:
   Sequence(Node *parent = nullptr);
   Sequence(QList<Node *> children);

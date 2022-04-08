@@ -73,7 +73,15 @@ void Simulation::setView(SimulationView *view) {
   // connect(viewButton, SIGNAL(clicked()), this, SLOT(takeInput()));
 }
 
+
 void Simulation::generateWorld() { 
   int population=input_widget_->getPopulation();
-  world_ = new World(population); 
+  world_ = new World(population);
+}
+
+World *Simulation::world() const { return world_; }
+
+Simulation &Simulation::instance() {
+  static Simulation *simulation = new Simulation(nullptr);
+  return *simulation;
 }

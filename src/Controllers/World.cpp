@@ -4,7 +4,10 @@
 #include <QVector2D>
 
 World::World(int population) : population_(population) {
-  qsrand(QTime::currentTime().msec());
+
+  // as variable cause it needs to be saved in the future
+  int time = QTime::currentTime().msecsSinceStartOfDay();
+  qsrand(time);
 
   for (int j = 0; j < population_; j++) {
     QVector<QVector2D> v;

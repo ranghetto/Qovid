@@ -3,7 +3,7 @@
 #include <QTime>
 #include <QVector2D>
 
-World::World(int population, int infection_range, int infection_rate, int death_rate, int time_toRecover, int initial_infect) {
+World::World(uint population, uint infection_range, uint infection_rate, uint death_rate, uint time_toRecover, uint initial_infect) {
   qsrand(QTime::currentTime().msec());
 
   for (int j = 0; j < population; j++) 

@@ -7,7 +7,7 @@
 
 class World {
 public:
-  World(int, int, int, int, int, int);
+  World(uint, uint, uint, uint, uint, uint);
   void addEntity(Entity &entity);
   QVector<Entity *> entities() const;
   QVector<Actor *> findNearbyActors(QVector2D center, int range) const;

@@ -7,7 +7,7 @@
 
 class World {
 public:
-  World(int);
+  World(uint, uint, uint, uint, uint, uint);
   void addEntity(Entity &entity);
   QVector<Entity *> entities() const;
   QVector<Actor *> findNearbyActors(QVector2D center, int range) const;
@@ -15,7 +15,6 @@ public:
 
 private:
   QVector<Entity *> entities_;
-  int population_;
 };
 
 #endif // WORLD_H

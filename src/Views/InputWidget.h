@@ -18,11 +18,18 @@ public:
     //setters & getters
     void setSimulation(Simulation*);
     int getPopulation();
+    int getInfectionRange();
+    int getInfectionRate();
+    int getDeathRate();
+    int getTimeRecover();
+    int getInitialInfect();
+public slots:
+    void changeMax(int);
 private:
-  QLabel *label_population, *label_infection, *label_infection_rate,
-      *label_death_rate, *label_time;
-  QSpinBox *input_population, *input_infection, *input_infection_rate,
-      *input_death_rate;
+  QLabel *label_population, *label_infection_range, *label_infection_rate,
+      *label_death_rate, *label_time, *label_recover, *label_initial_infect;
+  QSpinBox *input_population, *input_infection_range, *input_infection_rate,
+      *input_death_rate, *input_time_toRecover, *input_initial_infect;
   QRadioButton *sim_duration_30s, *sim_duration_1m, *sim_duration_3m,
       *sim_duration_complete;
   QPushButton *start_sim;

@@ -1,6 +1,6 @@
 #include "CheckInfected.h"
 
-CheckInfected::CheckInfected(Actor &actor) : actor_(actor) {}
+CheckInfected::CheckInfected(const Actor &actor) : actor_(actor) {}
 
 NodeState CheckInfected::evaluate() {
   if (actor_.healthState() == ActorHealthState::INFECTED) {

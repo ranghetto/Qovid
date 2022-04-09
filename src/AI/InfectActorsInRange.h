@@ -8,13 +8,13 @@ using namespace BehaviourTree;
 
 class InfectActorsInRange : public Node {
 public:
-  InfectActorsInRange(Actor &actor, int range, float infectRateo);
+  InfectActorsInRange(const Actor &actor, uint range, uint infectRateo);
   NodeState evaluate() override;
 
 private:
-  Actor &actor_;
-  int range_;
-  float infectRateo_;
+  const Actor &actor_;
+  const uint range_;
+  const uint infectRateo_;
 };
 
 #endif // INFECT_ACTORS_IN_RANGE_H

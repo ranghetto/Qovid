@@ -23,17 +23,17 @@ World::World(int population) : population_(population) {
   }
 }
 
-QVector<Entity *> World::entities() const { return entities_; }
+QVector<Entity &> World::entities() const { return entities_; }
 
-void World::addEntity(Entity &entity) { entities_.append(&entity); }
+void World::addEntity(Entity &entity) { entities_.append(entity); }
 
-QVector<Actor *> World::findNearbyActors(QVector2D center, int range) const {
-  QVector<Actor *> list;
+QVector<Actor &> World::findNearbyActors(QVector2D center, int range) const {
+  QVector<Actor &> list;
   for (auto e : entities_) {
     Actor *a = dynamic_cast<Actor *>(e);
     if (a)
       if ((center - a->position()).length() <= range)
-        list.append(a);
+        list.append(*a);
   }
   return list;
 }

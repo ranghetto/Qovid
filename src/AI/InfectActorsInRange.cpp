@@ -1,13 +1,13 @@
 #include "InfectActorsInRange.h"
 #include "../Controllers/Simulation.h"
 
-InfectActorsInRange::InfectActorsInRange(Actor &actor, int range,
+InfectActorsInRange::InfectActorsInRange(const Actor &actor, int range,
                                          float infectRateo)
     : actor_(actor), range_(range), infectRateo_(infectRateo) {}
 
 NodeState InfectActorsInRange::evaluate() {
 
-  QVector<Actor *> people = Simulation::instance().world()->findNearbyActors(
+  QVector<Actor &> people = Simulation::instance().world()->findNearbyActors(
       actor_.position(), range_);
 
   for (auto p : people) {

@@ -10,15 +10,15 @@ using namespace BehaviourTree;
 
 class Patrol : public Node {
 public:
-  Patrol(Actor &actor, QVector<QVector2D> waypoints, float waitTime = 0.0f);
+  Patrol(Actor &actor, QVector<QVector2D> waypoints, uint waitTime);
   NodeState evaluate() override;
 
 private:
   Actor &actor_;
-  QVector<QVector2D> waypoints_;
-  int currentWaypointIndex_;
-  float waitTime_; // milliseconds
-  float waitCounter_;
+  const QVector<QVector2D> waypoints_;
+  uint currentWaypointIndex_;
+  const uint waitTime_; // milliseconds
+  uint waitCounter_;
   bool waiting_;
 };
 

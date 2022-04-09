@@ -1,7 +1,7 @@
 #include "Patrol.h"
 #include "../Controllers/Simulation.h"
 
-Patrol::Patrol(Actor &actor, QVector<QVector2D> waypoints, float waitTime)
+Patrol::Patrol(Actor &actor, QVector<QVector2D> waypoints, uint waitTime)
     : actor_(actor), waypoints_(waypoints), currentWaypointIndex_(0),
       waitTime_(waitTime), waitCounter_(0), waiting_(false) {}
 

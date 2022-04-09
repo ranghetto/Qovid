@@ -9,13 +9,13 @@ using namespace BehaviourTree;
 
 class RecoverDeath : public Node {
 public:
-  RecoverDeath(Actor &actor, int timeToRecover, float deathChance);
+  RecoverDeath(Actor &actor, uint timeToRecover, uint deathChance);
   NodeState evaluate() override;
 
 private:
   Actor &actor_;
-  int timeToRecover_;
-  float deathChance_;
+  const uint timeToRecover_;
+  const uint deathChance_;
   bool timerStarted_;
   QElapsedTimer timer_;
 };

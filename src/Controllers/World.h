@@ -9,11 +9,11 @@ class World {
 public:
   World(int);
   void addEntity(Entity &entity);
-  QVector<Entity *> entities() const;
-  QVector<Actor *> findNearbyActors(QVector2D center, int range) const;
+  QVector<Entity &> entities() const;
+  QVector<Actor &> findNearbyActors(QVector2D center, int range) const;
 
 private:
-  QVector<Entity *> entities_;
+  QVector<Entity &> entities_;
   int population_;
 };
 

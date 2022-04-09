@@ -1,6 +1,6 @@
 #include "CheckAlive.h"
 
-CheckAlive::CheckAlive(Actor &actor) : actor_(actor) {}
+CheckAlive::CheckAlive(const Actor &actor) : actor_(actor) {}
 
 NodeState CheckAlive::evaluate() {
   // If actor is dead node failed so remaining nodes in the sequence

@@ -18,5 +18,36 @@ QT += core gui widgets charts
 
 # Input
 SOURCES += src/main.cpp \
+  src/AI/CheckAlive.cpp \
+  src/AI/CheckInfected.cpp \
+  src/AI/InfectActorsInRange.cpp \
+  src/AI/Patrol.cpp \
+  src/AI/RecoverDeath.cpp \
+  src/BehaviourTree/Node.cpp \
+  src/BehaviourTree/Sequence.cpp \
+  src/BehaviourTree/Tree.cpp \
+  src/Controllers/Simulation.cpp \
+  src/Controllers/World.cpp \
+  src/Entities/Actor.cpp \
+  src/Views/ContainerWidget.cpp \
+  src/Views/InputWidget.cpp \
+  src/Views/MainWindow.cpp \
+  src/Views/SimulationWidget.cpp \
 
 HEADERS += \
+  src/AI/CheckAlive.h \
+  src/AI/CheckInfected.h \
+  src/AI/InfectActorsInRange.h \
+  src/AI/Patrol.h \
+  src/AI/RecoverDeath.h \
+  src/BehaviourTree/Node.h \
+  src/BehaviourTree/Sequence.h \
+  src/BehaviourTree/Tree.h \
+  src/Controllers/Simulation.h \
+  src/Controllers/World.h \
+  src/Entities/Actor.h \
+  src/Entities/Entity.h \
+  src/Views/ContainerWidget.h \
+  src/Views/InputWidget.h \
+  src/Views/MainWindow.h \
+  src/Views/SimulationWidget.h \

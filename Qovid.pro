@@ -32,7 +32,7 @@ SOURCES += src/main.cpp \
   src/Views/ContainerWidget.cpp \
   src/Views/InputWidget.cpp \
   src/Views/MainWindow.cpp \
-  src/Views/SimulationView.cpp \
+  src/Views/SimulationWidget.cpp \
 
 HEADERS += \
   src/AI/CheckAlive.h \
@@ -50,4 +50,4 @@ HEADERS += \
   src/Views/ContainerWidget.h \
   src/Views/InputWidget.h \
   src/Views/MainWindow.h \
-  src/Views/SimulationView.h \
+  src/Views/SimulationWidget.h \

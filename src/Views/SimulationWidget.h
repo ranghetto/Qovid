@@ -1,15 +1,15 @@
-#ifndef SIMULATION_VIEW_H
-#define SIMULATION_VIEW_H
+#ifndef SIMULATION_WIDGET_H
+#define SIMULATION_WIDGET_H
 
 class Simulation;
 #include <QPainter>
 #include <QWidget>
 
-class SimulationView : public QWidget {
+class SimulationWidget : public QWidget {
   Q_OBJECT
 
 public:
-  SimulationView(Simulation *controller = nullptr, QWidget *parent = 0);
+  SimulationWidget(Simulation *controller = nullptr, QWidget *parent = 0);
   void paintEvent(QPaintEvent *) override;
   void setController(Simulation *controller);
 
@@ -17,4 +17,4 @@ private:
   Simulation *controller_;
 };
 
-#endif // SIMULATION_VIEW_H
+#endif // SIMULATION_WIDGET_H

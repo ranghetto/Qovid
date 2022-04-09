@@ -10,12 +10,11 @@ class Simulation;
 class MainWindow : public QMainWindow {
   Q_OBJECT
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ContainerWidget* getContainer();
-    void setSimulation(Simulation*);
+  MainWindow(QWidget *parent = nullptr);
+  ContainerWidget *getContainerWidget();
+
 private:
-  ContainerWidget *container;
-  Simulation* controller_;
+  ContainerWidget *container_;
 };
 
 #endif

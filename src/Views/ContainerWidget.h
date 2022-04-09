@@ -2,7 +2,7 @@
 #define CONTAINERWIDGET_H
 
 #include "InputWidget.h"
-#include "SimulationView.h"
+#include "SimulationWidget.h"
 #include <QHBoxLayout>
 #include <QWidget>
 
@@ -13,13 +13,13 @@ class ContainerWidget : public QWidget {
 
 public:
   ContainerWidget(QWidget *parent = nullptr);
-  InputWidget* getInputWidget();   //return input_wiget to the controller
-  void setSimulation(Simulation*); //set controller_
-  void addSimulationView(SimulationView*);
+  InputWidget *getInputWidget();    // return input_wiget to the controller
+  void setSimulation(Simulation *); // set controller_
+  void addSimulationWidget(SimulationWidget *);
 
 private:
-  SimulationView *simulation_;
+  SimulationWidget *simulation_;
   InputWidget *input_widget_;
-  Simulation* controller_;
+  Simulation *controller_;
 };
 #endif // CONTAINERWIDGET_H

@@ -5,7 +5,7 @@
 #include "../Views/ContainerWidget.h"
 #include "../Views/InputWidget.h"
 #include "../Views/MainWindow.h"
-#include "../Views/SimulationView.h"
+#include "../Views/SimulationWidget.h"
 #include "World.h"
 #include <QElapsedTimer>
 #include <QObject>
@@ -21,18 +21,22 @@ public:
   static Simulation &instance();
 
   // Setters
-  void setView(SimulationView *view);
-  void generateWorld();
+  void setContainerAndInputWidget(ContainerWidget *container);
 
   // Getters
   World *world() const;
-  SimulationView *view() const; // TODO implement
   qint64 deltaTime() const;
+  bool isRunning() const;
 
+  // Called everytime view_ QWidget is updated();
   void render(QPainter &painter);
 
+  // Helper functions
+  void generateWorld();
+  void toggleSimulation() const;
+
 public slots:
-  void update();                // update loop
+  void update();                // main sim loop
   void handleStartSimulation(); // handle InputWidget QPushButton
 
 private:
@@ -41,10 +45,9 @@ private:
   static Simulation *instance_;
 
   // Views
-  SimulationView *view_;
-  MainWindow *main_window_;
-  ContainerWidget *container_widget_;
-  InputWidget *input_widget_;
+  SimulationWidget *simulationWidget_;
+  ContainerWidget *containerWidget_;
+  InputWidget *inputWidget_;
 
   // Controllers
   World *world_;
@@ -56,10 +59,8 @@ private:
   qint64 lastTime_;
   qint64 deltaTime_;
 
-  void createMainWindow(); // setter for mainwindow, containerwidget,
-                           // inputwidget
-
   void updateEntities();
+  void createSimulationWidgetAndAddToContainerLayout();
 };
 
 #endif // SIMULATION_H

@@ -1,15 +1,9 @@
 #include "MainWindow.h"
 #include "../Controllers/Simulation.h"
 
-MainWindow::MainWindow(QWidget *parent){
-    container=new ContainerWidget(this);
-    setCentralWidget(container);
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+  container_ = new ContainerWidget(this);
+  setCentralWidget(container_);
 }
 
-void MainWindow::setSimulation(Simulation* controller){
-    controller_=controller;
-}
-
-ContainerWidget* MainWindow::getContainer(){
-    return container;
-}
+ContainerWidget *MainWindow::getContainerWidget() { return container_; }

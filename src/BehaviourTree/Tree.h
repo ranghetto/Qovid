@@ -2,7 +2,6 @@
 #define TREE_H
 
 #include "Node.h"
-#include <QDebug>
 #include <QtGlobal>
 
 namespace BehaviourTree {

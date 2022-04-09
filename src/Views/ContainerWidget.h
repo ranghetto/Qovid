@@ -13,13 +13,11 @@ class ContainerWidget : public QWidget {
 
 public:
   ContainerWidget(QWidget *parent = nullptr);
-  InputWidget *getInputWidget();    // return input_wiget to the controller
-  void setSimulation(Simulation *); // set controller_
-  void addSimulationWidget(SimulationWidget *);
+  InputWidget *getInputWidget(); // return input_wiget to the controller
+  SimulationWidget *getSimulationWidget();
 
 private:
   SimulationWidget *simulation_;
   InputWidget *input_widget_;
-  Simulation *controller_;
 };
 #endif // CONTAINERWIDGET_H

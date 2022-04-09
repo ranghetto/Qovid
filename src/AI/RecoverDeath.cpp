@@ -1,4 +1,5 @@
 #include "RecoverDeath.h"
+#include "../Controllers/Simulation.h"
 
 RecoverDeath::RecoverDeath(Actor &actor, int timeToRecover, int deathChance)
     : actor_(actor), timeToRecover_(timeToRecover), deathChance_(deathChance),
@@ -15,7 +16,8 @@ NodeState RecoverDeath::evaluate() {
     timerStarted_ = true;
   }
 
-  if (timer_.elapsed() >= timeToRecover_) {
+  if (timer_.elapsed() >=
+      timeToRecover_ + Simulation::instance().pausedTime()) {
     if (qrand() % 100 < deathChance_)
       actor_.setHealthState(ActorHealthState::DEAD);
     else

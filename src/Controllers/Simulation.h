@@ -21,11 +21,12 @@ public:
   static Simulation &instance();
 
   // Setters
-  void setContainerAndInputWidget(ContainerWidget *container);
+  void setContainerWidgets(ContainerWidget *container);
 
   // Getters
   World *world() const;
   qint64 deltaTime() const;
+  qint64 pausedTime() const;
   bool isRunning() const;
 
   // Called everytime view_ QWidget is updated();
@@ -33,11 +34,17 @@ public:
 
   // Helper functions
   void generateWorld();
-  void toggleSimulation() const;
 
 public slots:
-  void update();                // main sim loop
-  void handleStartSimulation(); // handle InputWidget QPushButton
+  void update();          // main sim loop
+  void startSimulation(); // handle InputWidget QPushButton
+  void toggleSimulation();
+  void stopSimulation();
+
+signals:
+  void simulationStarted();
+  void simulationStopped();
+  void simulationPaused();
 
 private:
   // Private constructor, singleton pattern
@@ -55,12 +62,16 @@ private:
   // Members
   QTimer *loopTimer_;
   QElapsedTimer *deltaTimer_;
-  bool isRunning_;
+  QElapsedTimer *pausedTimer_;
   qint64 lastTime_;
   qint64 deltaTime_;
+  qint64 pausedTime_;
 
   void updateEntities();
-  void createSimulationWidgetAndAddToContainerLayout();
+  void connectSimulationStarted();
+  void connectSimulationPaused();
+  void connectSimulationStopped();
+  void connectButtons();
 };
 
 #endif // SIMULATION_H

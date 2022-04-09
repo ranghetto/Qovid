@@ -3,18 +3,14 @@
 
 ContainerWidget::ContainerWidget(QWidget *parent) : QWidget(parent) {
   input_widget_ = new InputWidget(this);
+  simulation_ = new SimulationWidget(nullptr, this);
   QHBoxLayout *layout = new QHBoxLayout(this);
   layout->addWidget(input_widget_);
+  layout->addWidget(simulation_);
+  simulation_->setVisible(false);
   this->setLayout(layout);
-}
-
-void ContainerWidget::setSimulation(Simulation *controller) {
-  controller_ = controller;
 }
 
 InputWidget *ContainerWidget::getInputWidget() { return input_widget_; }
 
-void ContainerWidget::addSimulationWidget(SimulationWidget *simulation) {
-  simulation_ = simulation;
-  layout()->addWidget(simulation_);
-}
+SimulationWidget *ContainerWidget::getSimulationWidget() { return simulation_; }

@@ -16,3 +16,7 @@ void SimulationWidget::paintEvent(QPaintEvent *) {
 void SimulationWidget::setController(Simulation *controller) {
   controller_ = controller;
 }
+
+void SimulationWidget::setVisibleSlot() { setVisible(true); }
+
+void SimulationWidget::setInvisibleSlot() { setVisible(false); }

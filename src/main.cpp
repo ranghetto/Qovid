@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
   // always available by calling `instance()` method
 
   // setContainerWidget() will set InputWidget & SimulationWidget
-  Simulation::instance().setContainerAndInputWidget(c);
+  Simulation::instance().setContainerWidgets(c);
 
   m.show();
 

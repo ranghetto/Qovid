@@ -26,7 +26,11 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   sim_duration_3m = new QRadioButton("3 minuto", this);
   sim_duration_complete = new QRadioButton("fino al completamento", this);
   // button
-  start_sim = new QPushButton("Inizia Simulazione", this);
+  start_sim = new QPushButton("Inizia", this);
+  pause_sim = new QPushButton("Pausa/Riprendi", this);
+  pause_sim->setDisabled(true);
+  stop_sim = new QPushButton("Stop", this);
+  stop_sim->setDisabled(true);
   // signal slot
   connect(input_population, SIGNAL(valueChanged(int)), this,
           SLOT(changeMax(int)));
@@ -75,12 +79,27 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   layout->addWidget(sim_duration_1m);
   layout->addWidget(sim_duration_3m);
   layout->addWidget(sim_duration_complete);
-  layout->addWidget(start_sim);
+
+  QHBoxLayout *btnLayout = new QHBoxLayout();
+
+  btnLayout->addWidget(start_sim);
+  btnLayout->addWidget(pause_sim);
+  btnLayout->addWidget(stop_sim);
+
+  layout->addSpacerItem(new QSpacerItem(0, 20));
+
+  layout->addLayout(btnLayout);
 
   this->setLayout(layout);
 }
 
-void InputWidget::disableSimulationButton() { start_sim->setEnabled(false); }
+void InputWidget::disableStartButton() { start_sim->setDisabled(true); }
+void InputWidget::disablePauseButton() { pause_sim->setDisabled(true); }
+void InputWidget::disableStopButton() { stop_sim->setDisabled(true); }
+void InputWidget::enableStartButton() { start_sim->setEnabled(true); }
+void InputWidget::enablePauseButton() { pause_sim->setEnabled(true); }
+void InputWidget::enableStopButton() { stop_sim->setEnabled(true); }
+void InputWidget::simulationPaused() {}
 
 void InputWidget::changeMax(int n) { input_initial_infect->setMaximum(n); }
 
@@ -88,8 +107,6 @@ void InputWidget::changeMax(int n) { input_initial_infect->setMaximum(n); }
 
 void InputWidget::setSimulation(Simulation *controller) {
   controller_ = controller;
-  connect(start_sim, SIGNAL(clicked()), controller_,
-          SLOT(handleStartSimulation()));
 }
 
 int InputWidget::getPopulation() { return input_population->value(); }
@@ -103,3 +120,9 @@ int InputWidget::getDeathRate() { return input_death_rate->value(); }
 int InputWidget::getTimeRecover() { return input_time_toRecover->value(); }
 
 int InputWidget::getInitialInfect() { return input_initial_infect->value(); }
+
+QPushButton *InputWidget::startSimButton() const { return start_sim; }
+
+QPushButton *InputWidget::pauseSimButton() const { return pause_sim; }
+
+QPushButton *InputWidget::stopSimButton() const { return stop_sim; }

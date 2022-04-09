@@ -15,6 +15,10 @@ public:
 
 private:
   Simulation *controller_;
+
+public slots:
+  void setVisibleSlot();
+  void setInvisibleSlot();
 };
 
 #endif // SIMULATION_WIDGET_H

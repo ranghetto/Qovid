@@ -7,14 +7,15 @@ InfectActorsInRange::InfectActorsInRange(const Actor &actor, uint range,
 
 NodeState InfectActorsInRange::evaluate() {
 
-  QVector<Actor &> people = Simulation::instance().world()->findNearbyActors(
+  QVector<Actor *> people = Simulation::instance().world()->findNearbyActors(
       actor_.position(), range_);
 
   for (auto p : people) {
-    // TODO probably this needs to be: select 20% of the total people around
-    // this actor and infect them, the other 80% stay healthy
-    if (qrand() % 100 < infectRateo_)
-      p->setHealthState(ActorHealthState::INFECTED);
+    if (p)
+      // TODO probably this needs to be: select 20% of the total people around
+      // this actor and infect them, the other 80% stay healthy
+      if (qrand() % 100 < infectRateo_)
+        p->setHealthState(ActorHealthState::INFECTED);
   }
 
   state_ = NodeState::SUCCESS;

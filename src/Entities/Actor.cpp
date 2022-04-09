@@ -18,6 +18,7 @@ Actor::Actor(QVector2D position, float speed, ActorHealthState state,
           new RecoverDeath(*this, timeToRecover, deathChance),
       })),
       position_(position), speed_(speed), healthState_(state) {}
+
 QVector2D Actor::position() const { return position_; }
 
 float Actor::speed() const { return speed_; }

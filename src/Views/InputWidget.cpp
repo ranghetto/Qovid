@@ -12,12 +12,14 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_death_rate = new QLabel(this);
   label_time = new QLabel(this);
   label_recover = new QLabel(this);
+  label_initial_infect= new QLabel(this);
   // input field
   input_population = new QSpinBox(this);
   input_infection_range = new QSpinBox(this);
   input_infection_rate = new QSpinBox(this);
   input_death_rate = new QSpinBox(this);
   input_time_toRecover = new QSpinBox(this);
+  input_initial_infect = new QSpinBox(this);
   // radio menu
   sim_duration_30s = new QRadioButton("30 secondi", this);
   sim_duration_1m = new QRadioButton("1 minuto", this);
@@ -25,6 +27,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   sim_duration_complete = new QRadioButton("fino al completamento", this);
   // button
   start_sim = new QPushButton("Inizia Simulazione", this);
+  //signal slot
+  connect(input_population, SIGNAL(valueChanged(int)), this, SLOT(changeMax(int)));
   // label text
   label_population->setText("Grandezza della popolazione");
   label_infection_range->setText("Raggio del contagio");
@@ -32,6 +36,7 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_death_rate->setText("Probabilità di morte dell'infetto");
   label_time->setText("Durata simulazione");
   label_recover->setText("Durata infezione");
+  label_initial_infect->setText("Infetti Iniziali");
   // SpinBox max min setting
   input_population->setMaximum(300);
   input_population->setMinimum(2);
@@ -54,6 +59,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   layout->addWidget(input_death_rate);
   layout->addWidget(label_recover);
   layout->addWidget(input_time_toRecover);
+  layout->addWidget(label_initial_infect);
+  layout->addWidget(input_initial_infect);
   layout->addWidget(label_time);
   layout->addWidget(sim_duration_30s);
   layout->addWidget(sim_duration_1m);
@@ -66,6 +73,10 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
 
 void InputWidget::disableSimulationButton(){
   start_sim->setEnabled(false);
+}
+
+void InputWidget::changeMax(int n){
+  input_initial_infect->setMaximum(n);
 }
 
 //setters & getters
@@ -95,5 +106,8 @@ int InputWidget::getTimeRecover(){
   return input_time_toRecover->value();
 }
 
+int InputWidget::getInitialInfect(){
+  return input_initial_infect->value();
+}
 
 

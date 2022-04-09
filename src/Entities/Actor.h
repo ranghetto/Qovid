@@ -13,8 +13,8 @@ using namespace BehaviourTree;
 class Actor : public Entity, public Tree {
 public:
   Actor(QVector2D position, float speed, ActorHealthState state,
-        QVector<QVector2D> waypoints, float waitTime, float range,
-        float timeToRecover, float surviveRateo, float infectRateo);
+        QVector<QVector2D> waypoints, uint waitTime, uint range,
+        uint timeToRecover, uint deathChance, uint infectRateo);
   void update() override;
   void render(QPainter &painter) override;
 

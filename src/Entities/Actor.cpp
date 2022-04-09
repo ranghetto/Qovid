@@ -8,8 +8,8 @@
 #include <QPainter>
 
 Actor::Actor(QVector2D position, float speed, ActorHealthState state,
-             QVector<QVector2D> waypoints, float waitTime, float range,
-             float timeToRecover, float deathChance, float infectRateo)
+             QVector<QVector2D> waypoints, uint waitTime, uint range,
+             uint timeToRecover, uint deathChance, uint infectRateo)
     : Tree(new Sequence({
           new CheckAlive(*this),
           new Patrol(*this, waypoints, waitTime),

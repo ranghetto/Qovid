@@ -14,8 +14,8 @@ World::World(uint population, uint infection_range, uint infection_rate,
     for (uint i = 0; i < 6; i++) {
       v.append(QVector2D(qrand() % 500, qrand() % 500));
     }
-    Actor *a = new Actor(v[5], 0.2f, ActorHealthState::HEALTHY,
-                         {v[0], v[1], v[2], v[3], v[4]}, 2000, infection_range,
+    Actor *a = new Actor(v[0], 0.1f, ActorHealthState::HEALTHY,
+                         {v[1], v[2], v[3], v[4], v[5]}, 2000, infection_range,
                          time_toRecover, death_rate, infection_rate);
     if (population - initial_infect <= j) {
       a->setHealthState(ActorHealthState::INFECTED);

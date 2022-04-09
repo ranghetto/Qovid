@@ -6,3 +6,5 @@ void BehaviourTree::Tree::update() const {
   if (root_)
     root_->evaluate();
 }
+
+BehaviourTree::Tree::~Tree() { delete root_; }

@@ -2,13 +2,14 @@
 #define TREE_H
 
 #include "Node.h"
+#include <QDebug>
 #include <QtGlobal>
 
 namespace BehaviourTree {
 class Tree {
 public:
   Tree(Node *root = nullptr);
-  ~Tree() = default;
+  ~Tree();
   void update() const;
 
 private:

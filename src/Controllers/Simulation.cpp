@@ -30,6 +30,10 @@ void Simulation::handleStartSimulation() {
   view_ = new SimulationView(this);
   this->setView(view_);
   container_widget_->addSimulationView(view_);
+
+  loopTimer_->stop();
+  delete view_;
+  delete world_;
 }
 
 qint64 Simulation::deltaTime() const { return deltaTime_; }
@@ -48,19 +52,21 @@ void Simulation::update() {
 }
 
 void Simulation::updateEntities() {
-  for (auto entity : world_->entities()) {
-    if (entity)
-      entity->update();
-  }
+  if (world_)
+    for (auto entity : world_->entities()) {
+      if (entity)
+        entity->update();
+    }
 }
 
 // setter & getter
 
 void Simulation::render(QPainter &painter) {
-  for (auto entity : world_->entities()) {
-    if (entity)
-      entity->render(painter);
-  }
+  if (world_)
+    for (auto entity : world_->entities()) {
+      if (entity)
+        entity->render(painter);
+    }
 }
 
 // create mainwindow and set/get pointers

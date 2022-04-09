@@ -11,6 +11,7 @@ public:
   void addEntity(Entity &entity);
   QVector<Entity *> entities() const;
   QVector<Actor *> findNearbyActors(QVector2D center, int range) const;
+  ~World();
 
 private:
   QVector<Entity *> entities_;

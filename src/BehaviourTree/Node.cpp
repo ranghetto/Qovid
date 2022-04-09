@@ -2,7 +2,7 @@
 
 BehaviourTree::Node::Node(Node *parent) : parent_(parent) {}
 
-BehaviourTree::Node::Node(QList<Node *> children) {
+BehaviourTree::Node::Node(QList<Node *> children) : parent_(nullptr) {
   for (auto child : children) {
     addNode(child);
   }
@@ -13,6 +13,8 @@ BehaviourTree::Node::~Node() {
     delete child;
   }
 }
+
+void BehaviourTree::Node::setParent(Node *parent) { parent_ = parent; }
 
 void BehaviourTree::Node::addNode(Node *node) {
   node->parent_ = this;

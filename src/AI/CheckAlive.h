@@ -9,12 +9,11 @@ using namespace BehaviourTree;
 
 class CheckAlive : public Node {
 public:
-  CheckAlive(Actor &actor);
+  CheckAlive(const Actor &actor);
   NodeState evaluate() override;
 
 private:
-  Actor &actor_;
-  int range_;
+  const Actor &actor_;
 };
 
 #endif // CHECK_ALIVE_H

@@ -8,12 +8,11 @@ using namespace BehaviourTree;
 
 class CheckInfected : public Node {
 public:
-  CheckInfected(Actor &actor);
+  CheckInfected(const Actor &actor);
   NodeState evaluate() override;
 
 private:
-  Actor &actor_;
-  int range_;
+  const Actor &actor_;
 };
 
 #endif // CHECK_INFECTED_H

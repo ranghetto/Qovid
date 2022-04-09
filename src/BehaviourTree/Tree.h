@@ -8,8 +8,8 @@ namespace BehaviourTree {
 class Tree {
 public:
   Tree(Node *root = nullptr);
-  ~Tree() = default;
-  void update();
+  ~Tree();
+  void update() const;
 
 private:
   Node *root_;

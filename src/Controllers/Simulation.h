@@ -5,7 +5,7 @@
 #include "../Views/ContainerWidget.h"
 #include "../Views/InputWidget.h"
 #include "../Views/MainWindow.h"
-#include "../Views/SimulationView.h"
+#include "../Views/SimulationWidget.h"
 #include "World.h"
 #include <QElapsedTimer>
 #include <QObject>
@@ -21,19 +21,30 @@ public:
   static Simulation &instance();
 
   // Setters
-  void setView(SimulationView *view);
-  void generateWorld();
+  void setContainerWidgets(ContainerWidget *container);
 
   // Getters
   World *world() const;
-  SimulationView *view() const; // TODO implement
   qint64 deltaTime() const;
+  qint64 pausedTime() const;
+  bool isRunning() const;
 
+  // Called everytime view_ QWidget is updated();
   void render(QPainter &painter);
 
+  // Helper functions
+  void generateWorld();
+
 public slots:
-  void update();                // update loop
-  void handleStartSimulation(); // handle InputWidget QPushButton
+  void update();          // main sim loop
+  void startSimulation(); // handle InputWidget QPushButton
+  void toggleSimulation();
+  void stopSimulation();
+
+signals:
+  void simulationStarted();
+  void simulationStopped();
+  void simulationPaused();
 
 private:
   // Private constructor, singleton pattern
@@ -41,10 +52,9 @@ private:
   static Simulation *instance_;
 
   // Views
-  SimulationView *view_;
-  MainWindow *main_window_;
-  ContainerWidget *container_widget_;
-  InputWidget *input_widget_;
+  SimulationWidget *simulationWidget_;
+  ContainerWidget *containerWidget_;
+  InputWidget *inputWidget_;
 
   // Controllers
   World *world_;
@@ -52,14 +62,16 @@ private:
   // Members
   QTimer *loopTimer_;
   QElapsedTimer *deltaTimer_;
-  bool isRunning_;
+  QElapsedTimer *pausedTimer_;
   qint64 lastTime_;
   qint64 deltaTime_;
-
-  void createMainWindow(); // setter for mainwindow, containerwidget,
-                           // inputwidget
+  qint64 pausedTime_;
 
   void updateEntities();
+  void connectSimulationStarted();
+  void connectSimulationPaused();
+  void connectSimulationStopped();
+  void connectButtons();
 };
 
 #endif // SIMULATION_H

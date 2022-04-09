@@ -84,12 +84,9 @@ void Simulation::setContainerAndInputWidget(ContainerWidget *container) {
 
 void Simulation::generateWorld() {
   world_ = new World(
-                      input_widget_->getPopulation(),
-                      input_widget_->getInfectionRange(),
-                      input_widget_->getInfectionRate(),
-                      input_widget_->getDeathRate(),
-                      input_widget_->getTimeRecover(),
-                      input_widget_->getInitialInfect());
+      inputWidget_->getPopulation(), inputWidget_->getInfectionRange(),
+      inputWidget_->getInfectionRate(), inputWidget_->getDeathRate(),
+      inputWidget_->getTimeRecover(), inputWidget_->getInitialInfect());
 }
 
 Simulation &Simulation::instance() {

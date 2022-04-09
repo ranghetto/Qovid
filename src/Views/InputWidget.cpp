@@ -38,17 +38,25 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_time->setText("Durata simulazione");
   label_recover->setText("Durata infezione");
   label_initial_infect->setText("Infetti Iniziali");
-  // SpinBox max min setting
-  input_population->setMaximum(500);
-  input_population->setMinimum(0);
-  input_infection_range->setMaximum(100);
-  input_infection_range->setMinimum(0);
-  input_infection_rate->setMaximum(100);
-  input_infection_rate->setMinimum(0);
-  input_death_rate->setMaximum(100);
-  input_death_rate->setMinimum(0);
-  input_time_toRecover->setMaximum(60000);
-  input_time_toRecover->setMinimum(0);
+
+  // SpinBox range setting
+  input_population->setRange(0, 500);
+  input_population->setValue(200);
+
+  input_infection_range->setRange(0, 100);
+  input_infection_range->setValue(2);
+
+  input_infection_rate->setRange(0, 100);
+  input_infection_rate->setValue(15);
+
+  input_death_rate->setRange(0, 100);
+  input_death_rate->setValue(2);
+
+  input_time_toRecover->setRange(0, 60000);
+  input_time_toRecover->setValue(20000);
+
+  input_initial_infect->setValue(2);
+
   // adding widget to layout
   layout->addWidget(label_population);
   layout->addWidget(input_population);

@@ -14,6 +14,8 @@ public:
 
   virtual NodeState evaluate() = 0;
 
+  void setParent(Node *parent);
+
 protected:
   NodeState state_;
   Node *parent_;

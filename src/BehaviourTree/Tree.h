@@ -9,7 +9,7 @@ class Tree {
 public:
   Tree(Node *root = nullptr);
   ~Tree() = default;
-  void update();
+  void update() const;
 
 private:
   Node *root_;

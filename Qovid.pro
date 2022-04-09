@@ -24,7 +24,6 @@ SOURCES += src/main.cpp \
   src/AI/Patrol.cpp \
   src/AI/RecoverDeath.cpp \
   src/BehaviourTree/Node.cpp \
-  src/BehaviourTree/Selector.cpp \
   src/BehaviourTree/Sequence.cpp \
   src/BehaviourTree/Tree.cpp \
   src/Controllers/Simulation.cpp \
@@ -42,7 +41,6 @@ HEADERS += \
   src/AI/Patrol.h \
   src/AI/RecoverDeath.h \
   src/BehaviourTree/Node.h \
-  src/BehaviourTree/Selector.h \
   src/BehaviourTree/Sequence.h \
   src/BehaviourTree/Tree.h \
   src/Controllers/Simulation.h \

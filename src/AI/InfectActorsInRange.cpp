@@ -2,7 +2,7 @@
 #include "../Controllers/Simulation.h"
 
 InfectActorsInRange::InfectActorsInRange(const Actor &actor, uint range,
-                                         uint infectRateo)
+                                         int infectRateo)
     : actor_(actor), range_(range), infectRateo_(infectRateo) {}
 
 NodeState InfectActorsInRange::evaluate() {

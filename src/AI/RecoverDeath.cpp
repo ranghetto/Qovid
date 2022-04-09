@@ -1,6 +1,6 @@
 #include "RecoverDeath.h"
 
-RecoverDeath::RecoverDeath(Actor &actor, uint timeToRecover, uint deathChance)
+RecoverDeath::RecoverDeath(Actor &actor, int timeToRecover, int deathChance)
     : actor_(actor), timeToRecover_(timeToRecover), deathChance_(deathChance),
       timerStarted_(false) {}
 

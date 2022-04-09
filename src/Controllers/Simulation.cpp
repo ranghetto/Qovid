@@ -88,8 +88,8 @@ void Simulation::generateWorld() {
                       input_widget_->getInfectionRange(),
                       input_widget_->getInfectionRate(),
                       input_widget_->getDeathRate(),
-                      input_widget_->getTimeRecover());
-
+                      input_widget_->getTimeRecover(),
+                      input_widget_->getInitialInfect());
 }
 
 World *Simulation::world() const { return world_; }

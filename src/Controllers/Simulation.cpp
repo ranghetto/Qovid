@@ -83,8 +83,13 @@ void Simulation::setView(SimulationView *view) {
 }
 
 void Simulation::generateWorld() {
-  int population = input_widget_->getPopulation();
-  world_ = new World(population);
+  world_ = new World(
+                      input_widget_->getPopulation(),
+                      input_widget_->getInfectionRange(),
+                      input_widget_->getInfectionRate(),
+                      input_widget_->getDeathRate(),
+                      input_widget_->getTimeRecover());
+
 }
 
 World *Simulation::world() const { return world_; }

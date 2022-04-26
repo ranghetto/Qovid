@@ -11,7 +11,7 @@ NodeState InfectActorsInRange::evaluate() {
       actor_.position(), range_);
 
   for (auto p : people) {
-    if (p)
+    if (p && p->healthState() == ActorHealthState::HEALTHY)
       // TODO probably this needs to be: select 20% of the total people around
       // this actor and infect them, the other 80% stay healthy
       if (qrand() % 100 < infectRateo_)

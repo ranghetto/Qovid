@@ -5,10 +5,10 @@ InfectActorsInRange::InfectActorsInRange(const Actor &actor, uint range,
                                          int infectRateo)
     : actor_(actor), range_(range), infectRateo_(infectRateo) {}
 
-NodeState InfectActorsInRange::evaluate() {
+NodeState InfectActorsInRange::evaluate(const Simulation &s) {
 
-  QVector<Actor *> people = Simulation::instance().world()->findNearbyActors(
-      actor_.position(), range_);
+  QVector<Actor *> people =
+      s.world()->findNearbyActors(actor_.position(), range_);
 
   for (auto p : people) {
     if (p && p->healthState() == ActorHealthState::HEALTHY)

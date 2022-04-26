@@ -10,7 +10,7 @@ using namespace BehaviourTree;
 class CheckAlive : public Node {
 public:
   CheckAlive(const Actor &actor);
-  NodeState evaluate() override;
+  NodeState evaluate(const Simulation &) override;
 
 private:
   const Actor &actor_;

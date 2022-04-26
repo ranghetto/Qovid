@@ -9,7 +9,7 @@ using namespace BehaviourTree;
 class InfectActorsInRange : public Node {
 public:
   InfectActorsInRange(const Actor &actor, uint range, int infectRateo);
-  NodeState evaluate() override;
+  NodeState evaluate(const Simulation &s) override;
 
 private:
   const Actor &actor_;

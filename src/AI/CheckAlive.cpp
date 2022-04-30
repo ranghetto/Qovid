@@ -2,7 +2,7 @@
 
 CheckAlive::CheckAlive(const Actor &actor) : actor_(actor) {}
 
-NodeState CheckAlive::evaluate() {
+NodeState CheckAlive::evaluate(const Simulation &) {
   // If actor is dead node failed so remaining nodes in the sequence
   // will not be executed
   // To handle death correctly it must be the first node of a sequence

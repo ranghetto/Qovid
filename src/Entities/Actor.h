@@ -15,7 +15,7 @@ public:
   Actor(QVector2D position, float speed, ActorHealthState state,
         QVector<QVector2D> waypoints, uint waitTime, uint range,
         uint timeToRecover, uint deathChance, uint infectRateo);
-  void update() override;
+  void update(const Simulation &s) override;
   void render(QPainter &painter) override;
 
   QVector2D position() const;

@@ -31,7 +31,7 @@ void Actor::setSpeed(float speed) { speed_ = speed; }
 
 void Actor::setHealthState(ActorHealthState state) { healthState_ = state; }
 
-void Actor::update() { Tree::update(); }
+void Actor::update(const Simulation &s) { Tree::update(s); }
 
 void Actor::render(QPainter &painter) {
   painter.setPen(Qt::PenStyle::NoPen);

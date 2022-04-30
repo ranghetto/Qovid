@@ -4,6 +4,9 @@
 #include <QList>
 #include <QtGlobal>
 
+// Incomplete type
+class Simulation;
+
 namespace BehaviourTree {
 enum NodeState { RUNNING, SUCCESS, FAILURE };
 class Node {
@@ -12,7 +15,7 @@ public:
   Node(QList<Node *> children);
   virtual ~Node();
 
-  virtual NodeState evaluate() = 0;
+  virtual NodeState evaluate(const Simulation &s) = 0;
 
   void setParent(Node *parent);
 

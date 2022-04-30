@@ -2,7 +2,7 @@
 
 CheckInfected::CheckInfected(const Actor &actor) : actor_(actor) {}
 
-NodeState CheckInfected::evaluate() {
+NodeState CheckInfected::evaluate(const Simulation &) {
   if (actor_.healthState() == ActorHealthState::INFECTED) {
     state_ = NodeState::SUCCESS;
     return state_;

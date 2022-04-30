@@ -52,17 +52,17 @@ void Simulation::update() {
 
   // input hanlder should be placed above if exists
   deltaTime_ = elapsed;
-  updateEntities();
+  updateEntities(*this);
 
   lastTime_ = current;
 }
 
 // HELPER METHODS
-void Simulation::updateEntities() {
+void Simulation::updateEntities(const Simulation &s) {
   if (world_)
     for (auto entity : world_->entities()) {
       if (entity)
-        entity->update();
+        entity->update(s);
     }
 }
 
@@ -77,7 +77,7 @@ void Simulation::render(QPainter &painter) {
 void Simulation::setContainerWidgets(ContainerWidget *container) {
   containerWidget_ = container;
   inputWidget_ = container->getInputWidget();
-  inputWidget_->setSimulation(this);
+  inputWidget_->setController(this);
   simulationWidget_ = container->getSimulationWidget();
   simulationWidget_->setController(this);
 
@@ -95,11 +95,6 @@ void Simulation::generateWorld() {
       inputWidget_->getPopulation(), inputWidget_->getInfectionRange(),
       inputWidget_->getInfectionRate(), inputWidget_->getDeathRate(),
       inputWidget_->getTimeRecover(), inputWidget_->getInitialInfect());
-}
-
-Simulation &Simulation::instance() {
-  static Simulation *simulation = new Simulation(nullptr);
-  return *simulation;
 }
 
 void Simulation::connectSimulationStarted() {

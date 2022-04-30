@@ -11,7 +11,7 @@ using namespace BehaviourTree;
 class Patrol : public Node {
 public:
   Patrol(Actor &actor, QVector<QVector2D> waypoints, uint waitTime);
-  NodeState evaluate() override;
+  NodeState evaluate(const Simulation &s) override;
 
 private:
   Actor &actor_;

@@ -2,9 +2,9 @@
 
 BehaviourTree::Tree::Tree(Node *root) : root_(root) {}
 
-void BehaviourTree::Tree::update(const Simulation &s) const {
+void BehaviourTree::Tree::update() const {
   if (root_)
-    root_->evaluate(s);
+    root_->evaluate();
 }
 
 BehaviourTree::Tree::~Tree() { delete root_; }

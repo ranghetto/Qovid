@@ -4,15 +4,12 @@
 #include "Node.h"
 #include <QtGlobal>
 
-// Incomplete type
-class Simulation;
-
 namespace BehaviourTree {
 class Tree {
 public:
   Tree(Node *root = nullptr);
   ~Tree();
-  void update(const Simulation &s) const;
+  void update() const;
 
 private:
   Node *root_;

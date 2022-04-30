@@ -9,7 +9,7 @@ using namespace BehaviourTree;
 class CheckInfected : public Node {
 public:
   CheckInfected(const Actor &actor);
-  NodeState evaluate(const Simulation &) override;
+  NodeState evaluate() override;
 
 private:
   const Actor &actor_;

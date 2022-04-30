@@ -15,7 +15,7 @@ class InputWidget : public QWidget {
 public:
   InputWidget(QWidget *parent = nullptr);
   // setters & getters
-  void setController(Simulation *);
+  void setSimulation(Simulation *);
   int getPopulation();
   int getInfectionRange();
   int getInfectionRate();

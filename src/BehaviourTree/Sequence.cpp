@@ -4,12 +4,11 @@ BehaviourTree::Sequence::Sequence(Node *parent) : Node(parent) {}
 
 BehaviourTree::Sequence::Sequence(QList<Node *> children) : Node(children) {}
 
-BehaviourTree::NodeState
-BehaviourTree::Sequence::evaluate(const Simulation &s) {
+BehaviourTree::NodeState BehaviourTree::Sequence::evaluate() {
   bool childrenRunning = false;
 
   for (auto child : children_) {
-    NodeState childState = child->evaluate(s);
+    NodeState childState = child->evaluate();
     if (childState == NodeState::FAILURE) {
       state_ = childState;
       return childState;

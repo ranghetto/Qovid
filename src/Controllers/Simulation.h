@@ -18,7 +18,7 @@ class Simulation : public QObject {
   Q_OBJECT
 
 public:
-  Simulation(QObject *parent = nullptr);
+  static Simulation &instance();
 
   // Setters
   void setContainerWidgets(ContainerWidget *container);
@@ -47,6 +47,10 @@ signals:
   void simulationPaused();
 
 private:
+  // Private constructor, singleton pattern
+  Simulation(QObject *parent = nullptr);
+  static Simulation *instance_;
+
   // Views
   SimulationWidget *simulationWidget_;
   ContainerWidget *containerWidget_;
@@ -63,7 +67,7 @@ private:
   qint64 deltaTime_;
   qint64 pausedTime_;
 
-  void updateEntities(const Simulation &s);
+  void updateEntities();
   void connectSimulationStarted();
   void connectSimulationPaused();
   void connectSimulationStopped();

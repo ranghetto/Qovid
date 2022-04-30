@@ -2,6 +2,7 @@
 #define SIMULATION_H
 
 #include "../Entities/Entity.h"
+#include "../Loggers/ActorsLogger.h"
 #include "../Views/ContainerWidget.h"
 #include "../Views/ClockWidget.h"
 #include "../Views/InputWidget.h"
@@ -29,6 +30,7 @@ public:
 
   // Getters
   World *world() const;
+  ActorsLogger *logger();
   qint64 deltaTime() const;
   qint64 pausedTime() const;
   bool isRunning() const;
@@ -61,6 +63,9 @@ private:
   // Controllers
   World *world_;
   Timer *timer_;
+
+  // Loggers
+  ActorsLogger *logger_;
 
   // Members
   QTimer *loopTimer_;

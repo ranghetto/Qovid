@@ -7,7 +7,7 @@
 #include "../BehaviourTree/Sequence.h"
 #include <QPainter>
 
-Actor::Actor(QVector2D position, float speed, ActorHealthState state,
+Actor::Actor(int ID, QVector2D position, float speed, ActorHealthState state,
              QVector<QVector2D> waypoints, uint waitTime, uint range,
              uint timeToRecover, uint deathChance, uint infectRateo)
     : Tree(new Sequence({

@@ -105,7 +105,7 @@ void InputWidget::changeMax(int n) { input_initial_infect->setMaximum(n); }
 
 // setters & getters
 
-void InputWidget::setSimulation(Simulation *controller) {
+void InputWidget::setController(Simulation *controller) {
   controller_ = controller;
 }
 

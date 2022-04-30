@@ -10,7 +10,7 @@ using namespace BehaviourTree;
 class RecoverDeath : public Node {
 public:
   RecoverDeath(Actor &actor, int timeToRecover, int deathChance);
-  NodeState evaluate() override;
+  NodeState evaluate(const Simulation &s) override;
 
 private:
   Actor &actor_;

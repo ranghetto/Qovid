@@ -1,11 +1,11 @@
 #include "ActorsLogger.h"
 
 ActorsLogger::ActorsLogger(int seed, int totalPopulation, int infectionRange,
-                           int infectionRateo, int deathChance,
+                           int infectionRateo, int deathRateo,
                            int infectionDuration, int initialInfectedPeople)
     : seed_(seed), totalPopulation_(totalPopulation),
       infectionRange_(infectionRange), infectionRateo_(infectionRateo),
-      deathChance_(deathChance), infectionDuration_(infectionDuration),
+      deathRateo_(deathRateo), infectionDuration_(infectionDuration),
       initialInfectedPeople_(initialInfectedPeople) {}
 
 ActorsLogger::LogData::LogData(int ID, int time, QVector2D position,
@@ -20,8 +20,8 @@ void ActorsLogger::createLogData(int ID, int time, QVector2D position,
   data_.append(LogData(ID, time, position, oldState, currentState));
 }
 
-bool ActorsLogger::save() const {
-  QFile file("name_.json");
+bool ActorsLogger::save(const QString &url) const {
+  QFile file(url + ".json");
   if (!file.open(QIODevice::WriteOnly))
     return false;
 
@@ -46,7 +46,7 @@ void ActorsLogger::write(QJsonObject &json) const {
   json["seed"] = seed_;
   json["total_population"] = totalPopulation_;
   json["infection_range"] = infectionRange_;
-  json["death_change"] = deathChance_;
+  json["death_rateo"] = deathRateo_;
   json["infection_duration"] = infectionDuration_;
   json["initial_infected_people"] = initialInfectedPeople_;
 

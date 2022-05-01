@@ -7,6 +7,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QList>
 #include <QString>
 #include <QVector2D>
 
@@ -19,7 +20,7 @@ public:
   void createLogData(int ID, int time, QVector2D position,
                      ActorHealthState oldState, ActorHealthState currentState);
 
-  bool save() const;
+  bool save(const QString &url) const;
 
 private:
   class LogData {
@@ -32,22 +33,21 @@ private:
     ActorHealthState oldState;
     ActorHealthState currentState;
 
-    void read(const QJsonObject &json);
+    // void read(const QJsonObject &json);
     void write(QJsonObject &json) const;
   };
-
   QString name_;
   QDateTime dateTime_;
   int seed_;
   int totalPopulation_;
   int infectionRange_;
   int infectionRateo_;
-  int deathChance_;
+  int deathRateo_;
   int infectionDuration_;
   int initialInfectedPeople_;
-  QVector<LogData> data_;
+  QList<LogData> data_;
 
-  void read(const QJsonObject &json);
+  // void read(const QJsonObject &json);
   void write(QJsonObject &json) const;
 };
 

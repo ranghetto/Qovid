@@ -3,18 +3,16 @@
 #include <QTime>
 #include <QVector2D>
 
-World::World(uint population, uint infection_range, uint infection_rate,
-             uint death_rate, uint time_toRecover, uint initial_infect) {
-  // as variable cause it needs to be saved in the future
-  int time = QTime::currentTime().msecsSinceStartOfDay();
-  qsrand(time);
+World::World(Simulation &s, uint population, uint infection_range,
+             uint infection_rate, uint death_rate, uint time_toRecover,
+             uint initial_infect) {
 
   for (uint j = 0; j < population; j++) {
     QVector<QVector2D> v;
     for (uint i = 0; i < 6; i++) {
       v.append(QVector2D(qrand() % 500, qrand() % 500));
     }
-    Actor *a = new Actor(j, v[0], 0.1f, ActorHealthState::HEALTHY,
+    Actor *a = new Actor(j, s, v[0], 0.1f, ActorHealthState::HEALTHY,
                          {v[1], v[2], v[3], v[4], v[5]}, 2000, infection_range,
                          time_toRecover * 1000, death_rate, infection_rate);
     if (population - initial_infect <= j) {

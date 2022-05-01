@@ -1,17 +1,20 @@
 #include "Simulation.h"
+#include <QString>
 
 Simulation::Simulation(QObject *parent)
-    : QObject(parent), save_simulation_(nullptr), world_(nullptr), timer_(nullptr), 
-      loopTimer_(new QTimer(this)), deltaTimer_(new QElapsedTimer()), pausedTimer_(new QElapsedTimer()),
-      pausedTime_(0)  {
-  
+    : QObject(parent), world_(nullptr), loopTimer_(new QTimer(this)),
+      deltaTimer_(new QElapsedTimer()), pausedTimer_(new QElapsedTimer()),
+      pausedTime_(0), durationTimer_(new QElapsedTimer()) {
+
   connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
 }
+
+ActorsLogger *Simulation::logger() { return logger_; }
 
 // SIGNAL & SLOTS
 // handle signal from "start simulation" button
 void Simulation::startSimulation() {
-  
+
   generateWorld();
   generateTimer();
 
@@ -21,6 +24,7 @@ void Simulation::startSimulation() {
   // Every time `timeout()` signal is sent, the connecter slots'll be executed
   // in the main loop of Qt, without inferferring with normal operations.
   loopTimer_->start(0);
+  durationTimer_->start();
 
   // Timer to calculate `deltaTime`
   deltaTimer_->start();
@@ -53,17 +57,17 @@ void Simulation::update() {
 
   // input hanlder should be placed above if exists
   deltaTime_ = elapsed;
-  updateEntities(*this);
+  updateEntities();
 
   lastTime_ = current;
 }
 
 // HELPER METHODS
-void Simulation::updateEntities(const Simulation &s) {
+void Simulation::updateEntities() {
   if (world_)
     for (auto entity : world_->entities()) {
       if (entity)
-        entity->update(s);
+        entity->update();
     }
 }
 
@@ -82,7 +86,6 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
   simulationWidget_ = container->getSimulationWidget();
   simulationWidget_->setController(this);
 
-
   connect(loopTimer_, SIGNAL(timeout()), simulationWidget_, SLOT(update()));
 
   connectButtons();
@@ -93,19 +96,30 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
 }
 
 void Simulation::generateWorld() {
-  world_ = new World(
-      inputWidget_->getPopulation(), inputWidget_->getInfectionRange(),
-      inputWidget_->getInfectionRate(), inputWidget_->getDeathRate(),
-      inputWidget_->getTimeRecover(), inputWidget_->getInitialInfect());
+  // TODO get it from input, if empty generate one
+  int time = QTime::currentTime().msecsSinceStartOfDay();
+  qsrand(time);
+  // TODO refactor
+  int pop = inputWidget_->getPopulation();
+  int inf_range = inputWidget_->getInfectionRange();
+  int inf_rate = inputWidget_->getInfectionRate();
+  int death_rate = inputWidget_->getDeathRate();
+  int recover_time = inputWidget_->getTimeRecover();
+  int init = inputWidget_->getInitialInfect();
+
+  logger_ = new ActorsLogger(time, pop, inf_range, inf_rate, death_rate,
+                             recover_time, init);
+
+  world_ = new World(*this, pop, inf_range, inf_rate, death_rate, recover_time,
+                     init);
 }
 
 void Simulation::generateTimer() {
-  timer_=new Timer(this, inputWidget_);
+  timer_ = new Timer(this, inputWidget_);
   connect(this, SIGNAL(simulationStarted()), timer_, SLOT(setVisibleClock()));
   connect(this, SIGNAL(simulationPaused()), timer_, SLOT(stop_timer()));
   connect(this, SIGNAL(simulationStopped()), timer_, SLOT(setInvisibleClock()));
 }
-
 
 void Simulation::connectSimulationStarted() {
   connect(this, SIGNAL(simulationStarted()), inputWidget_,
@@ -115,7 +129,7 @@ void Simulation::connectSimulationStarted() {
   connect(this, SIGNAL(simulationStarted()), inputWidget_,
           SLOT(enableStopButton()));
   connect(this, SIGNAL(simulationStarted()), simulationWidget_,
-          SLOT(setVisibleSlot()));       
+          SLOT(setVisibleSlot()));
 }
 
 void Simulation::connectSimulationStopped() {
@@ -148,15 +162,16 @@ void Simulation::connectButtons() {
 void Simulation::stopSimulation() {
   loopTimer_->stop();
   emit simulationStopped();
-  //method called here because I need every slot to be called before show the QMessageBox
-  if(containerWidget_->SaveSimulationAlert())
-  {
-    save_simulation_=new QFileDialog();
-    save_simulation_->getSaveFileName(
-      save_simulation_, 
-      "Scegli il nome della simulazione",
-      QDir::currentPath(),
-      ".json" );
+  // method called here because I need every slot to be called before show the
+  // QMessageBox
+  if (containerWidget_->SaveSimulationAlert()) {
+    QString fileUrl = QFileDialog::getSaveFileName(
+        containerWidget_, "Scegli il nome della simulazione",
+        QDir::currentPath(), ".json");
+    if (!fileUrl.isEmpty())
+      logger_->save(fileUrl);
   }
   delete world_;
 }
+
+QElapsedTimer *Simulation::durationTimer() const { return durationTimer_; }

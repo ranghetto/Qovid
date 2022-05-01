@@ -12,7 +12,7 @@ public:
   Entity() = default;
   virtual ~Entity() = default;
 
-  virtual void update(const Simulation &s) = 0;
+  virtual void update() = 0;
   virtual void render(QPainter &painter) = 0;
 };
 

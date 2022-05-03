@@ -56,8 +56,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   input_death_rate->setRange(0, 100);
   input_death_rate->setValue(2);
 
-  input_time_toRecover->setRange(0, 60000);
-  input_time_toRecover->setValue(20000);
+  input_time_toRecover->setRange(0, 50);
+  input_time_toRecover->setValue(15);
 
   input_initial_infect->setValue(2);
 

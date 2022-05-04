@@ -13,8 +13,8 @@ class Simulation;
 class ClockWidget: public QWidget {
     Q_OBJECT
     public:
-        ClockWidget(QWidget *);
-        void setSimulation(Simulation *);
+        ClockWidget(QWidget*);
+        void setSimulation(Simulation*);
     public slots:
         void updatetime();
         void start();

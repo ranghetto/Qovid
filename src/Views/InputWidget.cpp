@@ -23,7 +23,7 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   // radio menu
   sim_duration_30s = new QRadioButton("30 secondi", this);
   sim_duration_1m = new QRadioButton("1 minuto", this);
-  sim_duration_3m = new QRadioButton("3 minuto", this);
+  sim_duration_3m = new QRadioButton("3 minuti", this);
   sim_duration_complete = new QRadioButton("fino al completamento", this);
   // button
   start_sim = new QPushButton("Inizia", this);
@@ -31,6 +31,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   pause_sim->setDisabled(true);
   stop_sim = new QPushButton("Stop", this);
   stop_sim->setDisabled(true);
+  //timer
+  timer_=new ClockWidget(this);
   // signal slot
   connect(input_population, SIGNAL(valueChanged(int)), this,
           SLOT(changeMax(int)));
@@ -90,6 +92,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
 
   layout->addLayout(btnLayout);
 
+  layout->addWidget(timer_);
+
   this->setLayout(layout);
 }
 
@@ -109,17 +113,21 @@ void InputWidget::setController(Simulation *controller) {
   controller_ = controller;
 }
 
-int InputWidget::getPopulation() { return input_population->value(); }
+ClockWidget* InputWidget::getClockWidget() const {
+  return timer_;
+}
 
-int InputWidget::getInfectionRange() { return input_infection_range->value(); }
+int InputWidget::getPopulation() const { return input_population->value(); }
 
-int InputWidget::getInfectionRate() { return input_infection_rate->value(); }
+int InputWidget::getInfectionRange() const { return input_infection_range->value(); }
 
-int InputWidget::getDeathRate() { return input_death_rate->value(); }
+int InputWidget::getInfectionRate() const{ return input_infection_rate->value(); }
 
-int InputWidget::getTimeRecover() { return input_time_toRecover->value(); }
+int InputWidget::getDeathRate() const{ return input_death_rate->value(); }
 
-int InputWidget::getInitialInfect() { return input_initial_infect->value(); }
+int InputWidget::getTimeRecover() const{ return input_time_toRecover->value(); }
+
+int InputWidget::getInitialInfect() const{ return input_initial_infect->value(); }
 
 QPushButton *InputWidget::startSimButton() const { return start_sim; }
 

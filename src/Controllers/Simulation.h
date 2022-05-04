@@ -3,6 +3,7 @@
 
 #include "../Entities/Entity.h"
 #include "../Views/ContainerWidget.h"
+#include "../Views/ClockWidget.h"
 #include "../Views/InputWidget.h"
 #include "../Views/MainWindow.h"
 #include "../Views/SimulationWidget.h"
@@ -51,6 +52,7 @@ private:
   SimulationWidget *simulationWidget_;
   ContainerWidget *containerWidget_;
   InputWidget *inputWidget_;
+  ClockWidget *timer_;
 
   // Controllers
   World *world_;

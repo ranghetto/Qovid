@@ -80,6 +80,9 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
   inputWidget_->setController(this);
   simulationWidget_ = container->getSimulationWidget();
   simulationWidget_->setController(this);
+  timer_=inputWidget_->getClockWidget();
+  timer_->setSimulation(this);
+
 
   connect(loopTimer_, SIGNAL(timeout()), simulationWidget_, SLOT(update()));
 
@@ -106,6 +109,8 @@ void Simulation::connectSimulationStarted() {
           SLOT(enableStopButton()));
   connect(this, SIGNAL(simulationStarted()), simulationWidget_,
           SLOT(setVisibleSlot()));
+  connect(this, SIGNAL(simulationStarted()), timer_,
+          SLOT(setVisibleClock()));
 }
 
 void Simulation::connectSimulationStopped() {
@@ -115,8 +120,8 @@ void Simulation::connectSimulationStopped() {
           SLOT(disablePauseButton()));
   connect(this, SIGNAL(simulationStopped()), inputWidget_,
           SLOT(disableStopButton()));
-  // connect(this, SIGNAL(simulationStopped()), simulationWidget_,
-  //        SLOT(setInvisibleSlot()));
+  connect(this, SIGNAL(simulationStopped()), timer_,
+          SLOT(setInvisibleClock()));
 }
 
 void Simulation::connectSimulationPaused() {

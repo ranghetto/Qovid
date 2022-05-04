@@ -7,6 +7,7 @@
 #include <QSpinBox>
 #include <QVBoxLayout>
 #include <QWidget>
+#include "ClockWidget.h"
 
 class Simulation;
 
@@ -15,13 +16,14 @@ class InputWidget : public QWidget {
 public:
   InputWidget(QWidget *parent = nullptr);
   // setters & getters
-  void setController(Simulation *);
-  int getPopulation();
-  int getInfectionRange();
-  int getInfectionRate();
-  int getDeathRate();
-  int getTimeRecover();
-  int getInitialInfect();
+  void setSimulation(Simulation *);
+  ClockWidget* getClockWidget() const;
+  int getPopulation() const;
+  int getInfectionRange() const;
+  int getInfectionRate() const;
+  int getDeathRate() const;
+  int getTimeRecover() const;
+  int getInitialInfect() const;
 
   QPushButton *startSimButton() const;
   QPushButton *pauseSimButton() const;
@@ -45,6 +47,7 @@ private:
   QRadioButton *sim_duration_30s, *sim_duration_1m, *sim_duration_3m,
       *sim_duration_complete;
   QPushButton *start_sim, *pause_sim, *stop_sim;
+  ClockWidget *timer_;
   Simulation *controller_;
 };
 

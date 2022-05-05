@@ -1,13 +1,15 @@
 #include "Timer.h"
+#include "../Controllers/Simulation.h"
 
-Timer::Timer(InputWidget* widget, QObject *parent)
-: widget_(widget), clock_(nullptr){
+Timer::Timer(Simulation *simulation, InputWidget* widget, QObject *parent)
+: simulation_(simulation), widget_(widget), clock_(nullptr){
 
     sim_duration_=0;
     clock_=widget_->getClock();
     clock_->setController(this);
     //connect
     connect(&update_, SIGNAL(timeout()), this, SLOT(updatetime()));
+    connect(&sim_timer_, SIGNAL(timeout()), this, SLOT(endOfSimulation()));
     connect(this, SIGNAL(start()), this, SLOT(start_timer())); 
     connect(this, SIGNAL(resume()), this, SLOT(updatetime())); 
 }
@@ -47,7 +49,8 @@ void Timer::start_timer(){
     {
         isUntillEnd_=false;
         sim_timer_.setSingleShot(true);
-        sim_timer_.start(sim_duration_);
+        //sim_timer_.start(sim_duration_);
+        sim_timer_.start(3000);
         update_.start(10);
     }
     else
@@ -81,12 +84,16 @@ void Timer::stop_timer(){
     }
 }
 
+void Timer::endOfSimulation(){
+    clock_->HideClock();
+    sim_timer_.stop();
+    update_.stop();
+    simulation_->simulationStopped();
+}
+
+
 void Timer::setVisibleClock() { 
     sim_duration_=widget_->getSimulationTime();
     emit start();
     clock_->ShowClock();
-}
-
-void Timer::setInvisibleClock() { 
-    clock_->HideClock();
 }

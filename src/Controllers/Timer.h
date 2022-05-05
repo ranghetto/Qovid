@@ -12,14 +12,14 @@ class Simulation;
 class Timer: public QObject {
     Q_OBJECT
     public:
-    Timer(InputWidget*, QObject *parent=nullptr);
+    Timer(Simulation*, InputWidget*, QObject *parent=nullptr);
     QString createQString(int, int);
     public slots:
         void updatetime();
         void start_timer();
         void stop_timer();
+        void endOfSimulation();
         void setVisibleClock();
-        void setInvisibleClock();
     signals:
         void start();
         void resume();
@@ -29,6 +29,7 @@ class Timer: public QObject {
     InputWidget *widget_;
     ClockWidget *clock_;
     QTimer sim_timer_, update_;
+    Simulation *simulation_;
 };
 
 #endif

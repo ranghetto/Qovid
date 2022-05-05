@@ -26,6 +26,7 @@ SOURCES += src/main.cpp \
   src/BehaviourTree/Node.cpp \
   src/BehaviourTree/Sequence.cpp \
   src/BehaviourTree/Tree.cpp \
+  src/Controllers/Timer.cpp \
   src/Controllers/Simulation.cpp \
   src/Controllers/World.cpp \
   src/Entities/Actor.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
   src/BehaviourTree/Node.h \
   src/BehaviourTree/Sequence.h \
   src/BehaviourTree/Tree.h \
+  src/Controllers/Timer.h \
   src/Controllers/Simulation.h \
   src/Controllers/World.h \
   src/Entities/Actor.h \

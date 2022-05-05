@@ -113,9 +113,7 @@ void InputWidget::setController(Simulation *controller) {
   controller_ = controller;
 }
 
-ClockWidget* InputWidget::getClockWidget() const {
-  return timer_;
-}
+ClockWidget* InputWidget::getClockWidget() const { return timer_; }
 
 int InputWidget::getPopulation() const { return input_population->value(); }
 

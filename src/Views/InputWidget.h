@@ -16,7 +16,7 @@ class InputWidget : public QWidget {
 public:
   InputWidget(QWidget *parent = nullptr);
   // setters & getters
-  void setSimulation(Simulation *);
+  void setController(Simulation *);
   ClockWidget* getClockWidget() const;
   int getPopulation() const;
   int getInfectionRange() const;

@@ -1,39 +1,69 @@
 #include "ClockWidget.h"
 #include "../Controllers/Simulation.h"
 
-ClockWidget::ClockWidget(QWidget *parent): QWidget(parent) {
-    
+ClockWidget::ClockWidget(QWidget *parent): QWidget(parent), isRunning(false) {
+    //pointer inizialization
     label_=new QLabel(this);
     QHBoxLayout *layout=new QHBoxLayout(this);
-    label_->setText(QTime(0, 0).toString("mm:ss"));
     //set font
     QFont font = label_->font();
     font.setPointSize(40);
     label_->setFont(font);
+    //set aligment
     label_->setAlignment(Qt::AlignCenter);
+    //widget visualization
     layout->addWidget(label_);
-    this->setLayout(layout);
-    this->setInvisibleClock();
+    setLayout(layout);
+    setInvisibleClock();
+    //connect
+    connect(&update_, SIGNAL(timeout()), this, SLOT(updatetime()));
+    connect(this, SIGNAL(resume()), this, SLOT(updatetime())); 
+    connect(this, SIGNAL(start()), this, SLOT(start_timer())); 
 
-    connect(&timer_, SIGNAL(timeout()), this, SLOT(updatetime()));
-    connect(this, SIGNAL(start_timer()), this, SLOT(start()));   
 }
 
+//methods
+QString ClockWidget::createQString(){
+    int minute=sim_timer_.remainingTime()/60000;
+    int seconds=sim_timer_.remainingTime()/1000;
+    QString s=(QString::number(minute)+" : "+QString::number(seconds));
+    return s;
+}
+
+//setter
 void ClockWidget::setSimulation(Simulation* controller){ controller_=controller; }
 
+//slot
 void ClockWidget::updatetime(){ 
-    label_->setText(QTime(0, 0).addMSecs(start_time_.elapsed()).toString("mm:ss"));
+    label_->setText(createQString());
 }
 
-void ClockWidget::start(){
-      label_->setText(QTime(0, 0).toString("mm:ss"));
-      start_time_.restart();
-      timer_.start(1000);
+void ClockWidget::start_timer(){
+    isRunning=true;
+    sim_timer_.start(30000);
+    update_.start(100);    
 }    
 
+void ClockWidget::stop_timer(){
+    if(isRunning)
+    {   
+        isRunning=false;
+        temp=sim_timer_.remainingTime();
+        sim_timer_.stop();
+        update_.stop();
+    }
+    else
+    {
+        isRunning=true;
+        update_.start(10);
+        sim_timer_.start(temp);
+        emit resume();
+    }
+}
+
 void ClockWidget::setVisibleClock() { 
+    emit start();
     setVisible(true);
-    emit start_timer();
 }
 
 void ClockWidget::setInvisibleClock() { 

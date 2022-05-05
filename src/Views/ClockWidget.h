@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QTimer>
-#include <QTime>
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QPushButton>
@@ -15,17 +14,21 @@ class ClockWidget: public QWidget {
     public:
         ClockWidget(QWidget*);
         void setSimulation(Simulation*);
+        QString createQString();
     public slots:
         void updatetime();
-        void start();
+        void start_timer();
+        void stop_timer();
         void setVisibleClock();
         void setInvisibleClock();
     signals:
-        void start_timer();
+        void start();
+        void resume();
     private:
+        int temp;
+        bool isRunning;
         QLabel *label_;
-        QTime start_time_;
-        QTimer timer_; 
+        QTimer sim_timer_, update_; 
         Simulation *controller_;   
 };
 

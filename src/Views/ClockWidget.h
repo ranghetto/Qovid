@@ -2,36 +2,22 @@
 #define CLOCKWIDGET_H
 
 #include <QWidget>
-#include <QTimer>
 #include <QLabel>
 #include <QHBoxLayout>
-#include <QPushButton>
-#include <QDebug>
 
-class Simulation;
+class Timer;
 
 class ClockWidget: public QWidget {
     Q_OBJECT
     public:
         ClockWidget(QWidget*);
-        void setSimulation(Simulation*);
-        QString createQString();
-    public slots:
-        void updatetime();
-        void start_timer();
-        void stop_timer();
-        void setVisibleClock();
-        void setInvisibleClock();
-        void fine();
-    signals:
-        void start();
-        void resume();
+        void setController(Timer*);
+        void write(QString);
+        void HideClock();
+        void ShowClock();
     private:
-        int temp;
-        bool isRunning;
         QLabel *label_;
-        QTimer sim_timer_, update_; 
-        Simulation *controller_;   
+        Timer *controller_;   
 };
 
 #endif

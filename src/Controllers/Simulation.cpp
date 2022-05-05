@@ -131,6 +131,8 @@ void Simulation::connectSimulationPaused() {
           SLOT(disableStartButton()));
   connect(this, SIGNAL(simulationPaused()), inputWidget_,
           SLOT(enableStopButton()));
+  connect(this, SIGNAL(simulationPaused()), timer_,
+          SLOT(stop_timer()));
 }
 
 void Simulation::connectButtons() {

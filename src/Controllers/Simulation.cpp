@@ -81,7 +81,6 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
   simulationWidget_ = container->getSimulationWidget();
   simulationWidget_->setController(this);
   timer_=inputWidget_->getClockWidget();
-  timer_->setSimulation(this);
 
 
   connect(loopTimer_, SIGNAL(timeout()), simulationWidget_, SLOT(update()));

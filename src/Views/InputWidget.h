@@ -24,6 +24,8 @@ public:
   int getDeathRate() const;
   int getTimeRecover() const;
   int getInitialInfect() const;
+  int getSimulationTime() const;
+  ClockWidget* getClock() const;
 
   QPushButton *startSimButton() const;
   QPushButton *pauseSimButton() const;
@@ -47,7 +49,7 @@ private:
   QRadioButton *sim_duration_30s, *sim_duration_1m, *sim_duration_3m,
       *sim_duration_complete;
   QPushButton *start_sim, *pause_sim, *stop_sim;
-  ClockWidget *timer_;
+  ClockWidget *clock_;
   Simulation *controller_;
 };
 

@@ -22,6 +22,7 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   input_initial_infect = new QSpinBox(this);
   // radio menu
   sim_duration_30s = new QRadioButton("30 secondi", this);
+  sim_duration_30s->setChecked(true);
   sim_duration_1m = new QRadioButton("1 minuto", this);
   sim_duration_3m = new QRadioButton("3 minuti", this);
   sim_duration_complete = new QRadioButton("fino al completamento", this);
@@ -32,7 +33,7 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   stop_sim = new QPushButton("Stop", this);
   stop_sim->setDisabled(true);
   //timer
-  timer_=new ClockWidget(this);
+  clock_=new ClockWidget(this);
   // signal slot
   connect(input_population, SIGNAL(valueChanged(int)), this,
           SLOT(changeMax(int)));
@@ -92,7 +93,7 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
 
   layout->addLayout(btnLayout);
 
-  layout->addWidget(timer_);
+  layout->addWidget(clock_);
 
   this->setLayout(layout);
 }
@@ -113,7 +114,28 @@ void InputWidget::setController(Simulation *controller) {
   controller_ = controller;
 }
 
-ClockWidget* InputWidget::getClockWidget() const { return timer_; }
+int InputWidget::getSimulationTime() const {
+  if(sim_duration_30s->isChecked())
+  {
+    return 30000;
+  }
+  if(sim_duration_1m->isChecked())
+  {
+    return 60000;
+  }
+  if(sim_duration_3m->isChecked())
+  {
+    return 180000;
+  }
+  if(sim_duration_complete->isChecked())
+  {
+    return 0;
+  }
+}
+
+ClockWidget* InputWidget::getClock() const {return clock_;}
+
+void InputWidget::setController(Simulation *controller) { controller_ = controller; }
 
 int InputWidget::getPopulation() const { return input_population->value(); }
 

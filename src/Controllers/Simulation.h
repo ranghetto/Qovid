@@ -8,6 +8,7 @@
 #include "../Views/MainWindow.h"
 #include "../Views/SimulationWidget.h"
 #include "World.h"
+#include "Timer.h"
 #include <QElapsedTimer>
 #include <QObject>
 #include <QPainter>
@@ -35,6 +36,7 @@ public:
 
   // Helper functions
   void generateWorld();
+  void generateTimer();
 
 public slots:
   void update();          // main sim loop
@@ -52,10 +54,10 @@ private:
   SimulationWidget *simulationWidget_;
   ContainerWidget *containerWidget_;
   InputWidget *inputWidget_;
-  ClockWidget *timer_;
 
   // Controllers
   World *world_;
+  Timer *timer_;
 
   // Members
   QTimer *loopTimer_;

@@ -17,16 +17,20 @@ ClockWidget::ClockWidget(QWidget *parent): QWidget(parent), isRunning(false) {
     setInvisibleClock();
     //connect
     connect(&update_, SIGNAL(timeout()), this, SLOT(updatetime()));
+    connect(&sim_timer_, SIGNAL(timeout()), this, SLOT(fine()));
     connect(this, SIGNAL(resume()), this, SLOT(updatetime())); 
     connect(this, SIGNAL(start()), this, SLOT(start_timer())); 
-
 }
 
 //methods
 QString ClockWidget::createQString(){
     int minute=sim_timer_.remainingTime()/60000;
     int seconds=sim_timer_.remainingTime()/1000;
-    QString s=(QString::number(minute)+" : "+QString::number(seconds));
+    QString s;
+    if(seconds%10 || !seconds)
+        {s=("0"+QString::number(minute)+" : 0"+QString::number(seconds));}
+    else
+        {s=("0"+QString::number(minute)+" : "+QString::number(seconds));}
     return s;
 }
 
@@ -34,14 +38,17 @@ QString ClockWidget::createQString(){
 void ClockWidget::setSimulation(Simulation* controller){ controller_=controller; }
 
 //slot
+void ClockWidget::fine(){}
+
 void ClockWidget::updatetime(){ 
     label_->setText(createQString());
 }
 
 void ClockWidget::start_timer(){
     isRunning=true;
-    sim_timer_.start(30000);
-    update_.start(100);    
+    sim_timer_.setSingleShot(true);
+    sim_timer_.start(3000);
+    update_.start(10);    
 }    
 
 void ClockWidget::stop_timer(){

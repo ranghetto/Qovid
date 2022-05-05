@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QDebug>
 
 class Simulation;
 
@@ -21,6 +22,7 @@ class ClockWidget: public QWidget {
         void stop_timer();
         void setVisibleClock();
         void setInvisibleClock();
+        void fine();
     signals:
         void start();
         void resume();

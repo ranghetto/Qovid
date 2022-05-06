@@ -29,6 +29,8 @@ public:
 
   void setHealthState(ActorHealthState state);
 
+  static ActorHealthState healthState(int value);
+
 private:
   int id_;
   Simulation &simulation_;

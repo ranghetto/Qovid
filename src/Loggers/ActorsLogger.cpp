@@ -13,6 +13,12 @@ ActorsLogger::ActorsLogger(int seed, int totalPopulation, int infectionRange,
   moments_.append(new Moment(totalPopulation));
 }
 
+ActorsLogger::~ActorsLogger() {
+  for (auto moment : moments_) {
+    delete moment;
+  }
+}
+
 ActorsLogger::Moment::Moment(int healthy)
     : time(0), healthy(healthy), infected(0), recovered(0), dead(0) {}
 

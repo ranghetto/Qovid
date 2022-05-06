@@ -172,6 +172,7 @@ void Simulation::stopSimulation() {
       logger_->save(fileUrl);
   }
   delete world_;
+  delete logger_;
 }
 
 QElapsedTimer *Simulation::durationTimer() const { return durationTimer_; }

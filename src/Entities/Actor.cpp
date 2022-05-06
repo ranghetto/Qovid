@@ -36,7 +36,9 @@ void Actor::setHealthState(ActorHealthState state) {
   ActorHealthState old = healthState_;
   healthState_ = state;
   simulation_.logger()->createLogData(
-      id_, simulation_.durationTimer()->elapsed() + simulation_.pausedTime(),
+      id_,
+      (simulation_.durationTimer()->elapsed() + simulation_.pausedTime()) /
+          1000,
       position(), old, healthState());
 }
 
@@ -69,4 +71,6 @@ ActorHealthState Actor::healthState(int value) {
     return ActorHealthState::RECOVERED;
   if (value == 3)
     return ActorHealthState::DEAD;
+
+  throw ActorHealhStateUndefined();
 }

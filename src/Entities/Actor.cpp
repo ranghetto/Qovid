@@ -8,8 +8,8 @@
 #include "../Controllers/Simulation.h"
 #include <QPainter>
 
-Actor::Actor(int id, const Simulation &simulation, QVector2D position,
-             float speed, ActorHealthState state, QVector<QVector2D> waypoints,
+Actor::Actor(const Simulation &simulation, QVector2D position, float speed,
+             ActorHealthState state, QVector<QVector2D> waypoints,
              uint waitTime, uint range, uint timeToRecover, uint deathChance,
              uint infectRateo)
     : Tree(new Sequence({
@@ -19,7 +19,7 @@ Actor::Actor(int id, const Simulation &simulation, QVector2D position,
           new InfectActorsInRange(*this, range, infectRateo),
           new RecoverDeath(*this, timeToRecover, deathChance),
       })),
-      id_(id), simulation_(simulation), position_(position), speed_(speed),
+      simulation_(simulation), position_(position), speed_(speed),
       healthState_(state) {}
 
 QVector2D Actor::position() const { return position_; }
@@ -35,11 +35,14 @@ void Actor::setSpeed(float speed) { speed_ = speed; }
 void Actor::setHealthState(ActorHealthState state) {
   ActorHealthState old = healthState_;
   healthState_ = state;
-  simulation_.logger()->createLogData(
-      id_,
+  int time =
       (simulation_.durationTimer()->elapsed() + simulation_.pausedTime()) /
-          1000,
-      position(), old, healthState());
+      1000;
+  if (old == ActorHealthState::HEALTHY &&
+      healthState_ == ActorHealthState::INFECTED)
+    simulation_.logger()->createInfectionData(time, position());
+
+  simulation_.logger()->updateStatusCounters(time, old, healthState_);
 }
 
 void Actor::update() { Tree::update(simulation_); }
@@ -60,17 +63,4 @@ void Actor::render(QPainter &painter) {
     painter.setBrush(QBrush(Qt::blue));
   }
   painter.drawEllipse(position_.toPoint(), 5, 5);
-}
-
-ActorHealthState Actor::healthState(int value) {
-  if (value == 0)
-    return ActorHealthState::HEALTHY;
-  if (value == 1)
-    return ActorHealthState::INFECTED;
-  if (value == 2)
-    return ActorHealthState::RECOVERED;
-  if (value == 3)
-    return ActorHealthState::DEAD;
-
-  throw ActorHealhStateUndefined();
 }

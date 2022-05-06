@@ -12,11 +12,9 @@ class ActorAI;
 
 using namespace BehaviourTree;
 
-class ActorHealhStateUndefined {};
-
 class Actor : public Entity, public Tree {
 public:
-  Actor(int id, const Simulation &simulation, QVector2D position, float speed,
+  Actor(const Simulation &simulation, QVector2D position, float speed,
         ActorHealthState state, QVector<QVector2D> waypoints, uint waitTime,
         uint range, uint timeToRecover, uint deathChance, uint infectRateo);
   void update() override;
@@ -31,11 +29,7 @@ public:
 
   void setHealthState(ActorHealthState state);
 
-  // CAN THROW ActorHealthStateUndefined IF value IS NOT CORRECT
-  static ActorHealthState healthState(int value);
-
 private:
-  int id_;
   const Simulation &simulation_;
   QVector2D position_;
   float speed_;

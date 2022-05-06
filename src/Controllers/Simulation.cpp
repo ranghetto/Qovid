@@ -103,7 +103,6 @@ void Simulation::generateTimer() {
   timer_=new Timer(this, inputWidget_);
   connect(this, SIGNAL(simulationStarted()), timer_, SLOT(setVisibleClock()));
   connect(this, SIGNAL(simulationPaused()), timer_, SLOT(stop_timer()));
-  connect(this, SIGNAL(simulationStopped()), timer_, SLOT(endOfSimulation()));
 }
 
 
@@ -125,6 +124,8 @@ void Simulation::connectSimulationStopped() {
           SLOT(disablePauseButton()));
   connect(this, SIGNAL(simulationStopped()), inputWidget_,
           SLOT(disableStopButton()));
+  connect(this, SIGNAL(simulationStopped()), timer_,
+          SLOT(endOfSimulation()));
 }
 
 void Simulation::connectSimulationPaused() {
@@ -146,7 +147,7 @@ void Simulation::connectButtons() {
 }
 
 void Simulation::stopSimulation() {
-  emit simulationStopped();
   loopTimer_->stop();
+  emit simulationStopped();
   delete world_;
 }

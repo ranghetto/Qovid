@@ -14,6 +14,7 @@ class Timer: public QObject {
     public:
     Timer(Simulation*, InputWidget*, QObject *parent=nullptr);
     QString createQString(int, int);
+
     public slots:
         void updatetime();
         void start_timer();
@@ -30,6 +31,8 @@ class Timer: public QObject {
     ClockWidget *clock_;
     QTimer sim_timer_, update_;
     Simulation *simulation_;
+    private slots:
+    void endOfTimer();
 };
 
 #endif

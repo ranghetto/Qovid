@@ -23,6 +23,9 @@ public:
                             ActorHealthState current);
 
   bool save(const QString &url) const;
+  void write(QJsonObject &json) const;
+
+  ~ActorsLogger();
 
 private:
   class Infection {
@@ -60,8 +63,6 @@ private:
 
   QList<Infection> infections_;
   QList<Moment *> moments_;
-
-  void write(QJsonObject &json) const;
 };
 
 #endif // ACTORS_LOGGER_H

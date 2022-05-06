@@ -18,25 +18,35 @@ public:
                int initialInfectedPeople);
   ActorsLogger(const QJsonObject &json);
 
-  void createLogData(int ID, int time, QVector2D position,
-                     ActorHealthState oldState, ActorHealthState currentState);
+  void createInfectionData(int time, QVector2D position);
+  void ActorsLogger::updateStatusCounters(int time, ActorHealthState old,
+                                          ActorHealthState current);
 
   bool save(const QString &url) const;
 
 private:
-  class LogData {
+  class Infection {
   public:
-    LogData(int ID, int time, QVector2D position, ActorHealthState oldState,
-            ActorHealthState currentState);
-    LogData(const QJsonObject &json);
-    int ID;
+    Infection(int time, QVector2D position);
+    Infection(const QJsonObject &json);
     int time;
     QVector2D position;
-    ActorHealthState oldState;
-    ActorHealthState currentState;
 
     void write(QJsonObject &json) const;
   };
+  class Moment {
+  public:
+    Moment();
+    Moment(const QJsonObject &json);
+    int time;
+    int healthy;
+    int infected;
+    int recovered;
+    int dead;
+
+    void write(QJsonObject &json) const;
+  };
+
   QDateTime dateTime_;
   QString name_;
   int seed_;
@@ -46,7 +56,8 @@ private:
   int deathRateo_;
   int infectionDuration_;
   int initialInfectedPeople_;
-  QList<LogData> data_;
+  QList<Infection> infections_;
+  QList<Moment> moments_;
 
   void write(QJsonObject &json) const;
 };

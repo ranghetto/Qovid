@@ -9,9 +9,9 @@ Timer::Timer(Simulation *simulation, InputWidget* widget, QObject *parent)
     clock_->setController(this);
     //connect
     connect(&update_, SIGNAL(timeout()), this, SLOT(updatetime()));
-    connect(&sim_timer_, SIGNAL(timeout()), this, SLOT(endOfTimer()));
+    connect(&sim_timer_, SIGNAL(timeout()), this, SLOT(pressButton()));
     connect(this, SIGNAL(start()), this, SLOT(start_timer())); 
-    connect(this, SIGNAL(resume()), this, SLOT(updatetime())); 
+    connect(this, SIGNAL(resume()), this, SLOT(updatetime()));
 }
 
 //methods
@@ -90,11 +90,9 @@ void Timer::endOfSimulation(){
     update_.stop();
 }
 
-void Timer::endOfTimer(){
-    simulation_->stopSimulation();
-    endOfSimulation();
+void Timer::pressButton(){
+    emit widget_->stopSimButton()->clicked();
 }
-
 
 void Timer::setVisibleClock() { 
     sim_duration_=widget_->getSimulationTime();

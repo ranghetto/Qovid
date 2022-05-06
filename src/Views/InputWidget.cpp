@@ -110,10 +110,6 @@ void InputWidget::changeMax(int n) { input_initial_infect->setMaximum(n); }
 
 // setters & getters
 
-void InputWidget::setController(Simulation *controller) {
-  controller_ = controller;
-}
-
 int InputWidget::getSimulationTime() const {
   if(sim_duration_30s->isChecked())
   {
@@ -135,7 +131,7 @@ int InputWidget::getSimulationTime() const {
 
 ClockWidget* InputWidget::getClock() const {return clock_;}
 
-void InputWidget::setController(Simulation *controller) { controller_ = controller; }
+void InputWidget::setController(Simulation *controller){ controller_=controller; };
 
 int InputWidget::getPopulation() const { return input_population->value(); }
 

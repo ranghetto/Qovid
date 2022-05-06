@@ -30,7 +30,7 @@ public:
 
   // Getters
   World *world() const;
-  ActorsLogger *logger();
+  ActorsLogger *logger() const;
   qint64 deltaTime() const;
   qint64 pausedTime() const;
   QElapsedTimer *durationTimer() const;

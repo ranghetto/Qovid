@@ -16,6 +16,7 @@ public:
   ActorsLogger(int seed, int totalPopulation, int infectionRange,
                int infectionRateo, int deathChance, int infectionDuration,
                int initialInfectedPeople);
+  ActorsLogger(const QJsonObject &json);
 
   void createLogData(int ID, int time, QVector2D position,
                      ActorHealthState oldState, ActorHealthState currentState);
@@ -27,13 +28,13 @@ private:
   public:
     LogData(int ID, int time, QVector2D position, ActorHealthState oldState,
             ActorHealthState currentState);
+    LogData(const QJsonObject &json);
     int ID;
     int time;
     QVector2D position;
     ActorHealthState oldState;
     ActorHealthState currentState;
 
-    // void read(const QJsonObject &json);
     void write(QJsonObject &json) const;
   };
   QString name_;
@@ -47,7 +48,6 @@ private:
   int initialInfectedPeople_;
   QList<LogData> data_;
 
-  // void read(const QJsonObject &json);
   void write(QJsonObject &json) const;
 };
 

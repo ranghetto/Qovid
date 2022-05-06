@@ -58,3 +58,50 @@ void ActorsLogger::write(QJsonObject &json) const {
   }
   json["data"] = dataArray;
 }
+
+ActorsLogger::ActorsLogger(const QJsonObject &json) {
+  if (json.contains("name") && json["name"].isString())
+    name_ = json["name"].toString();
+  if (json.contains("date_time") && json["date_time"].isString())
+    dateTime_ = QDateTime::fromString(json["date_time"].toString());
+  if (json.contains("seed") && json["seed"].isDouble())
+    seed_ = json["seed"].toInt();
+  if (json.contains("total_population") && json["total_population"].isDouble())
+    totalPopulation_ = json["total_population"].toInt();
+  if (json.contains("infection_range") && json["infection_range"].isDouble())
+    infectionRange_ = json["infection_range"].toInt();
+  if (json.contains("death_rateo") && json["death_rateo"].isDouble())
+    deathRateo_ = json["death_rateo"].toInt();
+  if (json.contains("infection_duration") &&
+      json["infection_duration"].isDouble())
+    infectionDuration_ = json["infection_duration"].toInt();
+  if (json.contains("initial_infected_people") &&
+      json["initial_infected_people"].isDouble())
+    initialInfectedPeople_ = json["initial_infected_people"].toInt();
+
+  if (json.contains("data") && json["data"].isArray()) {
+    QJsonArray dataArray = json["data"].toArray();
+    data_.clear();
+    data_.reserve(dataArray.size());
+    for (int i = 0; i < dataArray.size(); ++i) {
+      QJsonObject logObj = dataArray[i].toObject();
+      LogData logData(logObj);
+      data_.append(logData);
+    }
+  }
+}
+
+ActorsLogger::LogData::LogData(const QJsonObject &json) {
+  if (json.contains("id") && json["id"].isDouble())
+    ID = json["id"].toInt();
+  if (json.contains("time") && json["time"].isDouble())
+    time = json["time"].toInt();
+  if (json.contains("x") && json["x"].isDouble())
+    position.setX(json["x"].toDouble());
+  if (json.contains("y") && json["y"].isDouble())
+    position.setX(json["y"].toDouble());
+  if (json.contains("oldState") && json["oldState"].isDouble())
+    oldState = Actor::healthState(json["oldState"].toInt());
+  if (json.contains("currentState") && json["currentState"].isDouble())
+    currentState = Actor::healthState(json["currentState"].toInt());
+}

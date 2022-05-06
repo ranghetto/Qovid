@@ -59,3 +59,14 @@ void Actor::render(QPainter &painter) {
   }
   painter.drawEllipse(position_.toPoint(), 5, 5);
 }
+
+ActorHealthState Actor::healthState(int value) {
+  if (value == 0)
+    return ActorHealthState::HEALTHY;
+  if (value == 1)
+    return ActorHealthState::INFECTED;
+  if (value == 2)
+    return ActorHealthState::RECOVERED;
+  if (value == 3)
+    return ActorHealthState::DEAD;
+}

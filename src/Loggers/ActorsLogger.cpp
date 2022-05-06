@@ -1,11 +1,14 @@
 #include "ActorsLogger.h"
+#include <stdexcept>
 
 ActorsLogger::ActorsLogger(int seed, int totalPopulation, int infectionRange,
                            int infectionRateo, int deathRateo,
                            int infectionDuration, int initialInfectedPeople)
-    : seed_(seed), totalPopulation_(totalPopulation),
-      infectionRange_(infectionRange), infectionRateo_(infectionRateo),
-      deathRateo_(deathRateo), infectionDuration_(infectionDuration),
+    : dateTime_(QDateTime::currentDateTime()),
+      name_(dateTime_.toString(Qt::ISODate)), seed_(seed),
+      totalPopulation_(totalPopulation), infectionRange_(infectionRange),
+      infectionRateo_(infectionRateo), deathRateo_(deathRateo),
+      infectionDuration_(infectionDuration),
       initialInfectedPeople_(initialInfectedPeople) {}
 
 ActorsLogger::LogData::LogData(int ID, int time, QVector2D position,
@@ -42,7 +45,7 @@ void ActorsLogger::LogData::write(QJsonObject &json) const {
 
 void ActorsLogger::write(QJsonObject &json) const {
   json["name"] = name_;
-  json["date_time"] = dateTime_.toString();
+  json["date_time"] = dateTime_.toString(Qt::ISODate);
   json["seed"] = seed_;
   json["total_population"] = totalPopulation_;
   json["infection_range"] = infectionRange_;
@@ -101,7 +104,21 @@ ActorsLogger::LogData::LogData(const QJsonObject &json) {
   if (json.contains("y") && json["y"].isDouble())
     position.setX(json["y"].toDouble());
   if (json.contains("oldState") && json["oldState"].isDouble())
-    oldState = Actor::healthState(json["oldState"].toInt());
+    // Add try-catch so in the future we can show an error widget
+    try {
+      oldState = Actor::healthState(json["oldState"].toInt());
+    } catch (ActorHealhStateUndefined) {
+      throw std::invalid_argument("cannot convert " +
+                                  json["oldState"].toString().toStdString() +
+                                  "to ActorHealthState.");
+    }
   if (json.contains("currentState") && json["currentState"].isDouble())
-    currentState = Actor::healthState(json["currentState"].toInt());
+    // Add try-catch so in the future we can show an error widget
+    try {
+      currentState = Actor::healthState(json["currentState"].toInt());
+    } catch (ActorHealhStateUndefined) {
+      throw std::invalid_argument(
+          "cannot convert " + json["currentState"].toString().toStdString() +
+          "to ActorHealthState.");
+    }
 }

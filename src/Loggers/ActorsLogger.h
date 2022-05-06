@@ -37,8 +37,8 @@ private:
 
     void write(QJsonObject &json) const;
   };
-  QString name_;
   QDateTime dateTime_;
+  QString name_;
   int seed_;
   int totalPopulation_;
   int infectionRange_;

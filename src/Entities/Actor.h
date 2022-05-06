@@ -3,14 +3,16 @@
 
 enum ActorHealthState { HEALTHY, INFECTED, RECOVERED, DEAD };
 
-class ActorAI;
 #include "../BehaviourTree/Tree.h"
 #include "Entity.h"
 #include <QVector2D>
 
 class Simulation;
+class ActorAI;
 
 using namespace BehaviourTree;
+
+class ActorHealhStateUndefined {};
 
 class Actor : public Entity, public Tree {
 public:
@@ -29,6 +31,7 @@ public:
 
   void setHealthState(ActorHealthState state);
 
+  // CAN THROW ActorHealthStateUndefined IF value IS NOT CORRECT
   static ActorHealthState healthState(int value);
 
 private:

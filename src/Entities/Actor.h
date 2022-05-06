@@ -16,7 +16,7 @@ class ActorHealhStateUndefined {};
 
 class Actor : public Entity, public Tree {
 public:
-  Actor(int id, Simulation &simulation, QVector2D position, float speed,
+  Actor(int id, const Simulation &simulation, QVector2D position, float speed,
         ActorHealthState state, QVector<QVector2D> waypoints, uint waitTime,
         uint range, uint timeToRecover, uint deathChance, uint infectRateo);
   void update() override;
@@ -36,7 +36,7 @@ public:
 
 private:
   int id_;
-  Simulation &simulation_;
+  const Simulation &simulation_;
   QVector2D position_;
   float speed_;
   ActorHealthState healthState_;

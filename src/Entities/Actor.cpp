@@ -8,8 +8,8 @@
 #include "../Controllers/Simulation.h"
 #include <QPainter>
 
-Actor::Actor(int id, Simulation &simulation, QVector2D position, float speed,
-             ActorHealthState state, QVector<QVector2D> waypoints,
+Actor::Actor(int id, const Simulation &simulation, QVector2D position,
+             float speed, ActorHealthState state, QVector<QVector2D> waypoints,
              uint waitTime, uint range, uint timeToRecover, uint deathChance,
              uint infectRateo)
     : Tree(new Sequence({

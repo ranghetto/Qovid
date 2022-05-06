@@ -9,7 +9,7 @@ Simulation::Simulation(QObject *parent)
   connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
 }
 
-ActorsLogger *Simulation::logger() { return logger_; }
+ActorsLogger *Simulation::logger() const { return logger_; }
 
 // SIGNAL & SLOTS
 // handle signal from "start simulation" button

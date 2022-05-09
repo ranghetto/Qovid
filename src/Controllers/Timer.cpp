@@ -1,7 +1,7 @@
 #include "Timer.h"
 #include "../Controllers/Simulation.h"
 
-Timer::Timer(Simulation *simulation, InputWidget* widget, QObject *parent)
+Timer::Timer(Simulation *simulation, InputWidget* widget)
 : simulation_(simulation), widget_(widget), clock_(nullptr){
 
     sim_duration_=0;

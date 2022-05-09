@@ -25,10 +25,10 @@ class Timer: public QObject {
     private:
     int sim_duration_;
     bool isRunning_;
+    Simulation *simulation_;
     InputWidget *widget_;
     ClockWidget *clock_;
     QTimer update_;
-    Simulation *simulation_;
 };
 
 #endif

@@ -3,10 +3,10 @@
 
 #include <QLabel>
 #include <QPushButton>
-#include <QRadioButton>
 #include <QSpinBox>
 #include <QVBoxLayout>
 #include <QWidget>
+#include "ClockWidget.h"
 
 class Simulation;
 
@@ -16,12 +16,14 @@ public:
   InputWidget(QWidget *parent = nullptr);
   // setters & getters
   void setController(Simulation *);
-  int getPopulation();
-  int getInfectionRange();
-  int getInfectionRate();
-  int getDeathRate();
-  int getTimeRecover();
-  int getInitialInfect();
+  ClockWidget* getClockWidget() const;
+  int getPopulation() const;
+  int getInfectionRange() const;
+  int getInfectionRate() const;
+  int getDeathRate() const;
+  int getTimeRecover() const;
+  int getInitialInfect() const;
+  ClockWidget* getClock() const;
 
   QPushButton *startSimButton() const;
   QPushButton *pauseSimButton() const;
@@ -39,12 +41,11 @@ public slots:
 
 private:
   QLabel *label_population, *label_infection_range, *label_infection_rate,
-      *label_death_rate, *label_time, *label_recover, *label_initial_infect;
+      *label_death_rate, *label_recover, *label_initial_infect;
   QSpinBox *input_population, *input_infection_range, *input_infection_rate,
       *input_death_rate, *input_time_toRecover, *input_initial_infect;
-  QRadioButton *sim_duration_30s, *sim_duration_1m, *sim_duration_3m,
-      *sim_duration_complete;
   QPushButton *start_sim, *pause_sim, *stop_sim;
+  ClockWidget *clock_;
   Simulation *controller_;
 };
 

@@ -1,7 +1,7 @@
 #include "Simulation.h"
 
 Simulation::Simulation(QObject *parent)
-    : QObject(parent), world_(nullptr), loopTimer_(new QTimer(this)),
+    : QObject(parent), world_(nullptr), timer_(nullptr), loopTimer_(new QTimer(this)),
       deltaTimer_(new QElapsedTimer()), pausedTimer_(new QElapsedTimer()),
       pausedTime_(0) {
 
@@ -11,10 +11,11 @@ Simulation::Simulation(QObject *parent)
 // SIGNAL & SLOTS
 // handle signal from "start simulation" button
 void Simulation::startSimulation() {
+  
+  generateWorld();
+  generateTimer();
 
   emit simulationStarted();
-
-  generateWorld();
 
   // ->start(0) is a timer configurations to enter in the event loop of Qt.
   // Every time `timeout()` signal is sent, the connecter slots'll be executed
@@ -81,6 +82,7 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
   simulationWidget_ = container->getSimulationWidget();
   simulationWidget_->setController(this);
 
+
   connect(loopTimer_, SIGNAL(timeout()), simulationWidget_, SLOT(update()));
 
   connectButtons();
@@ -97,6 +99,14 @@ void Simulation::generateWorld() {
       inputWidget_->getTimeRecover(), inputWidget_->getInitialInfect());
 }
 
+void Simulation::generateTimer() {
+  timer_=new Timer(this, inputWidget_);
+  connect(this, SIGNAL(simulationStarted()), timer_, SLOT(setVisibleClock()));
+  connect(this, SIGNAL(simulationPaused()), timer_, SLOT(stop_timer()));
+  connect(this, SIGNAL(simulationStopped()), timer_, SLOT(setInvisibleClock()));
+}
+
+
 void Simulation::connectSimulationStarted() {
   connect(this, SIGNAL(simulationStarted()), inputWidget_,
           SLOT(disableStartButton()));
@@ -105,7 +115,7 @@ void Simulation::connectSimulationStarted() {
   connect(this, SIGNAL(simulationStarted()), inputWidget_,
           SLOT(enableStopButton()));
   connect(this, SIGNAL(simulationStarted()), simulationWidget_,
-          SLOT(setVisibleSlot()));
+          SLOT(setVisibleSlot()));       
 }
 
 void Simulation::connectSimulationStopped() {
@@ -115,8 +125,6 @@ void Simulation::connectSimulationStopped() {
           SLOT(disablePauseButton()));
   connect(this, SIGNAL(simulationStopped()), inputWidget_,
           SLOT(disableStopButton()));
-  // connect(this, SIGNAL(simulationStopped()), simulationWidget_,
-  //        SLOT(setInvisibleSlot()));
 }
 
 void Simulation::connectSimulationPaused() {
@@ -138,7 +146,7 @@ void Simulation::connectButtons() {
 }
 
 void Simulation::stopSimulation() {
-  emit simulationStopped();
   loopTimer_->stop();
+  emit simulationStopped();
   delete world_;
 }

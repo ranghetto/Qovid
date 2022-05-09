@@ -10,7 +10,6 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_infection_range = new QLabel(this);
   label_infection_rate = new QLabel(this);
   label_death_rate = new QLabel(this);
-  label_time = new QLabel(this);
   label_recover = new QLabel(this);
   label_initial_infect = new QLabel(this);
   // input field
@@ -20,17 +19,14 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   input_death_rate = new QSpinBox(this);
   input_time_toRecover = new QSpinBox(this);
   input_initial_infect = new QSpinBox(this);
-  // radio menu
-  sim_duration_30s = new QRadioButton("30 secondi", this);
-  sim_duration_1m = new QRadioButton("1 minuto", this);
-  sim_duration_3m = new QRadioButton("3 minuto", this);
-  sim_duration_complete = new QRadioButton("fino al completamento", this);
   // button
   start_sim = new QPushButton("Inizia", this);
   pause_sim = new QPushButton("Pausa/Riprendi", this);
   pause_sim->setDisabled(true);
   stop_sim = new QPushButton("Stop", this);
   stop_sim->setDisabled(true);
+  //timer
+  clock_=new ClockWidget(this);
   // signal slot
   connect(input_population, SIGNAL(valueChanged(int)), this,
           SLOT(changeMax(int)));
@@ -39,7 +35,6 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_infection_range->setText("Raggio del contagio");
   label_infection_rate->setText("Probabilità di essere contagiati");
   label_death_rate->setText("Probabilità di morte dell'infetto");
-  label_time->setText("Durata simulazione");
   label_recover->setText("Durata infezione");
   label_initial_infect->setText("Infetti Iniziali");
 
@@ -74,11 +69,6 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   layout->addWidget(input_time_toRecover);
   layout->addWidget(label_initial_infect);
   layout->addWidget(input_initial_infect);
-  layout->addWidget(label_time);
-  layout->addWidget(sim_duration_30s);
-  layout->addWidget(sim_duration_1m);
-  layout->addWidget(sim_duration_3m);
-  layout->addWidget(sim_duration_complete);
 
   QHBoxLayout *btnLayout = new QHBoxLayout();
 
@@ -89,6 +79,8 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   layout->addSpacerItem(new QSpacerItem(0, 20));
 
   layout->addLayout(btnLayout);
+
+  layout->addWidget(clock_);
 
   this->setLayout(layout);
 }
@@ -105,21 +97,21 @@ void InputWidget::changeMax(int n) { input_initial_infect->setMaximum(n); }
 
 // setters & getters
 
-void InputWidget::setController(Simulation *controller) {
-  controller_ = controller;
-}
+ClockWidget* InputWidget::getClock() const {return clock_;}
 
-int InputWidget::getPopulation() { return input_population->value(); }
+void InputWidget::setController(Simulation *controller){ controller_=controller; };
 
-int InputWidget::getInfectionRange() { return input_infection_range->value(); }
+int InputWidget::getPopulation() const { return input_population->value(); }
 
-int InputWidget::getInfectionRate() { return input_infection_rate->value(); }
+int InputWidget::getInfectionRange() const { return input_infection_range->value(); }
 
-int InputWidget::getDeathRate() { return input_death_rate->value(); }
+int InputWidget::getInfectionRate() const{ return input_infection_rate->value(); }
 
-int InputWidget::getTimeRecover() { return input_time_toRecover->value(); }
+int InputWidget::getDeathRate() const{ return input_death_rate->value(); }
 
-int InputWidget::getInitialInfect() { return input_initial_infect->value(); }
+int InputWidget::getTimeRecover() const{ return input_time_toRecover->value(); }
+
+int InputWidget::getInitialInfect() const{ return input_initial_infect->value(); }
 
 QPushButton *InputWidget::startSimButton() const { return start_sim; }
 

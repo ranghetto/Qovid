@@ -3,10 +3,12 @@
 
 #include "../Entities/Entity.h"
 #include "../Views/ContainerWidget.h"
+#include "../Views/ClockWidget.h"
 #include "../Views/InputWidget.h"
 #include "../Views/MainWindow.h"
 #include "../Views/SimulationWidget.h"
 #include "World.h"
+#include "Timer.h"
 #include <QElapsedTimer>
 #include <QObject>
 #include <QPainter>
@@ -34,6 +36,7 @@ public:
 
   // Helper functions
   void generateWorld();
+  void generateTimer();
 
 public slots:
   void update();          // main sim loop
@@ -54,6 +57,7 @@ private:
 
   // Controllers
   World *world_;
+  Timer *timer_;
 
   // Members
   QTimer *loopTimer_;

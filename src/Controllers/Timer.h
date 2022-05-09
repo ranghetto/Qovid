@@ -12,7 +12,7 @@ class Timer: public QObject {
     Q_OBJECT
     public:
     Timer(Simulation*, InputWidget*, QObject *parent=nullptr);
-    QString createQString(int, int);
+    QString createQString(int, int) const;
     public slots:
         void updatetime();
         void start_timer();

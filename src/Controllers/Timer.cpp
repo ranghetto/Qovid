@@ -15,7 +15,7 @@ Timer::Timer(Simulation *simulation, InputWidget* widget, QObject *parent)
 
 //methods
 
-QString Timer::createQString(int minutes, int seconds){
+QString Timer::createQString(int minutes, int seconds) const {
     QString s;
     if(seconds>=10)
         {s=("0"+QString::number(minutes)+" : "+QString::number(seconds));}

@@ -7,7 +7,7 @@ ClockWidget::ClockWidget(QWidget *parent): QWidget(parent){
     QHBoxLayout *layout=new QHBoxLayout(this);
     //set font
     QFont font = label_->font();
-    font.setPointSize(40);
+    font.setPointSize(35);
     label_->setFont(font);
     //set aligment
     label_->setAlignment(Qt::AlignCenter);

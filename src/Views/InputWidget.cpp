@@ -10,7 +10,6 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_infection_range = new QLabel(this);
   label_infection_rate = new QLabel(this);
   label_death_rate = new QLabel(this);
-  label_time = new QLabel(this);
   label_recover = new QLabel(this);
   label_initial_infect = new QLabel(this);
   // input field
@@ -36,7 +35,6 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_infection_range->setText("Raggio del contagio");
   label_infection_rate->setText("Probabilità di essere contagiati");
   label_death_rate->setText("Probabilità di morte dell'infetto");
-  label_time->setText("Durata simulazione");
   label_recover->setText("Durata infezione");
   label_initial_infect->setText("Infetti Iniziali");
 
@@ -71,7 +69,6 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   layout->addWidget(input_time_toRecover);
   layout->addWidget(label_initial_infect);
   layout->addWidget(input_initial_infect);
-  layout->addWidget(label_time);
 
   QHBoxLayout *btnLayout = new QHBoxLayout();
 

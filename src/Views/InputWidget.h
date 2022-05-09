@@ -41,7 +41,7 @@ public slots:
 
 private:
   QLabel *label_population, *label_infection_range, *label_infection_rate,
-      *label_death_rate, *label_time, *label_recover, *label_initial_infect;
+      *label_death_rate, *label_recover, *label_initial_infect;
   QSpinBox *input_population, *input_infection_range, *input_infection_rate,
       *input_death_rate, *input_time_toRecover, *input_initial_infect;
   QPushButton *start_sim, *pause_sim, *stop_sim;

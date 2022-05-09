@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QTimer>
-#include <QDebug>
 #include "../Views/InputWidget.h"
 #include "../Views/ClockWidget.h"
 
@@ -18,20 +17,18 @@ class Timer: public QObject {
         void updatetime();
         void start_timer();
         void stop_timer();
-        void endOfSimulation();
+        void setInvisibleClock();
         void setVisibleClock();
-        void pressButton();
     signals:
         void start();
         void resume();
     private:
-    int sim_duration_, temp_;
-    bool isRunning_, isUntillEnd_;
+    int sim_duration_;
+    bool isRunning_;
     InputWidget *widget_;
     ClockWidget *clock_;
-    QTimer sim_timer_, update_;
+    QTimer update_;
     Simulation *simulation_;
-    private slots:
 };
 
 #endif

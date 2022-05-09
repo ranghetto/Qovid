@@ -20,12 +20,6 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   input_death_rate = new QSpinBox(this);
   input_time_toRecover = new QSpinBox(this);
   input_initial_infect = new QSpinBox(this);
-  // radio menu
-  sim_duration_30s = new QRadioButton("30 secondi", this);
-  sim_duration_30s->setChecked(true);
-  sim_duration_1m = new QRadioButton("1 minuto", this);
-  sim_duration_3m = new QRadioButton("3 minuti", this);
-  sim_duration_complete = new QRadioButton("fino al completamento", this);
   // button
   start_sim = new QPushButton("Inizia", this);
   pause_sim = new QPushButton("Pausa/Riprendi", this);
@@ -78,10 +72,6 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   layout->addWidget(label_initial_infect);
   layout->addWidget(input_initial_infect);
   layout->addWidget(label_time);
-  layout->addWidget(sim_duration_30s);
-  layout->addWidget(sim_duration_1m);
-  layout->addWidget(sim_duration_3m);
-  layout->addWidget(sim_duration_complete);
 
   QHBoxLayout *btnLayout = new QHBoxLayout();
 
@@ -109,25 +99,6 @@ void InputWidget::simulationPaused() {}
 void InputWidget::changeMax(int n) { input_initial_infect->setMaximum(n); }
 
 // setters & getters
-
-int InputWidget::getSimulationTime() const {
-  if(sim_duration_30s->isChecked())
-  {
-    return 30000;
-  }
-  if(sim_duration_1m->isChecked())
-  {
-    return 60000;
-  }
-  if(sim_duration_3m->isChecked())
-  {
-    return 180000;
-  }
-  if(sim_duration_complete->isChecked())
-  {
-    return 0;
-  }
-}
 
 ClockWidget* InputWidget::getClock() const {return clock_;}
 

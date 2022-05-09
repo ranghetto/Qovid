@@ -3,7 +3,6 @@
 
 #include <QLabel>
 #include <QPushButton>
-#include <QRadioButton>
 #include <QSpinBox>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -24,7 +23,6 @@ public:
   int getDeathRate() const;
   int getTimeRecover() const;
   int getInitialInfect() const;
-  int getSimulationTime() const;
   ClockWidget* getClock() const;
 
   QPushButton *startSimButton() const;
@@ -46,8 +44,6 @@ private:
       *label_death_rate, *label_time, *label_recover, *label_initial_infect;
   QSpinBox *input_population, *input_infection_range, *input_infection_rate,
       *input_death_rate, *input_time_toRecover, *input_initial_infect;
-  QRadioButton *sim_duration_30s, *sim_duration_1m, *sim_duration_3m,
-      *sim_duration_complete;
   QPushButton *start_sim, *pause_sim, *stop_sim;
   ClockWidget *clock_;
   Simulation *controller_;

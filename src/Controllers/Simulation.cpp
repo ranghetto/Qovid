@@ -1,9 +1,9 @@
 #include "Simulation.h"
 
 Simulation::Simulation(QObject *parent)
-    : QObject(parent), world_(nullptr), timer_(nullptr), loopTimer_(new QTimer(this)),
-      deltaTimer_(new QElapsedTimer()), pausedTimer_(new QElapsedTimer()),
-      pausedTime_(0), save_simulation_(nullptr) {
+    : QObject(parent), save_simulation_(nullptr), world_(nullptr), timer_(nullptr), 
+      loopTimer_(new QTimer(this)), deltaTimer_(new QElapsedTimer()), pausedTimer_(new QElapsedTimer()),
+      pausedTime_(0)  {
   
   connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
 }

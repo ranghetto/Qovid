@@ -3,8 +3,8 @@
 Simulation::Simulation(QObject *parent)
     : QObject(parent), world_(nullptr), timer_(nullptr), loopTimer_(new QTimer(this)),
       deltaTimer_(new QElapsedTimer()), pausedTimer_(new QElapsedTimer()),
-      pausedTime_(0) {
-
+      pausedTime_(0), save_simulation_(nullptr) {
+  
   connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
 }
 
@@ -148,5 +148,15 @@ void Simulation::connectButtons() {
 void Simulation::stopSimulation() {
   loopTimer_->stop();
   emit simulationStopped();
+  //method called here because I need every slot to be called before show the QMessageBox
+  if(containerWidget_->SaveSimulationAlert())
+  {
+    save_simulation_=new QFileDialog();
+    save_simulation_->getSaveFileName(
+      save_simulation_, 
+      "Scegli il nome della simulazione",
+      QDir::currentPath(),
+      ".json" );
+  }
   delete world_;
 }

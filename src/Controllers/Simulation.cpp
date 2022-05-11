@@ -19,7 +19,6 @@ void Simulation::startSimulation() {
   generateTimer();
 
   emit simulationStarted();
-
   // ->start(0) is a timer configurations to enter in the event loop of Qt.
   // Every time `timeout()` signal is sent, the connecter slots'll be executed
   // in the main loop of Qt, without inferferring with normal operations.
@@ -100,6 +99,8 @@ void Simulation::generateWorld() {
   int time = QTime::currentTime().msecsSinceStartOfDay();
   qsrand(time);
 
+  QDateTime dateTimeNow = QDateTime::currentDateTime();
+
   int population = inputWidget_->getPopulation();
   int infectionRange = inputWidget_->getInfectionRange();
   int infectionRate = inputWidget_->getInfectionRate();
@@ -107,7 +108,8 @@ void Simulation::generateWorld() {
   int recoverTime = inputWidget_->getTimeRecover();
   int initialInfects = inputWidget_->getInitialInfect();
 
-  logger_ = new ActorsLogger(time, population, infectionRange, infectionRate,
+  logger_ = new ActorsLogger(dateTimeNow.toString(Qt::ISODate), dateTimeNow,
+                             time, population, infectionRange, infectionRate,
                              deathRate, recoverTime, initialInfects);
 
   world_ = new World(*this, population, infectionRange, infectionRate,
@@ -167,7 +169,7 @@ void Simulation::stopSimulation() {
   if (containerWidget_->SaveSimulationAlert()) {
     QString fileUrl = QFileDialog::getSaveFileName(
         containerWidget_, "Scegli il nome della simulazione",
-        QDir::currentPath(), ".json");
+        logger_->getName(), ".json");
     if (!fileUrl.isEmpty())
       logger_->save(fileUrl);
   }

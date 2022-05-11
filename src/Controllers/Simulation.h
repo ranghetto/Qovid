@@ -9,7 +9,9 @@
 #include "../Views/SimulationWidget.h"
 #include "World.h"
 #include "Timer.h"
+#include <QDir>
 #include <QElapsedTimer>
+#include <QFileDialog>
 #include <QObject>
 #include <QPainter>
 #include <QTimer>
@@ -54,6 +56,7 @@ private:
   SimulationWidget *simulationWidget_;
   ContainerWidget *containerWidget_;
   InputWidget *inputWidget_;
+  QFileDialog *save_simulation_;
 
   // Controllers
   World *world_;

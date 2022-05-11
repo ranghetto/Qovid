@@ -5,6 +5,8 @@
 #include "SimulationWidget.h"
 #include <QHBoxLayout>
 #include <QWidget>
+#include <QMessageBox>
+#include <QDebug>
 
 class Simulation;
 
@@ -15,9 +17,11 @@ public:
   ContainerWidget(QWidget *parent = nullptr);
   InputWidget *getInputWidget(); // return input_wiget to the controller
   SimulationWidget *getSimulationWidget();
+  bool SaveSimulationAlert();
 
 private:
   SimulationWidget *simulation_;
   InputWidget *input_widget_;
-};
+  QMessageBox *save_simulation_;
+  };
 #endif // CONTAINERWIDGET_H

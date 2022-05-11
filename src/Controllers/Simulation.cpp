@@ -174,6 +174,8 @@ void Simulation::stopSimulation() {
       logger_->save(fileUrl);
   }
 
+  simulationWidget_->setInvisibleSlot();
+
   delete world_;
   delete logger_;
 }

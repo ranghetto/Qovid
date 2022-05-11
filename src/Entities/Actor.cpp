@@ -39,7 +39,7 @@ void Actor::setHealthState(ActorHealthState state) {
       (simulation_.durationTimer()->elapsed() + simulation_.pausedTime()) /
       1000;
   // if simulation has not started yet, set time to 0
-  if (time < 0)
+  if (!simulation_.durationTimer()->isValid())
     time = 0;
   if (old == ActorHealthState::HEALTHY &&
       healthState_ == ActorHealthState::INFECTED)

@@ -99,19 +99,19 @@ void Simulation::generateWorld() {
   // TODO get it from input, if empty generate one
   int time = QTime::currentTime().msecsSinceStartOfDay();
   qsrand(time);
-  // TODO refactor
-  int pop = inputWidget_->getPopulation();
-  int inf_range = inputWidget_->getInfectionRange();
-  int inf_rate = inputWidget_->getInfectionRate();
-  int death_rate = inputWidget_->getDeathRate();
-  int recover_time = inputWidget_->getTimeRecover();
-  int init = inputWidget_->getInitialInfect();
 
-  logger_ = new ActorsLogger(time, pop, inf_range, inf_rate, death_rate,
-                             recover_time, init);
+  int population = inputWidget_->getPopulation();
+  int infectionRange = inputWidget_->getInfectionRange();
+  int infectionRate = inputWidget_->getInfectionRate();
+  int deathRate = inputWidget_->getDeathRate();
+  int recoverTime = inputWidget_->getTimeRecover();
+  int initialInfects = inputWidget_->getInitialInfect();
 
-  world_ = new World(*this, pop, inf_range, inf_rate, death_rate, recover_time,
-                     init);
+  logger_ = new ActorsLogger(time, population, infectionRange, infectionRate,
+                             deathRate, recoverTime, initialInfects);
+
+  world_ = new World(*this, population, infectionRange, infectionRate,
+                     deathRate, recoverTime, initialInfects);
 }
 
 void Simulation::generateTimer() {
@@ -162,8 +162,8 @@ void Simulation::connectButtons() {
 void Simulation::stopSimulation() {
   loopTimer_->stop();
   emit simulationStopped();
+  durationTimer_->invalidate();
   // method called here because I need every slot to be called before show the
-  // QMessageBox
   if (containerWidget_->SaveSimulationAlert()) {
     QString fileUrl = QFileDialog::getSaveFileName(
         containerWidget_, "Scegli il nome della simulazione",
@@ -171,6 +171,7 @@ void Simulation::stopSimulation() {
     if (!fileUrl.isEmpty())
       logger_->save(fileUrl);
   }
+
   delete world_;
   delete logger_;
 }

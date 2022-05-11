@@ -1,5 +1,4 @@
 #include "ActorsLogger.h"
-#include <stdexcept>
 
 ActorsLogger::ActorsLogger(int seed, int totalPopulation, int infectionRange,
                            int infectionRateo, int deathRateo,

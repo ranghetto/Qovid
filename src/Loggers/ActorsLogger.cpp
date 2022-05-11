@@ -1,10 +1,10 @@
 #include "ActorsLogger.h"
 
-ActorsLogger::ActorsLogger(int seed, int totalPopulation, int infectionRange,
+ActorsLogger::ActorsLogger(const QString &name, const QDateTime &dateTime,
+                           int seed, int totalPopulation, int infectionRange,
                            int infectionRateo, int deathRateo,
                            int infectionDuration, int initialInfectedPeople)
-    : dateTime_(QDateTime::currentDateTime()),
-      name_(dateTime_.toString(Qt::ISODate)), seed_(seed),
+    : dateTime_(dateTime), name_(name), seed_(seed),
       totalPopulation_(totalPopulation), infectionRange_(infectionRange),
       infectionRateo_(infectionRateo), deathRateo_(deathRateo),
       infectionDuration_(infectionDuration),
@@ -17,6 +17,8 @@ ActorsLogger::~ActorsLogger() {
     delete moment;
   }
 }
+
+QString ActorsLogger::getName() const { return name_; }
 
 ActorsLogger::Moment::Moment(int healthy)
     : time(0), healthy(healthy), infected(0), recovered(0), dead(0) {}

@@ -13,8 +13,9 @@
 
 class ActorsLogger {
 public:
-  ActorsLogger(int seed, int totalPopulation, int infectionRange,
-               int infectionRateo, int deathChance, int infectionDuration,
+  ActorsLogger(const QString &name, const QDateTime &dateTime, int seed,
+               int totalPopulation, int infectionRange, int infectionRateo,
+               int deathChance, int infectionDuration,
                int initialInfectedPeople);
   ActorsLogger(const QJsonObject &json);
 
@@ -24,6 +25,8 @@ public:
 
   bool save(const QString &url) const;
   void write(QJsonObject &json) const;
+
+  QString getName() const;
 
   ~ActorsLogger();
 

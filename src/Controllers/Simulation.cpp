@@ -103,7 +103,7 @@ void Simulation::generateTimer() {
   timer_=new Timer(this, inputWidget_);
   connect(this, SIGNAL(simulationStarted()), timer_, SLOT(setVisibleClock()));
   connect(this, SIGNAL(simulationPaused()), timer_, SLOT(stop_timer()));
-  connect(this, SIGNAL(simulationStopped()), timer_, SLOT(setInvisibleClock()));
+  connect(this, SIGNAL(simulationStopped()), timer_, SLOT(setInvisibleandDestroyClock()));
 }
 
 

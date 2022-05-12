@@ -34,6 +34,7 @@ SOURCES += src/main.cpp \
   src/Views/ContainerWidget.cpp \
   src/Views/InputWidget.cpp \
   src/Views/MainWindow.cpp \
+  src/Views/OldSimulation.cpp \
   src/Views/SimulationWidget.cpp \
 
 HEADERS += \
@@ -54,4 +55,5 @@ HEADERS += \
   src/Views/ContainerWidget.h \
   src/Views/InputWidget.h \
   src/Views/MainWindow.h \
+  src/Views/OldSimulation.h \
   src/Views/SimulationWidget.h \

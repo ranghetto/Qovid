@@ -24,6 +24,7 @@ class Simulation : public QObject {
 
 public:
   Simulation(QObject *parent = nullptr);
+  ~Simulation();
 
   // Setters
   void setContainerWidgets(ContainerWidget *container);
@@ -56,9 +57,8 @@ signals:
 
 private:
   // Views
-  SimulationWidget *simulationWidget_;
   ContainerWidget *containerWidget_;
-  InputWidget *inputWidget_;
+  QFileDialog *saveSimulation_;
 
   // Controllers
   World *world_;

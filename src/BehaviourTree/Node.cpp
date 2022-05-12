@@ -8,15 +8,18 @@ BehaviourTree::Node::Node(QList<Node *> children) : parent_(nullptr) {
   }
 }
 
-BehaviourTree::Node::~Node() {
-  for (auto child : children_) {
-    delete child;
-  }
-}
+BehaviourTree::Node::~Node() { deleteChildrens(); }
 
 void BehaviourTree::Node::setParent(Node *parent) { parent_ = parent; }
 
 void BehaviourTree::Node::addNode(Node *node) {
   node->parent_ = this;
   children_.append(node);
+}
+
+void BehaviourTree::Node::deleteChildrens() {
+  for (auto child : children_) {
+    delete child;
+  }
+  children_.clear();
 }

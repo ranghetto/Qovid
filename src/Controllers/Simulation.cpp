@@ -77,6 +77,7 @@ void Simulation::render(QPainter &painter) {
 
 void Simulation::setContainerWidgets(ContainerWidget *container) {
   containerWidget_ = container;
+  containerWidget_->setController(this);
   inputWidget_ = container->getInputWidget();
   inputWidget_->setController(this);
   simulationWidget_ = container->getSimulationWidget();

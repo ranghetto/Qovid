@@ -16,6 +16,8 @@ public:
   ContainerWidget(QWidget *parent = nullptr);
   InputWidget *getInputWidget(); // return input_wiget to the controller
   SimulationWidget *getSimulationWidget();
+  OldSimulation* getOldSimulation();
+  void setController(Simulation*);
 public slots:
   void setVisibleOldSim();
   void setVisibleSimulator();
@@ -23,5 +25,6 @@ private:
   SimulationWidget *simulation_;
   InputWidget *input_widget_;
   OldSimulation *old_sim_;
+  Simulation *controller_;
 };
 #endif // CONTAINERWIDGET_H

@@ -1,3 +1,4 @@
+#include "Controllers/GraphHandler.h"
 #include "Controllers/Simulation.h"
 #include "Views/ContainerWidget.h"
 #include "Views/MainWindow.h"
@@ -16,6 +17,9 @@ int main(int argc, char **argv) {
   // setContainerWidget() will set InputWidget & SimulationWidget
   Simulation *s = new Simulation();
   s->setContainerWidgets(c);
+
+  GraphHandler *g = new GraphHandler();
+  g->setContainerWidgets(c);
 
   m.show();
 

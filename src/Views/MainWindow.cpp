@@ -4,20 +4,18 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   
   //menu
-  act_=new QAction("Apri Cartella", this);
-  connect(act_, SIGNAL(triggered()), this, SLOT(relayout()));
+  old_sim_=new QAction("Apri Cartella", this);
+  sim_=new QAction("Apri Simulatore", this);
   fileMenu_ = menuBar()->addMenu("Simulazioni");
-  fileMenu_->addAction(act_);
-  //widget
-  old_sim_=new OldSimulation(this);
-  old_sim_->hide();
+  fileMenu_->addAction(old_sim_);
+  fileMenu_->addAction(sim_);
+  //central widget
   container_ = new ContainerWidget(this);
   setCentralWidget(container_);
+  
+  connect(old_sim_, SIGNAL(triggered()), container_, SLOT(setVisibleOldSim()));
+  connect(sim_, SIGNAL(triggered()), container_, SLOT(setVisibleSimulator()));
 }
 
 ContainerWidget *MainWindow::getContainerWidget() { return container_; }
 
-void MainWindow::relayout(){
-  container_->hide();
-
-}

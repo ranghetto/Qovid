@@ -21,22 +21,22 @@ ActorsLogger::~ActorsLogger() {
 QString ActorsLogger::getName() const { return name_; }
 
 ActorsLogger::Moment::Moment(int healthy)
-    : time(0), healthy(healthy), infected(0), recovered(0), dead(0) {}
+    : time_(0), healthy_(healthy), infected_(0), recovered_(0), dead_(0) {}
 
 ActorsLogger::Infection::Infection(int time, QVector2D position)
-    : time(time), position(position) {}
+    : time_(time), position_(position) {}
 
 void ActorsLogger::createInfectionData(int time, QVector2D position) {
   infections_.append(Infection(time, position));
 }
 
-void ActorsLogger::Moment::advance(int t) { time = t; }
+void ActorsLogger::Moment::advance(int t) { time_ = t; }
 
 void ActorsLogger::updateStatusCounters(int time, ActorHealthState old,
                                         ActorHealthState current) {
   Moment *m;
   bool add = false;
-  if (time == moments_.last()->time)
+  if (time == moments_.last()->time_)
     m = moments_.last();
   else {
     m = new Moment(*moments_.last());
@@ -46,17 +46,17 @@ void ActorsLogger::updateStatusCounters(int time, ActorHealthState old,
 
   if (old == ActorHealthState::HEALTHY &&
       current == ActorHealthState::INFECTED) {
-    m->healthy--;
-    m->infected++;
+    m->healthy_--;
+    m->infected_++;
   }
   if (old == ActorHealthState::INFECTED &&
       current == ActorHealthState::RECOVERED) {
-    m->infected--;
-    m->recovered++;
+    m->infected_--;
+    m->recovered_++;
   }
   if (old == ActorHealthState::INFECTED && current == ActorHealthState::DEAD) {
-    m->infected--;
-    m->dead++;
+    m->infected_--;
+    m->dead_++;
   }
 
   if (add)
@@ -75,17 +75,17 @@ bool ActorsLogger::save(const QString &url) const {
 }
 
 void ActorsLogger::Infection::write(QJsonObject &json) const {
-  json["time"] = time;
-  json["x"] = position.toPoint().x();
-  json["y"] = position.toPoint().y();
+  json["time"] = time_;
+  json["x"] = position_.toPoint().x();
+  json["y"] = position_.toPoint().y();
 }
 
 void ActorsLogger::Moment::write(QJsonObject &json) const {
-  json["time"] = time;
-  json["healthy"] = healthy;
-  json["infected"] = infected;
-  json["recovered"] = recovered;
-  json["dead"] = dead;
+  json["time"] = time_;
+  json["healthy"] = healthy_;
+  json["infected"] = infected_;
+  json["recovered"] = recovered_;
+  json["dead"] = dead_;
 }
 
 void ActorsLogger::write(QJsonObject &json) const {
@@ -159,22 +159,26 @@ ActorsLogger::ActorsLogger(const QJsonObject &json) {
 
 ActorsLogger::Moment::Moment(const QJsonObject &json) {
   if (json.contains("time") && json["time"].isDouble())
-    time = json["time"].toInt();
+    time_ = json["time"].toInt();
   if (json.contains("healthy") && json["healthy"].isDouble())
-    time = json["healthy"].toInt();
+    healthy_ = json["healthy"].toInt();
   if (json.contains("infected") && json["infected"].isDouble())
-    time = json["infected"].toInt();
+    infected_ = json["infected"].toInt();
   if (json.contains("recovered") && json["recovered"].isDouble())
-    time = json["recovered"].toInt();
+    recovered_ = json["recovered"].toInt();
   if (json.contains("dead") && json["dead"].isDouble())
-    time = json["dead"].toInt();
+    dead_ = json["dead"].toInt();
 }
 
 ActorsLogger::Infection::Infection(const QJsonObject &json) {
   if (json.contains("time") && json["time"].isDouble())
-    time = json["time"].toInt();
+    time_ = json["time"].toInt();
   if (json.contains("x") && json["x"].isDouble())
-    position.setX(json["x"].toDouble());
+    position_.setX(json["x"].toDouble());
   if (json.contains("y") && json["y"].isDouble())
-    position.setX(json["y"].toDouble());
+    position_.setY(json["y"].toDouble());
 }
+
+QList<ActorsLogger::Moment *> ActorsLogger::moments() const { return moments_; }
+
+int ActorsLogger::totalPopulation() const { return totalPopulation_; }

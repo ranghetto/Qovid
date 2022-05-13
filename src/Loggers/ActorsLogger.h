@@ -13,6 +13,42 @@
 
 class ActorsLogger {
 public:
+  class Infection {
+  public:
+    Infection(int time, QVector2D position);
+    Infection(const QJsonObject &json);
+    void write(QJsonObject &json) const;
+
+    int time() const;
+    QVector2D position() const;
+
+  private:
+    int time_;
+    QVector2D position_;
+  };
+  class Moment {
+    friend ActorsLogger;
+
+  public:
+    Moment(int healthy);
+    Moment(const QJsonObject &json);
+    void advance(int time);
+    void write(QJsonObject &json) const;
+
+    int time() const;
+    int healthy() const;
+    int infected() const;
+    int recovered() const;
+    int dead() const;
+
+  private:
+    int time_;
+    int healthy_;
+    int infected_;
+    int recovered_;
+    int dead_;
+  };
+
   ActorsLogger(const QString &name, const QDateTime &dateTime, int seed,
                int totalPopulation, int infectionRange, int infectionRateo,
                int deathChance, int infectionDuration,
@@ -27,33 +63,12 @@ public:
   void write(QJsonObject &json) const;
 
   QString getName() const;
+  QList<Moment *> moments() const;
+  int totalPopulation() const;
 
   ~ActorsLogger();
 
 private:
-  class Infection {
-  public:
-    Infection(int time, QVector2D position);
-    Infection(const QJsonObject &json);
-    int time;
-    QVector2D position;
-
-    void write(QJsonObject &json) const;
-  };
-  class Moment {
-  public:
-    Moment(int healthy);
-    Moment(const QJsonObject &json);
-    void advance(int time);
-    int time;
-    int healthy;
-    int infected;
-    int recovered;
-    int dead;
-
-    void write(QJsonObject &json) const;
-  };
-
   QDateTime dateTime_;
   QString name_;
   int seed_;

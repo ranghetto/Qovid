@@ -14,6 +14,8 @@
 class ActorsLogger {
 public:
   class Infection {
+    friend ActorsLogger;
+
   public:
     Infection(int time, QVector2D position);
     Infection(const QJsonObject &json);

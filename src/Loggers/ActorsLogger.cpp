@@ -182,3 +182,11 @@ ActorsLogger::Infection::Infection(const QJsonObject &json) {
 QList<ActorsLogger::Moment *> ActorsLogger::moments() const { return moments_; }
 
 int ActorsLogger::totalPopulation() const { return totalPopulation_; }
+
+int ActorsLogger::Moment::time() const { return time_; }
+int ActorsLogger::Moment::healthy() const { return healthy_; }
+int ActorsLogger::Moment::infected() const { return infected_; }
+int ActorsLogger::Moment::recovered() const { return recovered_; }
+int ActorsLogger::Moment::dead() const { return dead_; }
+int ActorsLogger::Infection::time() const { return time_; }
+QVector2D ActorsLogger::Infection::position() const { return position_; }

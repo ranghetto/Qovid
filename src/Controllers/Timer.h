@@ -28,7 +28,7 @@ class Timer: public QObject {
     Simulation *simulation_;
     InputWidget *widget_;
     ClockWidget *clock_;
-    QTimer update_;
+    QTimer *update_;
 };
 
 #endif

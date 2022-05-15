@@ -7,10 +7,11 @@ Timer::Timer(Simulation *simulation, InputWidget* widget)
     sim_duration_=0;
     clock_=widget_->getClock();
     clock_->setController(this);
+    update_=new QTimer(this);
     //connect
     connect(this, SIGNAL(start()), this, SLOT(start_timer())); 
     connect(this, SIGNAL(resume()), this, SLOT(updatetime()));
-    connect(&update_, SIGNAL(timeout()), this, SLOT(updatetime()));
+    connect(update_, SIGNAL(timeout()), this, SLOT(updatetime()));
 }
 
 //methods
@@ -37,19 +38,19 @@ void Timer::updatetime(){
 void Timer::start_timer(){
     isRunning_=true;
     updatetime();
-    update_.start(1000);  
+    update_->start(1000);  
 }    
 
 void Timer::stop_timer(){
     if(isRunning_)
     {   
         isRunning_=false;
-        update_.stop();
+        update_->stop();
     }
     else
     {
         isRunning_=true;
-        update_.start(1000);
+        update_->start(1000);
         emit resume();
     }
 }
@@ -57,7 +58,7 @@ void Timer::stop_timer(){
 
 void Timer::setInvisibleClock(){
     sim_duration_=0;
-    update_.stop();
+    update_->stop();
     clock_->HideClock();
 }
 

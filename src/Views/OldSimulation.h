@@ -2,19 +2,28 @@
 #define OLDSIMULATION_H
 
 #include <QListWidgetItem>
+#include <QDir>
+#include <QPushButton>
 #include <QListWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QLabel>
 
+class GraphHandler;
+
 class OldSimulation: public QWidget{
+    Q_OBJECT
     public:
-    void f();
     OldSimulation(QWidget *parent = nullptr);
+    void NewWidgetItemAdder(const QString);
+    void getHandler(GraphHandler*);
+    public slots:
+    void Refresh();
     private:
-    QLabel *label, *label2;
     QListWidget *list_;
+    GraphHandler *controller_;
+    QPushButton *refresh_;
 };
 
 #endif

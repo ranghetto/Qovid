@@ -13,7 +13,7 @@ ContainerWidget::ContainerWidget(QWidget *parent) : QWidget(parent) {
   layout->addWidget(simulation_);
   simulation_->hide();
   old_sim_->hide();
-  this->setLayout(layout);
+  setLayout(layout);
 }
 
 void ContainerWidget::setController(Simulation* controller){controller_=controller;}

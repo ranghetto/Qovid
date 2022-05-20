@@ -2,9 +2,10 @@
 #include <QString>
 
 Simulation::Simulation(QObject *parent)
-    : QObject(parent), world_(nullptr), loopTimer_(new QTimer(this)),
+    : QObject(parent), saveSimulation_(nullptr), world_(nullptr),
+      timer_(nullptr), loopTimer_(new QTimer(this)),
       deltaTimer_(new QElapsedTimer()), pausedTimer_(new QElapsedTimer()),
-      pausedTime_(0), durationTimer_(new QElapsedTimer()) {
+      pausedTime_(0) {
 
   connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
 }
@@ -80,12 +81,11 @@ void Simulation::render(QPainter &painter) {
 
 void Simulation::setContainerWidgets(ContainerWidget *container) {
   containerWidget_ = container;
-  inputWidget_ = container->getInputWidget();
-  inputWidget_->setController(this);
-  simulationWidget_ = container->getSimulationWidget();
-  simulationWidget_->setController(this);
+  containerWidget_->getInputWidget()->setController(this);
+  containerWidget_->getSimulationWidget()->setController(this);
 
-  connect(loopTimer_, SIGNAL(timeout()), simulationWidget_, SLOT(update()));
+  connect(loopTimer_, SIGNAL(timeout()),
+          containerWidget_->getSimulationWidget(), SLOT(update()));
 
   connectButtons();
 
@@ -101,12 +101,14 @@ void Simulation::generateWorld() {
 
   QDateTime dateTimeNow = QDateTime::currentDateTime();
 
-  int population = inputWidget_->getPopulation();
-  int infectionRange = inputWidget_->getInfectionRange();
-  int infectionRate = inputWidget_->getInfectionRate();
-  int deathRate = inputWidget_->getDeathRate();
-  int recoverTime = inputWidget_->getTimeRecover();
-  int initialInfects = inputWidget_->getInitialInfect();
+  InputWidget *i = containerWidget_->getInputWidget();
+
+  int population = i->getPopulation();
+  int infectionRange = i->getInfectionRange();
+  int infectionRate = i->getInfectionRate();
+  int deathRate = i->getDeathRate();
+  int recoverTime = i->getTimeRecover();
+  int initialInfects = i->getInitialInfect();
 
   logger_ = new ActorsLogger(dateTimeNow.toString(Qt::ISODate), dateTimeNow,
                              time, population, infectionRange, infectionRate,
@@ -117,48 +119,48 @@ void Simulation::generateWorld() {
 }
 
 void Simulation::generateTimer() {
-  timer_ = new Timer(this, inputWidget_);
+  timer_ = new Timer(this, containerWidget_->getInputWidget());
   connect(this, SIGNAL(simulationStarted()), timer_, SLOT(setVisibleClock()));
   connect(this, SIGNAL(simulationPaused()), timer_, SLOT(stop_timer()));
   connect(this, SIGNAL(simulationStopped()), timer_, SLOT(setInvisibleClock()));
 }
 
 void Simulation::connectSimulationStarted() {
-  connect(this, SIGNAL(simulationStarted()), inputWidget_,
+  connect(this, SIGNAL(simulationStarted()), containerWidget_->getInputWidget(),
           SLOT(disableStartButton()));
-  connect(this, SIGNAL(simulationStarted()), inputWidget_,
+  connect(this, SIGNAL(simulationStarted()), containerWidget_->getInputWidget(),
           SLOT(enablePauseButton()));
-  connect(this, SIGNAL(simulationStarted()), inputWidget_,
+  connect(this, SIGNAL(simulationStarted()), containerWidget_->getInputWidget(),
           SLOT(enableStopButton()));
-  connect(this, SIGNAL(simulationStarted()), simulationWidget_,
-          SLOT(setVisibleSlot()));
+  connect(this, SIGNAL(simulationStarted()),
+          containerWidget_->getSimulationWidget(), SLOT(setVisibleSlot()));
 }
 
 void Simulation::connectSimulationStopped() {
-  connect(this, SIGNAL(simulationStopped()), inputWidget_,
+  connect(this, SIGNAL(simulationStopped()), containerWidget_->getInputWidget(),
           SLOT(enableStartButton()));
-  connect(this, SIGNAL(simulationStopped()), inputWidget_,
+  connect(this, SIGNAL(simulationStopped()), containerWidget_->getInputWidget(),
           SLOT(disablePauseButton()));
-  connect(this, SIGNAL(simulationStopped()), inputWidget_,
+  connect(this, SIGNAL(simulationStopped()), containerWidget_->getInputWidget(),
           SLOT(disableStopButton()));
 }
 
 void Simulation::connectSimulationPaused() {
-  connect(this, SIGNAL(simulationPaused()), inputWidget_,
+  connect(this, SIGNAL(simulationPaused()), containerWidget_->getInputWidget(),
           SLOT(simulationPaused()));
-  connect(this, SIGNAL(simulationPaused()), inputWidget_,
+  connect(this, SIGNAL(simulationPaused()), containerWidget_->getInputWidget(),
           SLOT(disableStartButton()));
-  connect(this, SIGNAL(simulationPaused()), inputWidget_,
+  connect(this, SIGNAL(simulationPaused()), containerWidget_->getInputWidget(),
           SLOT(enableStopButton()));
 }
 
 void Simulation::connectButtons() {
-  connect(inputWidget_->startSimButton(), SIGNAL(clicked()), this,
-          SLOT(startSimulation()));
-  connect(inputWidget_->pauseSimButton(), SIGNAL(clicked()), this,
-          SLOT(toggleSimulation()));
-  connect(inputWidget_->stopSimButton(), SIGNAL(clicked()), this,
-          SLOT(stopSimulation()));
+  connect(containerWidget_->getInputWidget()->startSimButton(),
+          SIGNAL(clicked()), this, SLOT(startSimulation()));
+  connect(containerWidget_->getInputWidget()->pauseSimButton(),
+          SIGNAL(clicked()), this, SLOT(toggleSimulation()));
+  connect(containerWidget_->getInputWidget()->stopSimButton(),
+          SIGNAL(clicked()), this, SLOT(stopSimulation()));
 }
 
 void Simulation::stopSimulation() {
@@ -174,10 +176,19 @@ void Simulation::stopSimulation() {
       logger_->save(fileUrl);
   }
 
-  simulationWidget_->setInvisibleSlot();
+  containerWidget_->getSimulationWidget()->setInvisibleSlot();
 
   delete world_;
   delete logger_;
 }
 
 QElapsedTimer *Simulation::durationTimer() const { return durationTimer_; }
+
+Simulation::~Simulation() {
+  delete containerWidget_;
+  delete world_;
+  delete timer_;
+  delete loopTimer_;
+  delete deltaTimer_;
+  delete pausedTimer_;
+}

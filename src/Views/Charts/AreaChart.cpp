@@ -1,6 +1,6 @@
 #include "AreaChart.h"
 
-AreaChart::AreaChart(const ActorsLogger &logger) {
+AreaChart::AreaChart(const ActorsLogger &logger) : LoggerChart(logger) {
   QtCharts::QLineSeries *lowerBound = new QtCharts::QLineSeries();
   QtCharts::QLineSeries *infected = new QtCharts::QLineSeries();
   QtCharts::QLineSeries *healthy = new QtCharts::QLineSeries();
@@ -21,13 +21,17 @@ AreaChart::AreaChart(const ActorsLogger &logger) {
   QtCharts::QAreaSeries *series0 =
       new QtCharts::QAreaSeries(lowerBound, infected);
   series0->setName("Infected");
+  series0->setBrush(QColor(LoggerChart::StatusColor::INFECTED));
   QtCharts::QAreaSeries *series1 = new QtCharts::QAreaSeries(infected, healthy);
   series1->setName("Healthy");
+  series1->setBrush(QColor(LoggerChart::StatusColor::HEALTHY));
   QtCharts::QAreaSeries *series2 =
       new QtCharts::QAreaSeries(healthy, recovered);
   series2->setName("Recovered");
+  series2->setBrush(QColor(LoggerChart::StatusColor::RECOVERED));
   QtCharts::QAreaSeries *series3 = new QtCharts::QAreaSeries(recovered, dead);
   series3->setName("Dead");
+  series3->setBrush(QColor(LoggerChart::StatusColor::DEAD));
 
   addSeries(series0);
   addSeries(series1);

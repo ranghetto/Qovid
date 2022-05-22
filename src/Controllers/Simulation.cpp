@@ -81,7 +81,6 @@ void Simulation::render(QPainter &painter) {
 
 void Simulation::setContainerWidgets(ContainerWidget *container) {
   containerWidget_ = container;
-
   containerWidget_->getInputWidget()->setController(this);
   containerWidget_->getSimulationWidget()->setController(this);
 
@@ -123,7 +122,7 @@ void Simulation::generateTimer() {
   timer_ = new Timer(this, containerWidget_->getInputWidget());
   connect(this, SIGNAL(simulationStarted()), timer_, SLOT(setVisibleClock()));
   connect(this, SIGNAL(simulationPaused()), timer_, SLOT(stop_timer()));
-  connect(this, SIGNAL(simulationStopped()), timer_, SLOT(setInvisibleandDestroyClock()));
+  connect(this, SIGNAL(simulationStopped()), timer_, SLOT(setInvisibleClock()));
 }
 
 void Simulation::connectSimulationStarted() {

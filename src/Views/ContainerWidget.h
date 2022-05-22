@@ -3,10 +3,10 @@
 
 #include "InputWidget.h"
 #include "SimulationWidget.h"
-#include <QHBoxLayout>
-#include <QWidget>
-#include <QMessageBox>
 #include <QDebug>
+#include <QHBoxLayout>
+#include <QMessageBox>
+#include <QWidget>
 
 class Simulation;
 
@@ -23,5 +23,5 @@ private:
   SimulationWidget *simulation_;
   InputWidget *input_widget_;
   QMessageBox *save_simulation_;
-  };
+};
 #endif // CONTAINERWIDGET_H

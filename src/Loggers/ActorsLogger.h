@@ -66,7 +66,6 @@ public:
 
   QString getName() const;
   QList<Moment *> moments() const;
-  QList<Infection *> infections() const;
   int totalPopulation() const;
 
   ~ActorsLogger();
@@ -82,7 +81,7 @@ private:
   int infectionDuration_;
   int initialInfectedPeople_;
 
-  QList<Infection *> infections_;
+  QList<Infection> infections_;
   QList<Moment *> moments_;
 };
 

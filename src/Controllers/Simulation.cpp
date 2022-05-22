@@ -164,11 +164,6 @@ void Simulation::connectButtons() {
           SIGNAL(clicked()), this, SLOT(stopSimulation()));
 }
 
-#include "../Views/Charts/AreaChart.h"
-#include "../Views/Charts/PieChart.h"
-#include "../Views/Charts/ScatterChart.h"
-#include "../Views/ChartsWidget.h"
-
 void Simulation::stopSimulation() {
   loopTimer_->stop();
   emit simulationStopped();
@@ -183,14 +178,6 @@ void Simulation::stopSimulation() {
   }
 
   containerWidget_->getSimulationWidget()->setInvisibleSlot();
-
-  PieChart *ch1 = new PieChart(*logger_);
-  AreaChart *ch2 = new AreaChart(*logger_);
-  ScatterChart *ch3 = new ScatterChart(*logger_);
-
-  ChartsWidget *cw = new ChartsWidget(*ch2, *ch1, *ch3);
-
-  cw->show();
 
   delete world_;
   delete logger_;

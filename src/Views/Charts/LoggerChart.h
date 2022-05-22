@@ -20,6 +20,7 @@ public:
     INFECTED = qRgb(230, 57, 70)
   };
   ActorsLogger &logger() { return logger_; }
+  virtual ~LoggerChart();
 };
 
 #endif // LOGGER_CHART_H

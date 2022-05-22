@@ -31,6 +31,10 @@ SOURCES += src/main.cpp \
   src/Controllers/Simulation.cpp \
   src/Controllers/World.cpp \
   src/Entities/Actor.cpp \
+  src/Loggers/ActorsLogger.cpp \
+  src/Views/Charts/AreaChart.cpp \
+  src/Views/Charts/PieChart.cpp \
+  src/Views/ChartsWidget.cpp \
   src/Views/ClockWidget.cpp \
   src/Views/ContainerWidget.cpp \
   src/Views/InputWidget.cpp \
@@ -53,6 +57,11 @@ HEADERS += \
   src/Controllers/World.h \
   src/Entities/Actor.h \
   src/Entities/Entity.h \
+  src/Loggers/ActorsLogger.h \
+  src/Views/Charts/AreaChart.h \
+  src/Views/Charts/LoggerChart.h \
+  src/Views/Charts/PieChart.h \
+  src/Views/ChartsWidget.h \
   src/Views/ClockWidget.h \
   src/Views/ContainerWidget.h \
   src/Views/InputWidget.h \

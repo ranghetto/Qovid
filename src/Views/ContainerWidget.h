@@ -3,7 +3,9 @@
 
 #include "InputWidget.h"
 #include "SimulationWidget.h"
+#include <QDebug>
 #include <QHBoxLayout>
+#include <QMessageBox>
 #include <QWidget>
 #include "OldSimulation.h"
 
@@ -21,10 +23,15 @@ public:
 public slots:
   void setVisibleOldSim();
   void setVisibleSimulator();
+  
+  bool SaveSimulationAlert();
+
 private:
   SimulationWidget *simulation_;
   InputWidget *input_widget_;
+  QMessageBox *save_simulation_;
   OldSimulation *old_sim_;
   Simulation *controller_;
+
 };
 #endif // CONTAINERWIDGET_H

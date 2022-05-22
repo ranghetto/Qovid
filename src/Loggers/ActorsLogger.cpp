@@ -16,9 +16,6 @@ ActorsLogger::~ActorsLogger() {
   for (auto moment : moments_) {
     delete moment;
   }
-  for (auto infection : infections_) {
-    delete infection;
-  }
 }
 
 QString ActorsLogger::getName() const { return name_; }
@@ -30,7 +27,7 @@ ActorsLogger::Infection::Infection(int time, QVector2D position)
     : time_(time), position_(position) {}
 
 void ActorsLogger::createInfectionData(int time, QVector2D position) {
-  infections_.append(new Infection(time, position));
+  infections_.append(Infection(time, position));
 }
 
 void ActorsLogger::Moment::advance(int t) { time_ = t; }
@@ -102,9 +99,9 @@ void ActorsLogger::write(QJsonObject &json) const {
   json["initial_infected_people"] = initialInfectedPeople_;
 
   QJsonArray infectionArray;
-  for (auto log : infections_) {
+  for (const Infection &log : infections_) {
     QJsonObject inf;
-    log->write(inf);
+    log.write(inf);
     infectionArray.append(inf);
   }
   json["infections"] = infectionArray;
@@ -144,7 +141,8 @@ ActorsLogger::ActorsLogger(const QJsonObject &json) {
     infections_.reserve(dataArray.size());
     for (int i = 0; i < dataArray.size(); ++i) {
       QJsonObject logObj = dataArray[i].toObject();
-      infections_.append(new Infection(logObj));
+      Infection inf(logObj);
+      infections_.append(inf);
     }
   }
   if (json.contains("moments") && json["moments"].isArray()) {
@@ -182,9 +180,6 @@ ActorsLogger::Infection::Infection(const QJsonObject &json) {
 }
 
 QList<ActorsLogger::Moment *> ActorsLogger::moments() const { return moments_; }
-QList<ActorsLogger::Infection *> ActorsLogger::infections() const {
-  return infections_;
-}
 
 int ActorsLogger::totalPopulation() const { return totalPopulation_; }
 

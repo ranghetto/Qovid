@@ -12,14 +12,13 @@ class Timer: public QObject {
     Q_OBJECT
     public:
     Timer(Simulation*, InputWidget*);
-    ~Timer()=default;
     QString createQString(int, int) const;
     public slots:
         void updatetime();
         void start_timer();
         void stop_timer();
-        void setInvisibleandDestroyClock();
-        void setVisibleClock();    
+        void setInvisibleClock();
+        void setVisibleClock();
     signals:
         void start();
         void resume();

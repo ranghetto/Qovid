@@ -55,11 +55,10 @@ void Timer::stop_timer(){
 }
 
 
-void Timer::setInvisibleandDestroyClock(){
+void Timer::setInvisibleClock(){
     sim_duration_=0;
     update_.stop();
     clock_->HideClock();
-    this->~Timer();
 }
 
 void Timer::setVisibleClock() { 

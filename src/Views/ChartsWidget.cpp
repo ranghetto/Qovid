@@ -1,7 +1,8 @@
 #include "ChartsWidget.h"
 
-ChartsWidget::ChartsWidget(AreaChart &areaChart, PieChart &pieChart)
-    : layout(new QGridLayout(this)) {
+ChartsWidget::ChartsWidget(AreaChart &areaChart, PieChart &pieChart,
+                           ScatterChart &scatterChart, QWidget *parent)
+    : QWidget(parent), layout(new QGridLayout(this)) {
   resize(500, 500);
 
   areaChartView = new QtCharts::QChartView(&areaChart);
@@ -10,8 +11,10 @@ ChartsWidget::ChartsWidget(AreaChart &areaChart, PieChart &pieChart)
   pieChartView = new QtCharts::QChartView(&pieChart);
   pieChartView->setRenderHints(QPainter::Antialiasing);
 
+  scatterChartView = new QtCharts::QChartView(&scatterChart);
+  scatterChartView->setRenderHints(QPainter::Antialiasing);
+
   layout->addWidget(areaChartView, 0, 0);
   layout->addWidget(pieChartView, 0, 1);
-
-  show();
+  layout->addWidget(scatterChartView, 1, 0);
 }

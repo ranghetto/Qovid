@@ -2,9 +2,9 @@
 #define AREA_CHART_H
 
 #include "../../Loggers/ActorsLogger.h"
-#include <QtCharts>
+#include "LoggerChart.h"
 
-class AreaChart : public QtCharts::QChart {
+class AreaChart : public LoggerChart {
 public:
   AreaChart(const ActorsLogger &logger);
 };

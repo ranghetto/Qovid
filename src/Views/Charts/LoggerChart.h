@@ -6,7 +6,7 @@
 
 class LoggerChart : public QtCharts::QChart {
 private:
-  ActorsLogger &logger_;
+  const ActorsLogger &logger_;
 
 public:
   LoggerChart(const ActorsLogger &logger) : logger_(logger) {
@@ -19,8 +19,7 @@ public:
     HEALTHY = qRgb(129, 208, 102),
     INFECTED = qRgb(230, 57, 70)
   };
-  ActorsLogger &logger() { return logger_; }
-  virtual ~LoggerChart();
+  const ActorsLogger &logger() { return logger_; }
 };
 
 #endif // LOGGER_CHART_H

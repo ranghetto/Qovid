@@ -33,6 +33,7 @@ SOURCES += src/main.cpp \
   src/Loggers/ActorsLogger.cpp \
   src/Views/Charts/AreaChart.cpp \
   src/Views/Charts/PieChart.cpp \
+  src/Views/Charts/ScatterChart.cpp \
   src/Views/ChartsWidget.cpp \
   src/Views/ClockWidget.cpp \
   src/Views/ContainerWidget.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
   src/Views/Charts/AreaChart.h \
   src/Views/Charts/LoggerChart.h \
   src/Views/Charts/PieChart.h \
+  src/Views/Charts/ScatterChart.h \
   src/Views/ChartsWidget.h \
   src/Views/ClockWidget.h \
   src/Views/ContainerWidget.h \

@@ -84,6 +84,7 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
 
   containerWidget_->getInputWidget()->setController(this);
   containerWidget_->getSimulationWidget()->setController(this);
+  containerWidget_->setController(this);
 
   connect(loopTimer_, SIGNAL(timeout()),
           containerWidget_->getSimulationWidget(), SLOT(update()));
@@ -123,7 +124,8 @@ void Simulation::generateTimer() {
   timer_ = new Timer(this, containerWidget_->getInputWidget());
   connect(this, SIGNAL(simulationStarted()), timer_, SLOT(setVisibleClock()));
   connect(this, SIGNAL(simulationPaused()), timer_, SLOT(stop_timer()));
-  connect(this, SIGNAL(simulationStopped()), timer_, SLOT(setInvisibleandDestroyClock()));
+  connect(this, SIGNAL(simulationStopped()), timer_,
+          SLOT(setInvisibleandDestroyClock()));
 }
 
 void Simulation::connectSimulationStarted() {

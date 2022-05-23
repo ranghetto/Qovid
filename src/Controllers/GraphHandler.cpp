@@ -33,7 +33,8 @@ void GraphHandler::showGraph(QListWidgetItem* sim){
     PieChart *ch1 = new PieChart(logger_);
     AreaChart *ch2 = new AreaChart(logger_);
     ScatterChart *ch3 = new ScatterChart(logger_);
-    ChartsWidget *cw = new ChartsWidget(*ch2, *ch1, *ch3);
+    BarChart *ch4 = new BarChart(logger_);
+    ChartsWidget *cw = new ChartsWidget(*ch2, *ch1, *ch3, *ch4);
     cw->show();
 }
 

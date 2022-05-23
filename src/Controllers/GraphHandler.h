@@ -8,6 +8,7 @@
 #include "../Views/OldSimulation.h"
 #include "../Loggers/ActorsLogger.h"
 #include "../Views/Charts/AreaChart.h"
+#include "../Views/Charts/BarChart.h"
 #include "../Views/Charts/PieChart.h"
 #include "../Views/Charts/ScatterChart.h"
 #include "../Views/ChartsWidget.h"

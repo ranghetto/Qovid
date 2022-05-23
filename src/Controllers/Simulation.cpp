@@ -5,7 +5,7 @@ Simulation::Simulation(QObject *parent)
     : QObject(parent), saveSimulation_(nullptr), world_(nullptr),
       timer_(nullptr), loopTimer_(new QTimer(this)),
       deltaTimer_(new QElapsedTimer()), pausedTimer_(new QElapsedTimer()),
-      pausedTime_(0) {
+      pausedTime_(0), durationTimer_(new QElapsedTimer()) {
 
   connect(loopTimer_, SIGNAL(timeout()), this, SLOT(update()));
 }
@@ -64,7 +64,7 @@ void Simulation::update() {
 
 // HELPER METHODS
 void Simulation::updateEntities() {
-  if (world_)
+  if (world_ && isRunning())
     for (auto entity : world_->entities()) {
       if (entity)
         entity->update();
@@ -72,7 +72,7 @@ void Simulation::updateEntities() {
 }
 
 void Simulation::render(QPainter &painter) {
-  if (world_)
+  if (world_ && isRunning())
     for (auto entity : world_->entities()) {
       if (entity)
         entity->render(painter);
@@ -163,6 +163,11 @@ void Simulation::connectButtons() {
           SIGNAL(clicked()), this, SLOT(stopSimulation()));
 }
 
+#include "../Views/Charts/AreaChart.h"
+#include "../Views/Charts/PieChart.h"
+#include "../Views/Charts/ScatterChart.h"
+#include "../Views/ChartsWidget.h"
+
 void Simulation::stopSimulation() {
   loopTimer_->stop();
   emit simulationStopped();
@@ -178,6 +183,14 @@ void Simulation::stopSimulation() {
 
   containerWidget_->getSimulationWidget()->setInvisibleSlot();
 
+  PieChart *ch1 = new PieChart(*logger_);
+  AreaChart *ch2 = new AreaChart(*logger_);
+  ScatterChart *ch3 = new ScatterChart(*logger_);
+
+  ChartsWidget *cw = new ChartsWidget(*ch2, *ch1, *ch3);
+
+  cw->show();
+
   delete world_;
   delete logger_;
 }
@@ -191,4 +204,5 @@ Simulation::~Simulation() {
   delete loopTimer_;
   delete deltaTimer_;
   delete pausedTimer_;
+  delete durationTimer_;
 }

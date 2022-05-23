@@ -23,6 +23,18 @@ void GraphHandler::PopulateOldSimulation(QDir *directory){
 }
 
 void GraphHandler::showGraph(QListWidgetItem* sim){
-    qDebug()<<sim->text();
+    QFile file(directory_->filePath(sim->text())); 
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning("Couldn't open save file.");
+    }
+    QByteArray saveData = file.readAll();
+    QJsonDocument loadDoc=QJsonDocument::fromJson(saveData);
+    ActorsLogger logger_(loadDoc.object());
+    PieChart *ch1 = new PieChart(logger_);
+    AreaChart *ch2 = new AreaChart(logger_);
+    ScatterChart *ch3 = new ScatterChart(logger_);
+    ChartsWidget *cw = new ChartsWidget(*ch2, *ch1, *ch3);
+    cw->show();
 }
+
 

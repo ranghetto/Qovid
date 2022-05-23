@@ -6,6 +6,11 @@
 #include <QDebug>
 #include "../Views/ContainerWidget.h"
 #include "../Views/OldSimulation.h"
+#include "../Loggers/ActorsLogger.h"
+#include "../Views/Charts/AreaChart.h"
+#include "../Views/Charts/PieChart.h"
+#include "../Views/Charts/ScatterChart.h"
+#include "../Views/ChartsWidget.h"
 
 class GraphHandler: public QObject{
     Q_OBJECT

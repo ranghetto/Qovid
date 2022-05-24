@@ -3,7 +3,6 @@
 
 #include "../../Loggers/ActorsLogger.h"
 #include "LoggerChart.h"
-#include <QDebug>
 
 class BarChart : public LoggerChart {
 public:

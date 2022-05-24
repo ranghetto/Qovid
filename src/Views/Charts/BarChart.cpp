@@ -31,7 +31,6 @@ BarChart::BarChart(const ActorsLogger &logger) : LoggerChart(logger) {
         {
             if(logger.moments().at(i)->time()!=temp)
             {
-                qDebug()<<logger.moments().at(i)->time();
                 temp=logger.moments().at(i)->time();
                 QString bar=createQString(logger.moments().at(i)->time());
                 categories<<bar;
@@ -100,44 +99,3 @@ QString BarChart::createQString(int time)
     }
     return s;
 }
-
-/*QStringList categories;
-    QString bar0=createQString(logger.moments().first()->time());
-    QString bar1=createQString(logger.moments().at(i+step)->time());
-    QString bar2=createQString(logger.moments().at(i+step*2)->time());
-    QString bar3=createQString(logger.moments().at(i+step*3)->time());
-    QString bar4=createQString(logger.moments().last()->time());
-    categories << bar0 << bar1 << bar2 << bar3 << bar4;
-    
-    *set0<<
-            logger.moments().first()->healthy() <<
-            logger.moments().at(i+step)->healthy() <<
-            logger.moments().at(i+step*2)->healthy() <<
-            logger.moments().at(i+step*3)->healthy() <<
-            logger.moments().last()->healthy();
-    *set1<<
-            logger.moments().first()->infected() <<
-            logger.moments().at(i+step)->infected() <<
-            logger.moments().at(i+step*2)->infected() <<
-            logger.moments().at(i+step*3)->infected() <<
-            logger.moments().last()->infected();
-    *set2<<
-            logger.moments().first()->recovered() <<
-            logger.moments().at(i+step)->recovered() <<
-            logger.moments().at(i+step*2)->recovered() <<
-            logger.moments().at(i+step*3)->recovered() <<
-            logger.moments().last()->recovered();
-    *set3<<
-            logger.moments().first()->dead() <<
-            logger.moments().at(i+step)->dead() <<
-            logger.moments().at(i+step*2)->dead() <<
-            logger.moments().at(i+step*3)->dead() <<
-            logger.moments().last()->dead();
-
-
-
-    series->append(set0);
-    series->append(set1);
-    series->append(set2);
-    series->append(set3);
-    addSeries(series);*/

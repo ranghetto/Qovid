@@ -35,26 +35,32 @@ InputWidget::InputWidget(QWidget *parent) : QWidget(parent) {
   label_infection_range->setText("Raggio del contagio");
   label_infection_rate->setText("Probabilità di essere contagiati");
   label_death_rate->setText("Probabilità di morte dell'infetto");
-  label_recover->setText("Durata infezione");
+  label_recover->setText("Durata stato 'infetto'");
   label_initial_infect->setText("Infetti Iniziali");
 
   // SpinBox range setting
   input_population->setRange(0, 500);
   input_population->setValue(200);
+  input_population->setSuffix(" persone");
 
   input_infection_range->setRange(0, 100);
   input_infection_range->setValue(2);
+  input_infection_range->setSuffix(" metri");
 
   input_infection_rate->setRange(0, 100);
   input_infection_rate->setValue(15);
+  input_infection_rate->setSuffix("%");
 
   input_death_rate->setRange(0, 100);
   input_death_rate->setValue(2);
+  input_death_rate->setSuffix("%");
 
   input_time_toRecover->setRange(0, 50);
   input_time_toRecover->setValue(15);
+  input_time_toRecover->setSuffix(" secondi");
 
   input_initial_infect->setValue(2);
+  input_initial_infect->setSuffix(" persone");
 
   // adding widget to layout
   layout->addWidget(label_population);

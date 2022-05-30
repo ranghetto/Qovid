@@ -4,6 +4,7 @@
 #include "Charts/AreaChart.h"
 #include "Charts/PieChart.h"
 #include "Charts/ScatterChart.h"
+#include "Charts/BarChart.h"
 #include <QGridLayout>
 #include <QWidget>
 #include <QtCharts>
@@ -11,16 +12,16 @@
 class ChartsWidget : public QWidget {
 public:
   ChartsWidget(AreaChart &areaChart, PieChart &pieChart,
-               ScatterChart &scatterChart, QWidget *parent = nullptr);
+               ScatterChart &scatterChart, BarChart &barChart, QWidget *parent = nullptr);
 
 private:
   QGridLayout *layout;
   QtCharts::QChartView *areaChartView;
   QtCharts::QChartView *pieChartView;
   QtCharts::QChartView *scatterChartView;
+  QtCharts::QChartView *barChartView;
   // Uncomment when adding new charts
   // QtCharts::QChartView *otherChartView;
-  // QtCharts::QChartView *other1ChartView;
 };
 
 #endif // CHARTS_WIDGET_H

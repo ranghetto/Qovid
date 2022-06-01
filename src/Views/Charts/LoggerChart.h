@@ -9,7 +9,8 @@ private:
   const ActorsLogger &logger_;
 
 public:
-  LoggerChart(const ActorsLogger &logger) : logger_(logger) {
+  LoggerChart(const ActorsLogger &logger, QGraphicsItem *parent = nullptr)
+      : QtCharts::QChart(parent), logger_(logger) {
     setAnimationOptions(QChart::SeriesAnimations);
   }
 
@@ -20,7 +21,7 @@ public:
     INFECTED = qRgb(230, 57, 70)
   };
   const ActorsLogger &logger() { return logger_; }
-  virtual ~LoggerChart(){}
+  virtual ~LoggerChart() {}
 };
 
 #endif // LOGGER_CHART_H

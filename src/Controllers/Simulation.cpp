@@ -40,9 +40,11 @@ qint64 Simulation::pausedTime() const { return pausedTime_; }
 void Simulation::toggleSimulation() {
   emit simulationPaused();
   if (isRunning()) {
+    emit lineStop();
     loopTimer_->stop();
     pausedTimer_->start();
   } else {
+    emit lineStart();
     loopTimer_->start(0);
     deltaTimer_->restart();
     lastTime_ = deltaTimer_->elapsed();
@@ -96,6 +98,9 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
   connectSimulationStopped();
 }
 
+#include "../Views/Charts/LineChart.h"
+#include <QChartView>
+
 void Simulation::generateWorld() {
   // TODO get it from input, if empty generate one
   int time = QTime::currentTime().msecsSinceStartOfDay();
@@ -118,6 +123,12 @@ void Simulation::generateWorld() {
 
   world_ = new World(*this, population, infectionRange, infectionRate,
                      deathRate, recoverTime, initialInfects);
+
+  LineChart *c = new LineChart(*this);
+  c->setAnimationOptions(QtCharts::QChart::SeriesAnimations);
+  QtCharts::QChartView *v = new QtCharts::QChartView(c);
+  v->setRenderHint(QPainter::Antialiasing);
+  v->show();
 }
 
 void Simulation::generateTimer() {

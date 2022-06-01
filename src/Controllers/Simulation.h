@@ -54,6 +54,8 @@ signals:
   void simulationStarted();
   void simulationStopped();
   void simulationPaused();
+  void lineStart();
+  void lineStop();
 
 private:
   // Views

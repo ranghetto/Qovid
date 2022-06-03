@@ -1,4 +1,5 @@
 #include "LineChart.h"
+#include "../../Controllers/Simulation.h"
 
 LineChart::LineChart(const Simulation &simulation, QGraphicsItem *parent)
     : QtCharts::QChart(parent), sim_(simulation),

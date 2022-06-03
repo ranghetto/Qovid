@@ -1,13 +1,13 @@
 #ifndef LINE_CHART_H
 #define LINE_CHART_H
 
-#include "../../Controllers/Simulation.h"
-
 #include <QChart>
 #include <QGraphicsItem>
 #include <QSplineSeries>
 #include <QTimer>
 #include <QValueAxis>
+
+class Simulation;
 
 class LineChart : public QtCharts::QChart {
   Q_OBJECT

@@ -29,6 +29,7 @@ void Simulation::startSimulation() {
   // Timer to calculate `deltaTime`
   deltaTimer_->start();
   lastTime_ = deltaTimer_->elapsed();
+
 }
 
 // GETTERS
@@ -99,7 +100,6 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
 }
 
 #include "../Views/Charts/LineChart.h"
-#include <QChartView>
 
 void Simulation::generateWorld() {
   // TODO get it from input, if empty generate one
@@ -123,12 +123,10 @@ void Simulation::generateWorld() {
 
   world_ = new World(*this, population, infectionRange, infectionRate,
                      deathRate, recoverTime, initialInfects);
-
-  LineChart *c = new LineChart(*this);
-  c->setAnimationOptions(QtCharts::QChart::SeriesAnimations);
-  QtCharts::QChartView *v = new QtCharts::QChartView(c);
-  v->setRenderHint(QPainter::Antialiasing);
-  v->show();
+  
+  //create dynamic chart in containerWidget
+  LineChart *chart_=new LineChart(*this);
+  containerWidget_->createGraph(chart_);
 }
 
 void Simulation::generateTimer() {

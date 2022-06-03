@@ -11,6 +11,8 @@ LineChart::LineChart(const Simulation &simulation, QGraphicsItem *parent)
   connect(&sim_, SIGNAL(simulationStopped()), &timer_, SLOT(stop()));
   timer_.setInterval(1000);
 
+  setAnimationOptions(QChart::SeriesAnimations);
+
   QPen red(Qt::red);
   red.setWidth(3);
   series_->setPen(red);

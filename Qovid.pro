@@ -35,6 +35,7 @@ SOURCES += src/main.cpp \
   src/Views/Charts/AreaChart.cpp \
   src/Views/Charts/BarChart.cpp \
   src/Views/Charts/LineChart.cpp \
+  src/Views/Charts/LoggerChart.cpp \
   src/Views/Charts/PieChart.cpp \
   src/Views/Charts/ScatterChart.cpp \
   src/Views/ChartsWidget.cpp \

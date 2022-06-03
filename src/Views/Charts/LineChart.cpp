@@ -25,6 +25,11 @@ LineChart::LineChart(const Simulation &simulation, QGraphicsItem *parent)
   timer_.start();
 }
 
+LineChart::~LineChart() {
+  delete series_;
+  delete axis_;
+}
+
 void LineChart::updateChart() {
   x_++;
   series_->append(x_, sim_.world()->infectedCount());

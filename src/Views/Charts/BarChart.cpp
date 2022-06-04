@@ -73,7 +73,7 @@ BarChart::BarChart(const ActorsLogger &logger) : LoggerChart(logger) {
   axes(Qt::Vertical).first()->setRange(0, logger.totalPopulation());
 }
 
-QString BarChart::createQString(int time) {
+QString BarChart::createQString(const int time) {
   QString s;
   int minutes = time / 60;
   int seconds = time % 60;

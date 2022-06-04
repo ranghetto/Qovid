@@ -37,7 +37,6 @@ public slots:
   void disablePauseButton();
   void disableStopButton();
   void disableStartButton();
-  void simulationPaused();
 
 private:
   QLabel *label_population, *label_infection_range, *label_infection_rate,

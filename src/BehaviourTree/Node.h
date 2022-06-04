@@ -13,7 +13,7 @@ class Node {
 public:
   Node(Node *parent = nullptr);
   Node(QList<Node *> children);
-  virtual ~Node();
+  virtual ~Node() = 0;
 
   virtual NodeState evaluate(const Simulation &s) = 0;
 
@@ -26,6 +26,7 @@ protected:
 
 private:
   void addNode(Node *node);
+  void deleteChildrens();
 };
 } // namespace BehaviourTree
 

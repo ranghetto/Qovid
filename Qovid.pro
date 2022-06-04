@@ -26,12 +26,24 @@ SOURCES += src/main.cpp \
   src/BehaviourTree/Node.cpp \
   src/BehaviourTree/Sequence.cpp \
   src/BehaviourTree/Tree.cpp \
+  src/Controllers/GraphHandler.cpp \
+  src/Controllers/Timer.cpp \
   src/Controllers/Simulation.cpp \
   src/Controllers/World.cpp \
   src/Entities/Actor.cpp \
+  src/Loggers/ActorsLogger.cpp \
+  src/Views/Charts/AreaChart.cpp \
+  src/Views/Charts/BarChart.cpp \
+  src/Views/Charts/LineChart.cpp \
+  src/Views/Charts/LoggerChart.cpp \
+  src/Views/Charts/PieChart.cpp \
+  src/Views/Charts/ScatterChart.cpp \
+  src/Views/ChartsWidget.cpp \
+  src/Views/ClockWidget.cpp \
   src/Views/ContainerWidget.cpp \
   src/Views/InputWidget.cpp \
   src/Views/MainWindow.cpp \
+  src/Views/OldSimulation.cpp \
   src/Views/SimulationWidget.cpp \
 
 HEADERS += \
@@ -43,11 +55,23 @@ HEADERS += \
   src/BehaviourTree/Node.h \
   src/BehaviourTree/Sequence.h \
   src/BehaviourTree/Tree.h \
+  src/Controllers/GraphHandler.h \
+  src/Controllers/Timer.h \
   src/Controllers/Simulation.h \
   src/Controllers/World.h \
   src/Entities/Actor.h \
   src/Entities/Entity.h \
+  src/Loggers/ActorsLogger.h \
+  src/Views/Charts/AreaChart.h \
+  src/Views/Charts/BarChart.h \
+  src/Views/Charts/LineChart.h \
+  src/Views/Charts/LoggerChart.h \
+  src/Views/Charts/PieChart.h \
+  src/Views/Charts/ScatterChart.h \
+  src/Views/ChartsWidget.h \
+  src/Views/ClockWidget.h \
   src/Views/ContainerWidget.h \
   src/Views/InputWidget.h \
   src/Views/MainWindow.h \
+  src/Views/OldSimulation.h \
   src/Views/SimulationWidget.h \

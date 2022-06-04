@@ -5,11 +5,15 @@
 #include "../Entities/Entity.h"
 #include <QVector>
 
+class Simulation;
+
 class World {
 public:
-  World(uint, uint, uint, uint, uint, uint);
+  World(Simulation &, uint, uint, uint, uint, uint, uint);
   void addEntity(Entity &entity);
   QVector<Entity *> entities() const;
+  int infectedCount() const;
+  int actorsCount() const;
   QVector<Actor *> findNearbyActors(QVector2D center, int range) const;
   ~World();
 

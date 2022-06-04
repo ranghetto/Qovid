@@ -29,6 +29,7 @@ void Simulation::startSimulation() {
   // Timer to calculate `deltaTime`
   deltaTimer_->start();
   lastTime_ = deltaTimer_->elapsed();
+
 }
 
 // GETTERS
@@ -40,13 +41,17 @@ qint64 Simulation::pausedTime() const { return pausedTime_; }
 void Simulation::toggleSimulation() {
   emit simulationPaused();
   if (isRunning()) {
+    emit lineStop();
     loopTimer_->stop();
     pausedTimer_->start();
+    containerWidget_->setInvisibleChart();
   } else {
+    emit lineStart();
     loopTimer_->start(0);
     deltaTimer_->restart();
     lastTime_ = deltaTimer_->elapsed();
     pausedTime_ += pausedTimer_->elapsed();
+    containerWidget_->setVisibleChart();
   }
 };
 
@@ -96,6 +101,8 @@ void Simulation::setContainerWidgets(ContainerWidget *container) {
   connectSimulationStopped();
 }
 
+#include "../Views/Charts/LineChart.h"
+
 void Simulation::generateWorld() {
   // TODO get it from input, if empty generate one
   int time = QTime::currentTime().msecsSinceStartOfDay();
@@ -118,6 +125,10 @@ void Simulation::generateWorld() {
 
   world_ = new World(*this, population, infectionRange, infectionRate,
                      deathRate, recoverTime, initialInfects);
+  
+  //create dynamic chart in containerWidget
+  LineChart *chart_=new LineChart(*this);
+  containerWidget_->createGraph(chart_);
 }
 
 void Simulation::generateTimer() {
@@ -180,6 +191,7 @@ void Simulation::stopSimulation() {
   }
 
   containerWidget_->getSimulationWidget()->setInvisibleSlot();
+  containerWidget_->setInvisibleChart();
 
   delete world_;
   delete logger_;

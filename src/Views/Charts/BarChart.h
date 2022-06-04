@@ -6,8 +6,9 @@
 
 class BarChart : public LoggerChart {
 public:
-  BarChart(const ActorsLogger&);
+  BarChart(const ActorsLogger &);
   QString createQString(int time);
+  ~BarChart() {}
 };
 
 #endif // BARCHART_H

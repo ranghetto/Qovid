@@ -7,6 +7,7 @@
 class ScatterChart : public LoggerChart {
 public:
   ScatterChart(const ActorsLogger &logger);
+  ~ScatterChart() {}
 };
 
 #endif // SCATTER_CHART_H

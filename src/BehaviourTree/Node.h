@@ -12,12 +12,8 @@ enum NodeState { RUNNING, SUCCESS, FAILURE };
 class Node {
 public:
   Node(Node *parent = nullptr);
-  // Every "action" aka node has to be unique to de entity is chained with
-  // or you risk to delete all nodes, even if are used by other entities
   Node(QList<Node *> children);
-  Node(const Node &node) = delete;
-  Node &operator=(const Node &node) = delete;
-  virtual ~Node();
+  virtual ~Node() = 0;
 
   virtual NodeState evaluate(const Simulation &s) = 0;
 

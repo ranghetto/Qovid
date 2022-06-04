@@ -150,8 +150,6 @@ void Simulation::connectSimulationStopped() {
 
 void Simulation::connectSimulationPaused() {
   connect(this, SIGNAL(simulationPaused()), containerWidget_->getInputWidget(),
-          SLOT(simulationPaused()));
-  connect(this, SIGNAL(simulationPaused()), containerWidget_->getInputWidget(),
           SLOT(disableStartButton()));
   connect(this, SIGNAL(simulationPaused()), containerWidget_->getInputWidget(),
           SLOT(enableStopButton()));

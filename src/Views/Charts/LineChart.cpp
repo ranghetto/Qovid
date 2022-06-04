@@ -13,8 +13,10 @@ LineChart::LineChart(const Simulation &simulation, QGraphicsItem *parent)
 
   setAnimationOptions(QChart::SeriesAnimations);
 
+  
   QPen red(Qt::red);
   red.setWidth(3);
+  series_->setName("Infetti");
   series_->setPen(red);
 
   addSeries(series_);

@@ -8,7 +8,6 @@
 #include "../Views/ChartsWidget.h"
 #include "../Views/ContainerWidget.h"
 #include "../Views/OldSimulation.h"
-#include <QDebug>
 #include <QDir>
 #include <QListWidgetItem>
 #include <QObject>

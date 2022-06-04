@@ -3,7 +3,6 @@
 
 #include "InputWidget.h"
 #include "SimulationWidget.h"
-#include <QDebug>
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include <QWidget>
@@ -24,7 +23,7 @@ public:
   void setController(Simulation*);
   void createGraph(LineChart*);
   void setInvisibleChart();
-  void setVisibleChart();
+
 public slots:
   void setVisibleOldSim();
   void setVisibleSimulator();

@@ -44,14 +44,12 @@ void Simulation::toggleSimulation() {
     emit lineStop();
     loopTimer_->stop();
     pausedTimer_->start();
-    containerWidget_->setInvisibleChart();
   } else {
     emit lineStart();
     loopTimer_->start(0);
     deltaTimer_->restart();
     lastTime_ = deltaTimer_->elapsed();
     pausedTime_ += pausedTimer_->elapsed();
-    containerWidget_->setVisibleChart();
   }
 };
 

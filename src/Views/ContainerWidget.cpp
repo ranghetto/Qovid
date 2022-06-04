@@ -21,11 +21,11 @@ void ContainerWidget::setController(Simulation *controller) {
   controller_ = controller;
 }
 
-InputWidget *ContainerWidget::getInputWidget() { return input_widget_; }
+InputWidget *ContainerWidget::getInputWidget() const { return input_widget_; }
 
-SimulationWidget *ContainerWidget::getSimulationWidget() { return simulation_; }
+SimulationWidget *ContainerWidget::getSimulationWidget() const { return simulation_; }
 
-OldSimulation *ContainerWidget::getOldSimulation() { return old_sim_; }
+OldSimulation *ContainerWidget::getOldSimulation() const { return old_sim_; }
 
 void ContainerWidget::setVisibleOldSim() {
   if (controller_->isRunning()) {

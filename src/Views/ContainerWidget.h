@@ -16,9 +16,9 @@ class ContainerWidget : public QWidget {
 
 public:
   ContainerWidget(QWidget *parent = nullptr);
-  InputWidget *getInputWidget(); // return input_wiget to the controller
-  SimulationWidget *getSimulationWidget();
-  OldSimulation* getOldSimulation();
+  InputWidget *getInputWidget() const; // return input_wiget to the controller
+  SimulationWidget *getSimulationWidget() const;
+  OldSimulation* getOldSimulation() const;
   void setController(Simulation*);
 public slots:
   void setVisibleOldSim();

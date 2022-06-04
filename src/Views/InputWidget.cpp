@@ -97,7 +97,7 @@ void InputWidget::disableStopButton() { stop_sim->setDisabled(true); }
 void InputWidget::enableStartButton() { start_sim->setEnabled(true); }
 void InputWidget::enablePauseButton() { pause_sim->setEnabled(true); }
 void InputWidget::enableStopButton() { stop_sim->setEnabled(true); }
-void InputWidget::simulationPaused() {}
+void InputWidget::simulationPaused() {} //mantenere?
 
 void InputWidget::changeMax(int n) { input_initial_infect->setMaximum(n); }
 

@@ -17,5 +17,5 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   connect(sim_, SIGNAL(triggered()), container_, SLOT(setVisibleSimulator()));
 }
 
-ContainerWidget *MainWindow::getContainerWidget() { return container_; }
+ContainerWidget *MainWindow::getContainerWidget() const { return container_; }
 

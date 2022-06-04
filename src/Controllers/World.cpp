@@ -24,6 +24,26 @@ World::World(Simulation &s, uint population, uint infection_range,
 
 QVector<Entity *> World::entities() const { return entities_; }
 
+int World::infectedCount() const {
+  int i = 0;
+  for (auto e : entities_) {
+    Actor *a = dynamic_cast<Actor *>(e);
+    if (a && a->healthState() == ActorHealthState::INFECTED)
+      i++;
+  }
+  return i;
+}
+
+int World::actorsCount() const {
+  int i = 0;
+  for (auto e : entities_) {
+    Actor *a = dynamic_cast<Actor *>(e);
+    if (a)
+      i++;
+  }
+  return i;
+}
+
 void World::addEntity(Entity &entity) { entities_.append(&entity); }
 
 QVector<Actor *> World::findNearbyActors(QVector2D center, int range) const {

@@ -11,7 +11,7 @@ namespace BehaviourTree {
 class Tree {
 public:
   Tree(Node *root = nullptr);
-  ~Tree();
+  virtual ~Tree();
   void update(const Simulation &s) const;
 
 private:

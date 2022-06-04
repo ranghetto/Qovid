@@ -7,6 +7,7 @@
 class AreaChart : public LoggerChart {
 public:
   AreaChart(const ActorsLogger &logger);
+  ~AreaChart() {}
 };
 
 #endif // AREA_CHART_H

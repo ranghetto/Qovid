@@ -9,9 +9,7 @@ private:
   const ActorsLogger &logger_;
 
 public:
-  LoggerChart(const ActorsLogger &logger) : logger_(logger) {
-    setAnimationOptions(QChart::SeriesAnimations);
-  }
+  LoggerChart(const ActorsLogger &logger, QGraphicsItem *parent = nullptr);
 
   enum StatusColor {
     DEAD = qRgb(191, 191, 191),
@@ -19,8 +17,8 @@ public:
     HEALTHY = qRgb(129, 208, 102),
     INFECTED = qRgb(230, 57, 70)
   };
-  const ActorsLogger &logger() { return logger_; }
-  virtual ~LoggerChart(){}
+  const ActorsLogger &logger();
+  virtual ~LoggerChart() = 0;
 };
 
 #endif // LOGGER_CHART_H

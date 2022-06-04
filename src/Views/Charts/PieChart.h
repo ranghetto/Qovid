@@ -7,6 +7,7 @@
 class PieChart : public LoggerChart {
 public:
   PieChart(const ActorsLogger &logger);
+  ~PieChart() {}
 };
 
 #endif // PIE_CHART_H

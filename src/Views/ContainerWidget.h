@@ -23,6 +23,8 @@ public:
   OldSimulation* getOldSimulation();
   void setController(Simulation*);
   void createGraph(LineChart*);
+  void setInvisibleChart();
+  void setVisibleChart();
 public slots:
   void setVisibleOldSim();
   void setVisibleSimulator();

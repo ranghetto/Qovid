@@ -11,8 +11,11 @@ class Simulation;
 
 class LineChart : public QtCharts::QChart {
   Q_OBJECT
+
 public:
   LineChart(const Simulation &simulation, QGraphicsItem *parent = nullptr);
+  ~LineChart();
+
 public slots:
   void updateChart();
 

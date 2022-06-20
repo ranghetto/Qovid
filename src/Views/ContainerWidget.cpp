@@ -38,8 +38,8 @@ OldSimulation *ContainerWidget::getOldSimulation() const { return old_sim_; }
 void ContainerWidget::setVisibleOldSim() {
   if (controller_->isRunning()) {
     controller_->toggleSimulation();
+    chart_view_->hide();
   }
-  chart_view_->hide();
   input_widget_->hide();
   simulation_->hide();
   old_sim_->show();

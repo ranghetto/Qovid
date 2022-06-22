@@ -21,8 +21,8 @@ void ContainerWidget::setController(Simulation *controller) {
   controller_ = controller;
 }
 
-void ContainerWidget::createGraph(LineChart *chart_){
-  chart_view_= new QtCharts::QChartView(chart_);
+void ContainerWidget::createGraph(LineChart *chart_) {
+  chart_view_ = new QtCharts::QChartView(chart_);
   chart_view_->setRenderHint(QPainter::Antialiasing);
   layout->addWidget(chart_view_);
   chart_view_->setMinimumWidth(500);
@@ -30,8 +30,9 @@ void ContainerWidget::createGraph(LineChart *chart_){
 
 InputWidget *ContainerWidget::getInputWidget() const { return input_widget_; }
 
-
-SimulationWidget *ContainerWidget::getSimulationWidget() const { return simulation_; }
+SimulationWidget *ContainerWidget::getSimulationWidget() const {
+  return simulation_;
+}
 
 OldSimulation *ContainerWidget::getOldSimulation() const { return old_sim_; }
 
@@ -47,7 +48,6 @@ void ContainerWidget::setVisibleOldSim() {
 
 void ContainerWidget::setVisibleSimulator() {
   if (controller_->world() != nullptr) {
-    controller_->toggleSimulation();
     simulation_->show();
     chart_view_->show();
   }
@@ -55,9 +55,7 @@ void ContainerWidget::setVisibleSimulator() {
   old_sim_->hide();
 }
 
-void ContainerWidget::setInvisibleChart(){
-  chart_view_->hide();
-}
+void ContainerWidget::setInvisibleChart() { chart_view_->hide(); }
 
 bool ContainerWidget::SaveSimulationAlert() {
   save_simulation_ = new QMessageBox(this);

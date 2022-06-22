@@ -29,7 +29,6 @@ void Simulation::startSimulation() {
   // Timer to calculate `deltaTime`
   deltaTimer_->start();
   lastTime_ = deltaTimer_->elapsed();
-
 }
 
 // GETTERS
@@ -75,11 +74,12 @@ void Simulation::updateEntities() {
 }
 
 void Simulation::render(QPainter &painter) {
-  if (world_ && isRunning())
+  if (world_ && isRunning()) {
     for (auto entity : world_->entities()) {
       if (entity)
         entity->render(painter);
     }
+  }
 }
 
 void Simulation::setContainerWidgets(ContainerWidget *container) {
@@ -123,9 +123,9 @@ void Simulation::generateWorld() {
 
   world_ = new World(*this, population, infectionRange, infectionRate,
                      deathRate, recoverTime, initialInfects);
-  
-  //create dynamic chart in containerWidget
-  LineChart *chart_=new LineChart(*this);
+
+  // create dynamic chart in containerWidget
+  LineChart *chart_ = new LineChart(*this);
   containerWidget_->createGraph(chart_);
 }
 
@@ -191,6 +191,9 @@ void Simulation::stopSimulation() {
 
   delete world_;
   delete logger_;
+
+  world_ = nullptr;
+  logger_ = nullptr;
 }
 
 QElapsedTimer *Simulation::durationTimer() const { return durationTimer_; }

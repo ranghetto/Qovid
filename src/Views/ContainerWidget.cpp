@@ -44,6 +44,7 @@ void ContainerWidget::setVisibleOldSim() {
   input_widget_->hide();
   simulation_->hide();
   old_sim_->show();
+  old_sim_->Refresh();
 }
 
 void ContainerWidget::setVisibleSimulator() {

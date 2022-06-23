@@ -18,8 +18,7 @@ AreaChart::AreaChart(const ActorsLogger &logger) : LoggerChart(logger) {
                                          moment->recovered() + moment->dead());
   }
 
-  QtCharts::QAreaSeries *series0 = 
-      new QtCharts::QAreaSeries(infected, healthy);    
+  QtCharts::QAreaSeries *series0 = new QtCharts::QAreaSeries(infected, healthy);
   series0->setName("Healthy");
   series0->setBrush(QColor(LoggerChart::StatusColor::HEALTHY));
   QtCharts::QAreaSeries *series1 =
@@ -38,7 +37,7 @@ AreaChart::AreaChart(const ActorsLogger &logger) : LoggerChart(logger) {
   addSeries(series1);
   addSeries(series2);
   addSeries(series3);
-  setTitle("Andamento Epidemologico");
+  setTitle("Andamento Epidemiologico");
   createDefaultAxes();
   axes(Qt::Horizontal)
       .first()
